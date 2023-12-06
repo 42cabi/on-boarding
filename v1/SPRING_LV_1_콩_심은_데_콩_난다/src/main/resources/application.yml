@@ -1,0 +1,3 @@
+spring:
+  kong:
+   what-kind-of-drink: 'coffee'
