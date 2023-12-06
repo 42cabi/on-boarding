@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: org.glassfish.jaxb:jaxb-core:4.0.4" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="org.glassfish.jaxb" artifactId="jaxb-core" version="4.0.4" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.jaxb/jaxb-core/4.0.4/2d5aadd02af86f1e9d8c6f7e8501673f915d4e25/jaxb-core-4.0.4.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.jaxb/jaxb-core/4.0.4/ece1e800db7d3c4625221ed1c2ef32d53aff9d5/jaxb-core-4.0.4-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

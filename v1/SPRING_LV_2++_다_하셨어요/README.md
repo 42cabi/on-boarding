@@ -39,7 +39,7 @@
     - 기존에 작성한 구조대로 설명을 잘 하는지 (String을 반환하는지)
 - `Movie`를 생성할 때,
     - DB에 저장되어 있지 않은 Director인 경우 `IllegalArgumentException`을 throw하는 지
-    - 영화가 제작된 시각이 1900년 이전인 경우 `IllegalArgumentException`을 throw하는 지
+    - 영화가 제작된 시각이 감독의 데뷔 이전인 경우 `IllegalArgumentException`을 throw하는 지
 - `Movie`가 언제 만들어졌는지 구분할 때
     - 잘 구분하는지
 
