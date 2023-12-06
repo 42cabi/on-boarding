@@ -1,6 +1,7 @@
 ## 개요
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/1dc14d02-9fef-47d5-828a-c667c7d13337/0ab90cee-d401-4826-93c7-29d0111fc56e/Untitled.png)
+![2314](https://github.com/42cabi/on-boarding/assets/105692206/16177f61-c7d8-44ef-8c5e-8ff1d1736d31)
+
 
 3차 백엔드이자 까비 고인물인 MZ 대표 `은비(eunbikim)`는 문득 본인보다 고인물인 유저는 누구일지 궁금해졌다.
 
