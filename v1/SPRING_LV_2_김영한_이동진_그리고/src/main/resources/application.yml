@@ -1,4 +1,10 @@
 spring:
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://localhost:3306/test?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    username: root
+    password: example
+
   jpa:
     hibernate:
-      ddl-auto:
+      ddl-auto: create
