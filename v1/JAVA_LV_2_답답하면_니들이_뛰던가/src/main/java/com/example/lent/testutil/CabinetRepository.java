@@ -15,7 +15,7 @@ public class CabinetRepository {
 	}
 
 	public Cabinet save(Cabinet cabinet) {
-		TABLE.removeIf(c -> c.getCabinetId().equals(cabinet.getCabinetId()));
+		TABLE.removeIf(old -> old.getCabinetId().equals(cabinet.getCabinetId()));
 		TABLE.add(cabinet);
 		return cabinet;
 	}
