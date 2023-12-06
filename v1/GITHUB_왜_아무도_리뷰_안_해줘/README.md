@@ -1,6 +1,7 @@
 ## 개요
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/1dc14d02-9fef-47d5-828a-c667c7d13337/482977e3-ef9b-4f21-9411-33b8615bc600/Untitled.png)
+![2](https://github.com/42cabi/on-boarding/assets/105692206/788272e1-3e9a-43eb-a3ca-abd173f4be28)
+
 
 4차 백엔드인 `상제(sanan)`는 열심히 코드를 구현하고 오류를 해결해 PR을 올렸지만 아무도 코드를 검토해주지 않았다. 화가 난 상제는 여러 가지 함정들을 파놓고 이전 기수들이 모르게 **6차 팀원들에게만** PR 리뷰를 요청하는데..
 
