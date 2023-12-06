@@ -12,11 +12,12 @@ public class LentHistoryRepositoryImpl implements LentHistoryRepository {
 
 	@Override
 	public LentHistory save(LentHistory lentHistory) {
-		return null;
+		TABLE.add(lentHistory);
+		return lentHistory;
 	}
 
 	@Override
 	public List<LentHistory> findAll() {
-		return null;
+		return List.copyOf(TABLE);
 	}
 }

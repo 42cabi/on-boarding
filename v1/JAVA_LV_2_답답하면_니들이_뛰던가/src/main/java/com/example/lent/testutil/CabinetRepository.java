@@ -15,8 +15,15 @@ public class CabinetRepository {
 	}
 
 	public Cabinet save(Cabinet cabinet) {
-		TABLE.removeIf(c -> c.getCabinetId().equals(cabinet.getCabinetId()));
+		TABLE.removeIf(e -> e.getCabinetId().equals(cabinet.getCabinetId()));
 		TABLE.add(cabinet);
 		return cabinet;
+	}
+
+	public Cabinet findById(Long cabinetId) {
+		return TABLE.stream()
+				.filter(e -> e.getCabinetId().equals(cabinetId))
+				.findAny()
+				.orElseThrow(() -> new RuntimeException("사물함이 없어요!"));
 	}
 }

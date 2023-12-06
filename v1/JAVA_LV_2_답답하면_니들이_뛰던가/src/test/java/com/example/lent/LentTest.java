@@ -32,8 +32,8 @@ public class LentTest {
 		userRepository = new UserRepository();
 		cabinetRepository = new CabinetRepository();
 		lentHistoryRepository = new LentHistoryRepositoryImpl();
-		lentService = new LentServiceImpl(/*lentHistoryRepository, cabinetRepository, userRepository*/);
-		lentController = new LentController(/*lentService*/);
+		lentService = new LentServiceImpl(lentHistoryRepository, cabinetRepository, userRepository);
+		lentController = new LentController(lentService);
 	}
 
 	@DisplayName("지금부터 대여를 시작한다.")
