@@ -22,7 +22,7 @@ public class UserRepository {
 	}
 
 	public User save(User user) {
-		TABLE.removeIf(c -> c.getUserId().equals(user.getUserId()));
+		TABLE.removeIf(old -> old.getUserId().equals(user.getUserId()));
 		TABLE.add(user);
 		return user;
 	}
