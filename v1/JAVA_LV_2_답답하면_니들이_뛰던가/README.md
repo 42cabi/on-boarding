@@ -13,9 +13,13 @@
 
 ## 목표
 
-`LentTest`를 통과하는 코드를 작성하기
+`LentTest`를 통과하는 사물함 대여 코드를 작성하기
 
 ## 요구사항
+
+### 사양
+
+- JDK 17을 사용해주세요.
 
 ### 작성
 
@@ -23,8 +27,7 @@
 - `dto`, `testutil` 패키지에 있는 클래스들은 수정할 수 없습니다.
 - `domain` 패키지에 있는 클래스들은 **프로퍼티만 수정할 수 없고**, 나머지는 마음대로 추가, 변경이 가능합니다.
 - `LentController, LentService, LentRepository` 클래스 파일을 실제 까비 코드의 패키지와 동일한 방식으로 분류해주세요.
-- `LentController`는 `LentService` 멤버를, `LentServiceImpl`은 `LentHistoryRepository`, `CabinetRepository`, `UserRepository`
-  를 주입받아야 합니다. (왜 일까요?)
+- `LentController`는 `LentService` 멤버를, `LentServiceImpl`은 `LentHistoryRepository`, `CabinetRepository`, `UserRepository` 를 주입받아야 합니다. (왜 일까요?)
 
 ### 구현
 
@@ -36,6 +39,14 @@
     - 사물함의 대여 기간은 31일입니다.
 - `LentController`는 `LentRequest`를 매개변수로 받고, `LentRespone`를 반환하는 대여 메서드 `lent`를 구현해야 합니다.
 - 이외에 적혀있지 않은 부분에 대해서는 자유롭게 작성해주시면 됩니다.
+
+## 제출
+
+- Github에 PR로 제출합니다.
+- 서로 코드 리뷰하는 것은 상관 없으나, 개별로 코드를 작성해보는 것을 권장합니다.
+- Intellij에서 코드 스타일을 `GoogleStyle`로 사용합니다.
+    - `코드 스타일` - `Java`에서 `탭 문자 사용`, `스마트 탭`에 **체크**하고, `탭 크기는 4`, `들여쓰기 4`, `연속 들여쓰기 8`로 설정합니다.
+    - `저장 시 액션` 옵션에서 `코드 서식 다시 지정`, `import 문 최적화`, `코드 재정렬`, `코드 정리 실행` 을 설정해주세요.
 
 ## 보너스
 
@@ -51,3 +62,5 @@
 - 자바의 예외(Exception)
 - 자바 컬렉션(Collection)
 - 접근자와 불변성(Getter, Immutable)
+
+made by sanan
