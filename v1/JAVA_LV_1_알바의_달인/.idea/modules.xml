@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/bot.main.iml" filepath="$PROJECT_DIR$/.idea/modules/bot.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/bot.test.iml" filepath="$PROJECT_DIR$/.idea/modules/bot.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/JAVA_LV_1_알바의_달인.iml" filepath="$PROJECT_DIR$/.idea/JAVA_LV_1_알바의_달인.iml" />
     </modules>
   </component>
 </project>
