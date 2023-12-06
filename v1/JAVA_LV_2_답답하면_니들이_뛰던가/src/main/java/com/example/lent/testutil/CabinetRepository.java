@@ -19,4 +19,11 @@ public class CabinetRepository {
 		TABLE.add(cabinet);
 		return cabinet;
 	}
+
+	public Cabinet findById(Long cabinetId) {
+		return TABLE.stream()
+				.filter(e -> e.getCabinetId().equals(cabinetId))
+				.findAny()
+				.orElseThrow(() -> new RuntimeException("사물함이 없어요!"));
+	}
 }
