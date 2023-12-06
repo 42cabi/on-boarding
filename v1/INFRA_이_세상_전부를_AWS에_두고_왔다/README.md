@@ -1,6 +1,7 @@
 ## 개요
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/1dc14d02-9fef-47d5-828a-c667c7d13337/fddbf326-6f52-4005-a0cf-0fda3a4b4b76/Untitled.png)
+![123](https://github.com/42cabi/on-boarding/assets/105692206/5edb05f0-c3d1-4cda-94d3-f2e4c5ae4522)
+
 
 3차 백엔드이자 인프라 마스터인 `시원(sichoi)`은 새 기수 사람들을 위해 보물을 `S3`와 `EC2`에 숨겨두었다.
 
