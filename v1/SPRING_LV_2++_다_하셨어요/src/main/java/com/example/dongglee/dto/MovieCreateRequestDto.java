@@ -7,6 +7,6 @@ import java.time.LocalDateTime;
 @Getter
 public class MovieCreateRequestDto {
 	private String title;
-	private String director;
+	private Long directorId;
 	private LocalDateTime filmedAt;
 }

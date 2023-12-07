@@ -3,10 +3,7 @@ package com.example.dongglee;
 import com.example.dongglee.domain.Movie;
 import com.example.dongglee.dto.MovieCreateRequestDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,7 +20,8 @@ public class MovieController {
 	}
 
 	@PostMapping
-	public Movie createMovie(MovieCreateRequestDto dto) {
+	public Movie createMovie(
+			@RequestBody MovieCreateRequestDto dto) {
 		return movieService.createMovie(dto);
 	}
 }
