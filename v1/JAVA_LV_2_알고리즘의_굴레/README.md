@@ -2,10 +2,14 @@
 
 ## 개요
 
+<img width="431" src="https://github.com/42cabi/on-boarding/assets/82518170/0c864d3f-cdb7-4abc-bf3f-f342ec16df97">
+
 
 5차 백엔드인 `우주(wchae)`는 매일 아침마다 알고리즘 스터디를 진행하는데, 알고리즘으로 큰 스트레스를 받고 있다.
 
 매일 같이 알고리즘 스터디를 하는 `지원(jpark2)`의 눈치를 받다보니 너무 큰 스트레스를 받은 나머지, 문제를 넣으면 알고리즘을 알려주는 **알고리즘 봇**을 만들기로 결심한다.
+
+<img width="431" src="https://github.com/42cabi/on-boarding/assets/82518170/39428c59-9c7b-47b4-8c63-633aa20891de">
 
 
 과연 우주는 알고리즘의 굴레와 속박에서 벗어나 행복을 찾을 수 있을까?
