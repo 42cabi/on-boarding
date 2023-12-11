@@ -1,6 +1,7 @@
 ## 개요
 
-![Untitled](https://github.com/42cabi/on-boarding/assets/82518170/cd31422c-803c-4a4c-b034-8d7576bb6840)
+<img width="350" src="https://github.com/42cabi/on-boarding/assets/82518170/cd31422c-803c-4a4c-b034-8d7576bb6840">
+
 
 5차 백엔드이자 복싱의 달인인 `대욱(daewoole)`은 화가 나면 주변 사람들에게 잼민 펀치를 선물한다.
 
