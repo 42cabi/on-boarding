@@ -4,11 +4,11 @@ public class TwoPointer implements Algorithm {
 
 	@Override
 	public boolean isSolution(Algorithm algorithm) {
-		return false;
+		return (algorithm instanceof TwoPointer);
 	}
 
 	@Override
 	public String getSolution() {
-		return null;
+		return "너에게 닿기를...";
 	}
 }
