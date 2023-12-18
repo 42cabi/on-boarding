@@ -2,7 +2,7 @@
 
 ### **🚀 프론트엔드 온보딩 프로젝트: "Todo List 마스터하기!"**
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/1dc14d02-9fef-47d5-828a-c667c7d13337/8fdb1483-9112-489a-8e33-263fa3313da7/Untitled.png)
+<img width="477" alt="image" src="https://github.com/42cabi/on-boarding/assets/72684256/47b219c2-c9b6-4579-8c7b-dc21d49ade4a">
 
 ### 🎯 프로젝트 목표
 
