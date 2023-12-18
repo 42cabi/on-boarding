@@ -2,7 +2,7 @@
 
 ### **🌐 HTML/CSS/JavaScript 온보딩 프로젝트: "사물함 대여 정보 표시하기"**
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/1dc14d02-9fef-47d5-828a-c667c7d13337/83e86e2f-44e6-45fb-b2a0-9ec2f5dab86f/Untitled.png)
+<img width="759" alt="image" src="https://github.com/42cabi/on-boarding/assets/72684256/e4f7bc1f-34e3-4ef5-aae3-3738af2d9b3f">
 
 ### 🎯 프로젝트 목표
 
