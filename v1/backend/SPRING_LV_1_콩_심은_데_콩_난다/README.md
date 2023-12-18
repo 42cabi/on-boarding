@@ -12,21 +12,21 @@
 
 ## 목표
 
-- 이미 작성된 코드들을 Spring Boot로 실행하기
+- **Spring의 Bean**과 **Spring Boot의 Component, Component Scan** 개념 알아보기
+- **Spring Container**와 **의존성 주입(DI)**, **제어의 역전(IoC)**에 대해 알아보기
+- 자바의 패키지 구조, 그리고 프로필(`application-?.yml`)에 대해 이해해보기
 
 ## 요구사항
 
-- Spring Container를 이용해서 `Controller`에 `Service`를, `Service`에 `Properties`를 주입해주세요. 단, 내부 프로퍼티들은 `final`이어야 합니다.
-- Spring Boot를 실행한 뒤, ‘`localhost/reaction`’에 들어가면 브라우저에는 ‘YES’, 콘솔에는 콜라 모양 아스키 아트가 보여야합니다.
-
-## 제한사항
-
+- **Spring Boot**를 실행한 뒤, ‘`localhost:8080/reaction`’에 들어가면 브라우저에는 ‘**`YES`’**, `**콘솔에는 콜라 모양 아스키 아트**`가 보여야합니다.
+- **Spring Container**를 이용해서 `Controller`에 `Service`를, `Service`에 `Properties`를 주입해주세요. 단, 내부 프로퍼티들은 `final`이어야 합니다.
+- 컨트롤러는 `RestController`여야 합니다.
 - 의존성 주입에 `@Autowired`는 사용할 수 없습니다.
-- `Configuration`을 따로 두어 `@Bean`으로 등록할 수 없습니다. - 더 나은 방법이 있지 않을까요?
+    - `Configuration`을 따로 두어 `@Bean`으로 등록할 수 없습니다. - 더 나은 방법이 있지 않을까요?
 
 ## 힌트
 
-- `@RequiredConstructor`가 뭘까요?
+- `@RequiredArgsConstructor`가 뭘까요?
 
 ## 제출
 
@@ -38,6 +38,8 @@
 
 ## 키워드
 
+- 어노테이션과 롬복(Annotation, Lombok)
+- 의존성 주입(DI, Dependency Injection)
 - Bean, Component
 - Spring Boot
 - ApplicationContext
