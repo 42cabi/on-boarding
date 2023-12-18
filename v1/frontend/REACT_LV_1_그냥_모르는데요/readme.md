@@ -2,7 +2,7 @@
 
 ### 개요
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/1dc14d02-9fef-47d5-828a-c667c7d13337/355ff7cd-4803-4429-8da5-5febf9f82a71/Untitled.png)
+<img width="616" alt="image" src="https://github.com/42cabi/on-boarding/assets/72684256/3442d528-99b9-41ea-b416-d18bc100da91">
 
 리액트 어서오고.
 
@@ -10,7 +10,7 @@
 
 ### 목표
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/1dc14d02-9fef-47d5-828a-c667c7d13337/55da17df-d8bc-4c86-ab63-9586aa662734/Untitled.png)
+<img width="614" alt="image" src="https://github.com/42cabi/on-boarding/assets/72684256/a223b70e-ea6a-4cb8-80ab-6234e4da1e6a">
 
 - Cabi의 login페이지를 리액트로 클론 코딩하기
 
