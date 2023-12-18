@@ -2,7 +2,8 @@
 
 ## 개요
 
-//// 사진
+<img width="407" alt="image" src="https://github.com/42cabi/on-boarding/assets/72684256/e49dff78-eda0-4cb9-a2a9-b53e081a273f">
+
 
 아는 건 아무 것도 없지만 열심히 하겠다는 마음만으로 까비에 합류하게 된 `성희(seonghmo)`.
 
@@ -14,7 +15,8 @@
 
 ## 목표
 
-//// 사진
+<img width="699" alt="image" src="https://github.com/42cabi/on-boarding/assets/72684256/777760e6-3f64-4b58-89e0-7058970d5ec8">
+
 
 - Cabi의 login페이지를 클론 코딩하기 (**`HTML`**, **`CSS`**)
 - Figma에서 이미지 export 하는 법
