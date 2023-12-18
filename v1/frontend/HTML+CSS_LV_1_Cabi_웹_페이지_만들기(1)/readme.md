@@ -7,14 +7,13 @@
 이 온보딩 프로젝트의 목표는 주어진 디자인 요구 사항에 따라 반응형 웹 페이지를 구현하는 것입니다. PC와 모바일 환경에서 각각 다르게 보이는 요소들을 만들고, CSS 미디어 쿼리를 활용하여 레이아웃이 변화하는 것을 경험하게 됩니다. 주된 학습 포인트는 HTML 구조, CSS 스타일링, 그리고 반응형 웹 디자인의 기초입니다.
 
 - **`참고 이미지 및 링크`**
-
-  ![PC 이미지](https://prod-files-secure.s3.us-west-2.amazonaws.com/1dc14d02-9fef-47d5-828a-c667c7d13337/51b656ee-7c2f-479a-9251-20141814604f/Untitled.png)
+<img width="733" alt="image" src="https://github.com/42cabi/on-boarding/assets/72684256/013a0529-cba1-4038-98a9-645636c4b759">
 
   PC 이미지
 
-  ***
+***
 
-  ![모바일 이미지](https://prod-files-secure.s3.us-west-2.amazonaws.com/1dc14d02-9fef-47d5-828a-c667c7d13337/d9e66ffe-0dcc-44a6-ab49-ae2a855ba47e/Untitled.png)
+  <img width="358" alt="image" src="https://github.com/42cabi/on-boarding/assets/72684256/1549359f-a4df-41e1-90b1-37441e5921d4">
 
   모바일 이미지
 
