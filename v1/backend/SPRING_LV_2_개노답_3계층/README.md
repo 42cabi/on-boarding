@@ -20,6 +20,7 @@
 
 ### **작성**
 
+- `@Controller`, `@Service`, `@Repository` 어노테이션은 이 과제에서 사용되지 않습니다.
 - `dto`, `testutil` 패키지에 있는 클래스들은 수정할 수 없습니다.
 - `domain` 패키지에 있는 클래스들은 **프로퍼티만 수정할 수 없고**, **나머지(메서드 등)는 마음대로 추가, 변경이 가능**합니다.
 - `LentController, LentService, LentRepository` 클래스 파일을 실제 까비 코드의 패키지와 동일한 방식으로 분류해주세요.
