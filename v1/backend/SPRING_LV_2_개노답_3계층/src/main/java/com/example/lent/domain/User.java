@@ -6,9 +6,17 @@ import lombok.RequiredArgsConstructor;
 
 /*Entity가 뭘까요?*/
 @Getter
-@AllArgsConstructor
 public class User {
 	private Long userId;
 	private String name;
 	private boolean isBanned;
+
+	public User(String name, boolean isBanned) {
+		this.name = name;
+		this.isBanned = isBanned;
+	}
+
+	public void id(Long userId) {
+		this.userId = userId;
+	}
 }

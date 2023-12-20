@@ -6,9 +6,16 @@ import lombok.RequiredArgsConstructor;
 
 /*Entity가 뭘까요?*/
 @Getter
-@AllArgsConstructor
 public class Cabinet {
 	private Long cabinetId;
 	private CabinetStatus cabinetStatus;
 
+	public Cabinet(CabinetStatus status) {
+		this.cabinetId = null;
+		this.cabinetStatus = status;
+	}
+
+	public void id(Long id) {
+		this.cabinetId = id;
+	}
 }

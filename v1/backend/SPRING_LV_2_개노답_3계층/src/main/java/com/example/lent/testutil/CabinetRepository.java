@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CabinetRepository {
+	private static Long ID_SEQUENCE = 1L;
 	/*실제 DB를 사용하지 않으므로 내부 Collection으로 대체합니다. - Collection이 뭘까요?*/
 	private final List<Cabinet> TABLE = new ArrayList<>();
 
@@ -15,7 +16,12 @@ public class CabinetRepository {
 	}
 
 	public Cabinet save(Cabinet cabinet) {
-		TABLE.removeIf(c -> c.getCabinetId().equals(cabinet.getCabinetId()));
+		if (cabinet.getCabinetId() != null) {
+			TABLE.removeIf(c -> c.getCabinetId().equals(cabinet.getCabinetId()));
+			TABLE.add(cabinet);
+			return cabinet;
+		}
+		cabinet.id(ID_SEQUENCE++);
 		TABLE.add(cabinet);
 		return cabinet;
 	}

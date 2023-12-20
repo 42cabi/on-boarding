@@ -45,13 +45,13 @@ public class LentTest {
 		boolean banned = true;
 		boolean notBanned = false;
 
-		User wchae = createAndSave(1L, "wchae", notBanned);
-		User daewoole = createAndSave(2L, "daewoole", banned);
-		User jpark2 = createAndSave(3L, "jpark2", notBanned);
+		User wchae = createAndSave("wchae", notBanned);
+		User daewoole = createAndSave("daewoole", banned);
+		User jpark2 = createAndSave("jpark2", notBanned);
 
-		Cabinet cabinet1 = createAndSave(1L, CabinetStatus.FULL);
-		Cabinet cabinet2 = createAndSave(2L, CabinetStatus.AVAILABLE);
-		Cabinet cabinet3 = createAndSave(3L, CabinetStatus.AVAILABLE);
+		Cabinet cabinet1 = createAndSave(CabinetStatus.FULL);
+		Cabinet cabinet2 = createAndSave(CabinetStatus.AVAILABLE);
+		Cabinet cabinet3 = createAndSave(CabinetStatus.AVAILABLE);
 
 		createAndSaveLentHistory(jpark2, cabinet1, now.minusDays(10), 31);
 		assertThat(lentHistoryRepository.findAll().size()).isEqualTo(1); // NPE가 난다면 무슨 이유일까요?
@@ -97,14 +97,14 @@ public class LentTest {
 		assertThat(cabinet.getCabinetStatus()).isEqualTo(CabinetStatus.FULL);
 	}
 
-	private Cabinet createAndSave(Long id, CabinetStatus cabinetStatus) {
-		Cabinet cabinet = new Cabinet(id, cabinetStatus);
+	private Cabinet createAndSave(CabinetStatus cabinetStatus) {
+		Cabinet cabinet = new Cabinet(cabinetStatus);
 		cabinetRepository.save(cabinet);
 		return cabinet;
 	}
 
-	private User createAndSave(Long id, String name, boolean isBanned) {
-		User user = new User(id, name, isBanned);
+	private User createAndSave(String name, boolean isBanned) {
+		User user = new User(name, isBanned);
 		userRepository.save(user);
 		return user;
 	}

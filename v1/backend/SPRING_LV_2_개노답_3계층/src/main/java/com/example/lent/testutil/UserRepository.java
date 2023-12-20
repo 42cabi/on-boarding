@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserRepository {
+	private static Long ID_SEQUENCE = 1L;
 	/*실제 DB를 사용하지 않으므로 내부 Collection으로 대체합니다. - Collection이 뭘까요?*/
 	private final List<User> TABLE = new ArrayList<>();
 
@@ -22,7 +23,12 @@ public class UserRepository {
 	}
 
 	public User save(User user) {
-		TABLE.removeIf(c -> c.getUserId().equals(user.getUserId()));
+		if (user.getUserId() != null) {
+			TABLE.removeIf(c -> c.getUserId().equals(user.getUserId()));
+			TABLE.add(user);
+			return user;
+		}
+		user.id(ID_SEQUENCE++);
 		TABLE.add(user);
 		return user;
 	}
