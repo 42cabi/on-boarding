@@ -23,8 +23,19 @@
 
 - `GET /movies` 는 **DB에 저장되어 있는 모든 `Movie` 엔티티에 대해 조회**할 수 있어야 합니다.
 - `POST /movies`는 `**Movie` 엔티티를 생성, 실제 DB에 영속화**할 수 있어야 합니다.
+    - `POST` 데이터 예시
+        
+        ```json
+        {
+        	"title":"오펜하이머",
+        	"director":"놀란",
+        	"filmedAt":"2023-11-01T10:09:19"
+        }
+        ```
+        
 - 스프링 어플리케이션과 DB의 연결에 대해서는 `Spring Data JPA`를 사용해주세요.
     - 필요한 의존성을 `gradle`에 직접 설치해보세요.
+- `Movie` 클래스는 `@Entity`여야 합니다.요.
 - `Movie` 클래스는 `@Entity`여야 합니다.
 
 ## 힌트
