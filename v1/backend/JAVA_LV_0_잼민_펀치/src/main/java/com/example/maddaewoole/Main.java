@@ -7,7 +7,7 @@ public class Main {
         Daewoole daewoole = new Daewoole(jpark2.getMentions());
 
         int count = 0;
-        while (daewoole.isOverLimit()) {
+        while (!daewoole.isOverLimit()) {
             String provokeMention = jpark2.provoke();
             int learnedAngerPoint = daewoole.getLearnedAngerPoint(provokeMention);
 
@@ -21,11 +21,12 @@ public class Main {
     }
 
     private static void printProvokeMention(String mention, int angerPoint) {
-        System.out.println("지원은 '" + mention + "'를 시전하여 대욱의 본노를 " + angerPoint + " 증가시켰다.");
+        System.out.println("지원은 '" + mention + "'를 시전하여 대욱의 분노를 " + angerPoint + " 증가시켰다.");
     }
 
     private static void printAngerPoint(int angerPoint) {
         System.out.println("현재 대욱의 분노 수치: " + angerPoint);
+        System.out.print(System.lineSeparator());
     }
 
     private static void printPunchCount(int count) {
