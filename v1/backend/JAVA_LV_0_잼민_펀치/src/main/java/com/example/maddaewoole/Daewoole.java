@@ -12,7 +12,7 @@ public class Daewoole {
     private static final int ADD_LAST_POINT = 10;
     private int anger;
     private final int limit;
-    private Map<String, Integer> provokeMap = new HashMap<>();
+    private final Map<String, Integer> provokeMap = new HashMap<>();
 
     public Daewoole(List<String> mentions) {
         anger = 0;
