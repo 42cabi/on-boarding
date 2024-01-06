@@ -15,11 +15,13 @@ public class Daewoole {
     public Daewoole(List<String> mentions) {
         anger = 0;
         limit = generateRandomNumberInRange(MIN_LIMIT, MAX_LIMIT);
-        provokeMap = learnMentions(mentions);
+        learnMentions(mentions);
     }
 
-    private Map<String, Integer> learnMentions(List<String> mentions) {
-        return null;
+    private void learnMentions(List<String> mentions) {
+        for (String mention : mentions) {
+            provokeMap.put(mention, generateRandomNumberInRange(0, 20))
+        }
     }
 
     // 범위 내의 랜덤값 생성
