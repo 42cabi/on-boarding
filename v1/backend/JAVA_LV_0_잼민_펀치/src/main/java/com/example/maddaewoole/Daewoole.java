@@ -21,10 +21,15 @@ public class Daewoole {
     }
 
     public void provoked(String mention) {
-        int angerPoint = provokeMap.getOrDefault(mention, 0);
+        int angerPoint = getLearnedAngerPoint(mention);
 
         addAngerPoint(angerPoint);
     }
+
+    public int getLearnedAngerPoint(String mention) {
+        return provokeMap.getOrDefault(mention, 0);
+    }
+
 
     private void learnMentions(List<String> mentions) {
         int startPoint = 0;
