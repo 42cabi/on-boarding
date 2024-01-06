@@ -12,7 +12,6 @@ public class Main {
             int learnedAngerPoint = daewoole.getLearnedAngerPoint(provokeMention);
 
             printProvokeMention(provokeMention, learnedAngerPoint);
-            // 외부에서 property를 직접 수정하는 것보단.. 중복이 나을듯
             daewoole.provoked(provokeMention);
             printAngerPoint(daewoole.getAnger());
             count++;
