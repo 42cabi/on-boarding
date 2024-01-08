@@ -18,6 +18,7 @@ public class BotImpl implements JiwonBehavior {
 		Output output = new Output();
 		List<String> productNames = generateProductNames(orderInput);
 		List<Product> orders = generateOrders(productNames);
+		Product product = !orders.isEmpty() ? orders.get(0) : null;
 
 		String commandInput = orderInput.replaceAll("<.*?>", "").trim();
 		Command command = Command.from(commandInput);
@@ -26,6 +27,21 @@ public class BotImpl implements JiwonBehavior {
 			addToCart(productNames);
 			int price = calculateProducts(productNames);
 			output.printCalculateResult(price);
+		}
+		if (command.getType() == OrderType.FIND) {
+			boolean result = isContain(product);
+			output.printFindResult(product, result);
+		}
+		if (command.getType() == OrderType.REMOVE) {
+			boolean result = removeProducts(product);
+			output.printRemoveResult(product, result);
+		}
+		if (command.getType() == OrderType.COUNT) {
+			int count = getProductCount(product);
+			output.printCountResult(product, count);
+		}
+		if (command.getType() == OrderType.RESULT) {
+			result();
 		}
 	}
 
@@ -40,6 +56,12 @@ public class BotImpl implements JiwonBehavior {
 				.orElse(0);
 	}
 
+	private boolean removeProducts(Product product) {
+		if (!isContain(product)) {
+			return false;
+		}
+		return products.removeIf(p -> p.equals(product));
+	}
 
 	private List<Product> generateOrders(List<String> productNames) {
 		return productNames.stream()
