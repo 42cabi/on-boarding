@@ -6,16 +6,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class BotImpl implements JiwonBehavior {
-
+	Output output = new Output();
 	private static final int PRICE_UNIT = 1000;
 	private List<Product> products = new ArrayList<>();
 
-	// <오감자>랑<새우깡> => 네 6000원이요
-	// <우라라랑>이랑<가므마마마>
 	@Override
 	public void takeOrder(String orderInput) {
-		// 모든 Command를 체크하면서 주문 문자열을 분할
-		Output output = new Output();
 		List<String> productNames = generateProductNames(orderInput);
 		List<Product> orders = generateOrders(productNames);
 		Product product = !orders.isEmpty() ? orders.get(0) : null;
@@ -51,9 +47,8 @@ public class BotImpl implements JiwonBehavior {
 
 	private int calculateProducts(List<String> productNames) {
 		return productNames.stream()
-				.findFirst()
-				.map(name -> products.stream().filter(product -> product.getName().equals(name)).mapToInt(Product::getPrice).sum())
-				.orElse(0);
+				.mapToInt(name -> name.length() * PRICE_UNIT)
+				.sum();
 	}
 
 	private boolean removeProducts(Product product) {
