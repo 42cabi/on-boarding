@@ -21,7 +21,25 @@ public class BotImpl implements JiwonBehavior {
 
 		String commandInput = orderInput.replaceAll("<.*?>", "").trim();
 		Command command = Command.from(commandInput);
+
+		if (command.getType() == OrderType.CALCULATE) {
+			addToCart(productNames);
+			int price = calculateProducts(productNames);
+			output.printCalculateResult(price);
+		}
 	}
+
+	private void addToCart(List<String> productNames) {
+		productNames.forEach(name -> products.add(Product.from(name)));
+	}
+
+	private int calculateProducts(List<String> productNames) {
+		return productNames.stream()
+				.findFirst()
+				.map(name -> products.stream().filter(product -> product.getName().equals(name)).mapToInt(Product::getPrice).sum())
+				.orElse(0);
+	}
+
 
 	private List<Product> generateOrders(List<String> productNames) {
 		return productNames.stream()
