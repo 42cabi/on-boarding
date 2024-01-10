@@ -110,7 +110,7 @@ public class LentTest {
 	}
 
 	private LentHistory createAndSaveLentHistory(User user, Cabinet cabinet, LocalDateTime now, int days) {
-		LentHistory lentHistory = new LentHistory(user.getUserId(), cabinet.getCabinetId(), user.getName(), now, now.plusDays(days));
+		LentHistory lentHistory = new LentHistory(cabinet.getCabinetId(), user.getUserId(), user.getName(), now, now.plusDays(days));
 		lentHistoryRepository.save(lentHistory);
 		return lentHistory;
 	}
