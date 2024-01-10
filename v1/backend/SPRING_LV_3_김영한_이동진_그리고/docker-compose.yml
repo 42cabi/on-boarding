@@ -6,7 +6,7 @@ services:
     restart: always
     environment:
       MARIADB_ROOT_USER: root
-      MARIADB_ROOT_PASSWORD: example
+      MARIADB_ROOT_PASSWORD: Abcd123@
       MARIADB_DATABASE: test
     ports:
       - "3306:3306"
