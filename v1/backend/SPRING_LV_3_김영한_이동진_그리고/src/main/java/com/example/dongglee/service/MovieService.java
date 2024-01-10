@@ -18,11 +18,7 @@ public class MovieService {
     }
 
     public Movie createMovie(MovieCreateRequestDto dto) {
-        Movie movie = Movie.builder()
-                .director(dto.getDirector())
-                .title(dto.getTitle())
-                .filmedAt(dto.getFilmedAt())
-                .build();
+        Movie movie = Movie.from(dto);
 
         return movieRepository.save(movie);
     }

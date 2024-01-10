@@ -26,6 +26,11 @@ dependencies {
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    //JPA
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+    // mariadb 의존성 추가
+    runtimeOnly 'org.mariadb.jdbc:mariadb-java-client:2.7.9'
 }
 
 tasks.named('test') {

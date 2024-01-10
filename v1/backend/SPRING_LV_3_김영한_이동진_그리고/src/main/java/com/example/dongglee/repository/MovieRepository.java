@@ -1,12 +1,10 @@
 package com.example.dongglee.repository;
 
 import com.example.dongglee.domain.Movie;
-import java.util.List;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface MovieRepository {
-    List<Movie> findAll();
+public interface MovieRepository extends JpaRepository<Movie, Long> {
 
-    Movie save(Movie movie);
 }
