@@ -1,0 +1,109 @@
+@import "reset.css";
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
+
+.LoginPage {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    --main-color: #9747FF;
+    --sub-color: #B18CFF; 
+}
+
+.leftLoginPage {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    padding-left: 7%;
+
+    p {
+        font-family: Noto Sans KR;
+        font-size: 32px;
+        font-weight: 700;
+        line-height: 46.34px;
+    }
+
+    .lightPurple {
+        color: var(--sub-color);
+    }
+
+    span {
+        color: var(--main-color);
+    }
+
+    img {
+        margin: 40px 0;
+    }
+}
+
+.rightLoginPage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 50%;
+    height: 100%;
+    background-color: var(--main-color);
+
+    .modal {
+        width: 350px;
+        height: 500px;
+        background-color: white;
+        border-radius: 20px;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        padding: 85px 0;
+        box-sizing: border-box;
+
+        box-shadow: 10px 10px 40px 0px #00000040;
+
+        img {
+            width: 70px;
+            height: 70px;
+        }
+
+        h1 {
+            font-family: Noto Sans KR;
+            font-size: 40px;
+            font-weight: 400;
+            letter-spacing: -0.02em;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-family: Noto Sans KR;
+            font-size: 16px;
+            font-weight: 400;
+            text-align: center;
+            color: var(--sub-color);
+
+        }
+
+        button {
+            width: 200px;
+            height: 60px;
+            background-color: var(--main-color);
+            color: white;
+            border-radius: 5px;
+
+            cursor: pointer;
+        }
+    }
+}
+
+/* 반응형 구현 */
+@media screen and (max-width: 767px) {
+    .leftLoginPage {
+      display: none;
+    }
+    .rightLoginPage {
+      width: 100vw;
+    }
+}
+
