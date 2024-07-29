@@ -103,3 +103,14 @@ div p {
     }
   }
 }
+
+/* bonus */
+@media (max-width: 768px) {
+  .leftLoginPage {
+    display: none;
+  }
+
+  .rightLoginPage {
+    width: 100%;
+  }
+}
