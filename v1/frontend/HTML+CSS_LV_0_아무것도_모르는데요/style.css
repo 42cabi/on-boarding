@@ -1,0 +1,105 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap");
+@import url("reset.css");
+
+/* all */
+html, body, #loginPage {
+  width: 100vw;
+  height: 100vh;
+  font-family: "Noto Sans KR";
+}
+
+#loginPage {
+  display: flex;
+  flex-direction: row;
+}
+
+/* colors */
+.fontPurple {
+  color: #B18CFF;
+}
+
+/* margin, padding */
+div p {
+  padding: 10px 0;
+}
+
+/* contents */
+.leftLoginPage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  width: 50%;
+  height: 100%;
+  padding-left: 7%;
+  box-sizing: border-box;
+
+  .serviceTitle {
+    font-size: 32px;
+    font-weight: 700;
+  }
+
+  .serviceImage {
+    width: 446px;
+    height: 388px;
+    padding: 10% 10%;
+  }
+
+  .serviceSubtitle {
+    font-size: 28px;
+    font-weight: 700;
+
+    .fontPurple {
+      color: #9747FF;
+    }
+  }
+}
+
+.rightLoginPage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 50%;
+  height: 100%;
+  background-color: #9747FF;
+
+  .loginModal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 360px;
+    height: 500px;
+    background-color: #FFFFFF;
+    border-radius: 20px;
+    box-sizing: border-box;
+    padding: 85px 0;
+    box-shadow: 10px 10px 40px 0px #00000040;
+
+    .logoImage {
+      width: 70px;
+      height: 70px;
+    }
+
+    .logoTitle {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 40px;
+
+      .subTitle {
+        font-size: 16px;
+      }
+    }
+
+    .loginButton {
+      width: 200px;
+      height: 60px;
+      border-radius: 6px;
+      background-color: #9747FF;
+      color:#FFFFFF;
+      font-size: 18px;
+    }
+  }
+}
