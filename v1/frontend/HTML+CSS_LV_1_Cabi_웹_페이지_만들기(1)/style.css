@@ -24,14 +24,14 @@ html, body, #root {
 }
 
 /* row column setting */
-.row-direction-set {
+.flex-row {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
 }
 
-.col-direction-set {
+.flex-col {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -39,52 +39,58 @@ html, body, #root {
 }
 
 /* top navigation */
-#top-navigation {
+#top-nav {
   width: 100%;
   height: 80px;
   background-color: var(--primary-color);
   padding: 0 20px;
 }
 
-#logo-section {
+#logo {
   width: 122px;
   height: 35px;
-  /* padding: 0 10px; */
 }
 
-.logo-section__logo-image {
+.logo__image {
   width: 50px;
   height: 35px;
   justify-content: center;
 }
 
-.logo-section__logo-title {
+.logo__title {
   font-family: 'Do Hyeon', sans-serif;
   font-size: 24px;
   font-weight: 400;
   color: #FFFFFF;
 }
 
-#menu-section {
+#menu {
   width: 90px;
   height: 40px;
 }
 
 /* page sections */
-#page-sections {
+#main-page {
   justify-content: flex-start;
   align-items: flex-start;
   width: 100%;
   height: calc(100vh - 80px);
 }
 
-.selected {
+.item-selected {
   background-color: var(--primary-color);
   color: var(--font-color-white);
 }
 
+/* left-bar */
+#left-nav {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+}
+
 /* left navigation */
-#left-navigation {
+#floor-nav {
   width: 90px;
   height: 100%;
   color: var(--font-color-gray);
@@ -92,7 +98,7 @@ html, body, #root {
   border-right: 1px solid var(--line-color);
 }
 
-.left-navigation__bar {
+.floor-nav__item {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -103,13 +109,13 @@ html, body, #root {
   border-radius: 10px;
 }
 
-.left-navigation__bar:hover {
+.floor-nav__item:hover {
   background-color: var(--primary-color);
   color: var(--font-color-white)
 }
 
 /* left section navigation */
-#left-section-navigation {
+#section-nav {
   width: 240px;
   height: 100%;
   padding: 30px 0;
@@ -118,7 +124,7 @@ html, body, #root {
   border-right: 1px solid var(--line-color);
 }
 
-.left-section-navigation__bar {
+.section-nav__item {
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -129,7 +135,7 @@ html, body, #root {
   border-radius: 10px;
 }
 
-.left-section-navigation__bar:hover {
+.section-nav__item:hover {
   background-color: var(--primary-color);
   color: var(--font-color-white);
 }
@@ -185,12 +191,12 @@ main {
 }
 
 /* bottom navigation */
-#bottom-navigation {
+#tab-bar {
   width: 100%;
   height: 80px;
 }
 
-#bottom-navigation__list {
+#tab-bar__list {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -206,7 +212,7 @@ main {
   font-family: 'Inter', sans-serif;
 }
 
-.bottom-navigation__list__bar {
+.tab-bar__list__item {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -216,24 +222,24 @@ main {
   border-radius: 10px;
 }
 
-.bottom-navigation__list__bar:hover {
+.tab-bar__list__item:hover {
   background-color: var(--primary-color);
   color: var(--font-color-white);
 }
 
 /* responsive web */
-@media all and (min-width: 769px) {
-  #bottom-navigation {
+@media (min-width: 769px) {
+  #tab-bar {
     display: none;
   }
 }
 
-@media all and (max-width: 768px) {
-  #page-sections {
+@media (max-width: 768px) {
+  #main-page {
     height: calc(100vh - 80px - 80px);
   }
 
-  #left-navigation, #left-section-navigation {
+  #left-nav {
     display: none;
   }
 
@@ -241,12 +247,12 @@ main {
     width: 100%;
   }
 
-  #bottom-navigation {
+  #tab-bar {
     display: flex;
   }
 }
 
-@media all and (max-width: 450px) {
+@media (max-width: 450px) {
   .cabinet-list {
     grid-template-columns: repeat(4, 90px);
   }
