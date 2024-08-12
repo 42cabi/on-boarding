@@ -48,6 +48,8 @@ dl,
 dt,
 dd,
 ol,
+ul,
+li,
 fieldset,
 form,
 label,
@@ -79,7 +81,9 @@ summary,
 time,
 mark,
 audio,
-video {
+video,
+input,
+button {
   margin: 0;
   padding: 0;
   border: 0;
@@ -99,17 +103,16 @@ header,
 hgroup,
 menu,
 nav,
-button,
 section {
   display: block;
 }
 body {
   line-height: 1;
 }
-/* ol,
+ol,
 ul {
   list-style: none;
-} */
+}
 blockquote,
 q {
   quotes: none;
@@ -128,4 +131,8 @@ table {
 
 a {
   text-decoration: none;
+}
+
+input:focus {
+  outline: none;
 }

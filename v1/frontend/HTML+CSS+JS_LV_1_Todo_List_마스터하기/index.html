@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Todo List</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <hearder>
+        <h1>TODO LIST</h1>
+    </hearder>
+    <main>
+        <section>
+            <form class="todo-form">
+                <input class="todo-form__input" type="text" placeholder="오늘 할 일을 추가해보세요" required>
+                <button class="todo-form__button">
+                    <img src="img/add_btn.svg" alt="등록 버튼"/>
+                </button>
+            </form>
+        </section>
+        <section class="container">
+            <article class="todo-list">
+                <ul class="todo-list__ul"></ul>
+            </article>
+            <article class="done-list">
+                <ul class="done-list__ul"></ul>
+            </article>
+        </section>
+    </main>
+    <script src="js/todo.js"></script>
+</body>
+</html>
