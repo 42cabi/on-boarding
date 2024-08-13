@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="style.css" />
+    <title>cabi todo</title>
+  </head>
+  <body>
+    <div>
+      <header>Todo List</header>
+      <nav>
+        <div>
+          <button id="cat-btn-all" class="cat-btn">모두</button>
+          <button id="cat-btn-incomplete" class="cat-btn">미완료</button>
+          <button id="cat-btn-complete" class="cat-btn">완료</button>
+        </div>
+        <form id="search-form">
+          <input
+            id="search-form__input"
+            type="text"
+            placeholder="Search todo"
+          />
+        </form>
+      </nav>
+      <main>
+        <ul id="todo-list"></ul>
+        <form id="todo-form">
+          <input
+            id="todo-form__input"
+            type="text"
+            placeholder="Write todo here"
+          />
+          <input id="todo-form__btn" type="submit" value="추가" />
+        </form>
+      </main>
+    </div>
+  </body>
+  <script src="todo.js"></script>
+</html>
