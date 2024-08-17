@@ -6,11 +6,17 @@
 /* all */
 :root {
   --white: #FFFFFF;
+
   --primary-color: #9747FF;
   --secondary-color: #B18CFF;
-  --empty-cabinet-color: #EEEEEE;
+
+  --full-cabinet-color: var(--primary-color);
+  --available-cabinet-color: #EEEEEE;
+
+  --font-color-black: #333333;
   --font-color-gray: #7B7B7B;
   --font-color-white: var(--white);
+
   --line-color: #BCBCBC;
 }
 
@@ -163,7 +169,7 @@ main {
   color: var(--font-color-gray);
 }
 
-.cabinet-list {
+#cabinet-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, 90px);
   justify-content: center;
@@ -180,11 +186,24 @@ main {
   margin: 5px 5px;
   padding: 10px;
 
-  color: var(--font-color-white);
   font-size: 14px;
   font-weight: 400;
   border-radius: 10px;
-  background-color: var(--primary-color);
+}
+
+.full {
+  color: var(--font-color-white);
+  background-color: var(--full-cabinet-color);
+}
+
+.available {
+  color: var(--font-color-black);
+  background-color: var(--available-cabinet-color);
+  /* background-position: center;
+  background-repeat: no-repeat;
+  img {
+    background-image: url("../images/user_available.svg");
+  } */
 }
 
 .cabinet__info, .cabinet__username {

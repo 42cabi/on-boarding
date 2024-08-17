@@ -4,7 +4,7 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width"/>
     <title>Level 1: Cabinets</title>
-    <link href="style.css" rel="stylesheet"/>
+    <link href="./css/style.css" rel="stylesheet"/>
   </head>
   <body>
     <div id="root">
@@ -30,74 +30,15 @@
           </nav>
           <nav id="section-nav" class="flex-col">
             <ul>
-              <li class="section-nav__item">End of Cluster 1</li>
-              <li class="section-nav__item">Cluster 1 - OA</li>
-              <li class="section-nav__item">Cluster 1 - Terrace</li>
-              <li class="section-nav__item item-selected">Oasis</li>
-              <li class="section-nav__item">End of Cluster 2</li>
+              <li id="section-a" class="section-nav__item item-selected">A</li>
+              <li id="section-b" class="section-nav__item">B</li>
+              <li id="section-c" class="section-nav__item">C</li>
             </ul>
           </nav>
         </aside>
         <main>
-          <p id="location-title">2층 - Oasis</p>
-          <div class="cabinet-list">
-            <div class="cabinet flex-col">
-              <div class="cabinet__info flex-row">
-                <img src="images/personal_user.svg" alt="Personal Cabinet" class="cabinet__info__personal">
-                <p class="cabinet__info__number">1</p>
-              </div>
-              <p class="cabinet__username">42Cabi</p>
-            </div>
-            <div class="cabinet flex-col">
-              <div class="cabinet__info flex-row">
-                <img src="images/personal_user.svg" alt="Personal Cabinet" class="cabinet__info__personal">
-                <p class="cabinet__info__number">2</p>
-              </div>
-              <p class="cabinet__username">42Cabi</p>
-            </div>
-            <div class="cabinet flex-col">
-              <div class="cabinet__info flex-row">
-                <img src="images/personal_user.svg" alt="Personal Cabinet" class="cabinet__info__personal">
-                <p class="cabinet__info__number">3</p>
-              </div>
-              <p class="cabinet__username">42Cabi</p>
-            </div>
-            <div class="cabinet flex-col">
-              <div class="cabinet__info flex-row">
-                <img src="images/personal_user.svg" alt="Personal Cabinet" class="cabinet__info__personal">
-                <p class="cabinet__info__number">4</p>
-              </div>
-              <p class="cabinet__username">42Cabi</p>
-            </div>
-            <div class="cabinet flex-col">
-              <div class="cabinet__info flex-row">
-                <img src="images/personal_user.svg" alt="Personal Cabinet" class="cabinet__info__personal">
-                <p class="cabinet__info__number">5</p>
-              </div>
-              <p class="cabinet__username">42Cabi</p>
-            </div>
-            <div class="cabinet flex-col">
-              <div class="cabinet__info flex-row">
-                <img src="images/personal_user.svg" alt="Personal Cabinet" class="cabinet__info__personal">
-                <p class="cabinet__info__number">6</p>
-              </div>
-              <p class="cabinet__username">42Cabi</p>
-            </div>
-            <div class="cabinet flex-col">
-              <div class="cabinet__info flex-row">
-                <img src="images/personal_user.svg" alt="Personal Cabinet" class="cabinet__info__personal">
-                <p class="cabinet__info__number">7</p>
-              </div>
-              <p class="cabinet__username">42Cabi</p>
-            </div>
-            <div class="cabinet flex-col">
-              <div class="cabinet__info flex-row">
-                <img src="images/personal_user.svg" alt="Personal Cabinet" class="cabinet__info__personal">
-                <p class="cabinet__info__number">8</p>
-              </div>
-              <p class="cabinet__username">42Cabi</p>
-            </div>
-          </div>
+          <p id="location-title"></p>
+          <div id="cabinet-list"></div>
         </main>
       </div>
       <nav id="tab-bar">
@@ -109,5 +50,6 @@
         </ul>
       </nav>
     </div>
+    <script src="./js/cabinet.js" type="module"></script>
   </body>
 </html>
