@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>cabi-page-clone2</title>
+    <link rel="stylesheet" href="src/assets/css/style.css">
+  </head>
+  <body>
+    <nav class="top-navibar">
+      <div class="top-navibar__left-side">
+        <img src="src/assets/images/logo.svg" alt="Cabi Logo">
+        <p>Cabi</p>
+      </div>
+      <div class="top-navibar__right-side">
+        <img src="src/assets/images/profile.svg" alt="profile icon">
+        <img src="src/assets/images/package.svg" alt="package icon">
+      </div>
+    </nav>
+    <div class="main">
+      <div id="left-nav-wrap">
+        <nav class="left-nav">
+          <ul>
+            <li>Home</li>
+            <li class="left-nav--select">2층</li>
+            <li>4층</li>
+            <li>5층</li>
+          </ul>
+        </nav>
+        <section class="left-nav-section">
+          <ul>
+            <li id="left-nav-section__A">A</li>
+            <li id="left-nav-section__B">B</li>
+            <li id="left-nav-section__C">C</li>
+          </ul>
+        </section>
+      </div>
+      <main id="main-cabi">
+        <div class="main-cabi__navigation">
+          <button id="prev-section" class="nav-button">◀</button>
+          <p class="main-cabi__place"></p>
+          <button id="next-section" class="nav-button">▶</button>
+        </div>
+        <div class="main-cabi__box-container">
+        </div>
+      </main>
+    </div>
+    <nav class="bottom-nav">
+      <ul class="bottom-nav-ul">
+        <li>Home</li>
+        <li class="bottom-select">2층</li>
+        <li>4층</li>
+        <li>5층</li>
+      </ul>
+    </nav>
+  <script type="module" src="./js/index.js"></script>
+  </body>
+</html>
