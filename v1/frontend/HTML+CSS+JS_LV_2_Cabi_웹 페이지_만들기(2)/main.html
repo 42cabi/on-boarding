@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <title>Cabi</title>
+  </head>
+  <body id="body">
+    <header id="header">
+      <div class="header-sub">
+        <img
+          src="./img/cabi-logo.svg"
+          alt="cabi_logo"
+          class="header-sub-logo"
+        />
+        <a class="header-sub-text">Cabi</a>
+      </div>
+      <div class="header-sub">
+        <img
+          src="./img/profile-circle.svg"
+          alt="profile"
+          class="header-sub-btn"
+        />
+        <img src="./img/map.svg" alt="map" class="header-sub-btn" />
+      </div>
+    </header>
+    <div id="main-section">
+      <aside id="left-aside">
+        <nav id="left-nav">
+          <ul>
+            <li class="left-nav-btn">Home</li>
+            <li class="left-nav-btn left-nav-btn-selected">2층</li>
+            <li class="left-nav-btn">4층</li>
+            <li class="left-nav-btn">5층</li>
+          </ul>
+        </nav>
+        <div id="left-section-select">
+          <ul id="left-section-list"></ul>
+        </div>
+      </aside>
+      <main id="main">
+        <div id="main-section-header">
+          <div class="main-section-left"><</div>
+          <div class="main-section-text">2층 - Oasis</div>
+          <div class="main-section-right">></div>
+        </div>
+        <ul class="cabinet-list">
+          <div class="cabinet">
+            <div class="cabinet-info">
+              <img
+                src="./img/cabinet-icon.svg"
+                alt="cabinet_icon"
+                class="cabinet-icon"
+              />
+              <p class="cabinet-number">1</p>
+            </div>
+            <div class="cabinet-intra">junsbae</div>
+          </div>
+        </ul>
+      </main>
+      <nav id="tapbar">
+        <ul>
+          <li class="tapbar-btn">Home</li>
+          <li class="tapbar-btn tapbar-btn-selected">2층</li>
+          <li class="tapbar-btn">4층</li>
+          <li class="tapbar-btn">5층</li>
+        </ul>
+      </nav>
+    </div>
+  </body>
+  <script type="module" src="./main.js"></script>
+</html>
