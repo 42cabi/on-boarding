@@ -1,0 +1,17 @@
+html {
+  font-family: "Noto Sans KR", sans-serif;
+}
+
+body {
+  margin: 0;
+  overflow: hidden;
+}
+
+:root {
+  --primary-background-color: rgb(151, 71, 255);
+  --secondary-background-color: rgb(255, 255, 255);
+  --primary-text-color: rgb(24, 24, 24);
+  --secondary-text-color: rgb(177, 140, 255);
+  --tertiary-text-color: rgb(151, 71, 255);
+  --theme-text-color: rgb(255, 255, 255);
+}
