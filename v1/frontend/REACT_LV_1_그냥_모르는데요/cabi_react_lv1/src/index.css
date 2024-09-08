@@ -1,0 +1,18 @@
+@import './assets/css/reset.css';
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
+
+#root {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  box-sizing: border-box;
+
+  --main-color: #9747FF;
+  --sub-color: #B18CFF;
+  --text-color: #7B7B7B;
+  --text-main-color: #333333;
+  --line-color: #BCBCBC;
+  --box-shadow-color: #00000040;
+
+  font-family: 'Noto Sans KR', sans-serif;
+}
