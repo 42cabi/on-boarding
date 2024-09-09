@@ -1,0 +1,213 @@
+html {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: "Noto Sans KR", sans-serif;
+
+  /* colors */
+  --sys-default-main-color: rgb(151, 71, 255);
+  --sys-default-bg-color: rgb(225, 211, 255);
+  --sys-sub-color: rgb(177, 140, 255);
+  --default-text-color: rgb(64, 31, 107);
+  --theme-text-color: white;
+  --disabled-text-color: rgb(170, 170, 170);
+  /* checkbox color */
+  --checkbox-bg-color: rgb(150, 150, 150);
+}
+
+/* colors */
+
+.sys-default-main-color {
+  color: var(--sys-default-main-color);
+}
+.sys-sub-color {
+  color: var(--sys-sub-color);
+}
+.normal-text-color {
+  color: var(--normal-text-color);
+}
+.theme-text-color {
+  color: var(--theme-text-color);
+}
+
+/* layout */
+body {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+
+body > div {
+  width: 1024px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+header {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 1rem;
+  font-size: 32px;
+  background-color: var(--sys-default-main-color);
+  color: var(--theme-text-color);
+}
+
+nav {
+  width: 100%;
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 0 1rem;
+  background-color: var(--sys-default-main-color);
+}
+
+main {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--sys-sub-color);
+}
+
+/* nav */
+.cat-btn {
+  width: 72px;
+  height: 24px;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--sys-sub-color);
+  color: var(--default-text-color);
+}
+
+#search-form__input {
+  height: 24px;
+  font-size: 12px;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--sys-default-bg-color);
+  color: var(--default-text-color);
+  box-sizing: border-box;
+  padding: 0 1rem;
+}
+
+/* todo-list */
+
+#todo-list {
+  width: 100%;
+  height: calc(100vh - 64px - 72px - 40px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+.todo-list__item {
+  width: 100%;
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 1rem;
+  border-radius: 10px;
+  background-color: var(--sys-default-bg-color);
+}
+
+.todo-list__item > div {
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.todo-list__item + .todo-list__item {
+  margin-top: 1rem;
+}
+
+.todo-list__item-text-checked {
+  font-size: 20px;
+  color: var(--disabled-text-color);
+  text-decoration: line-through;
+}
+
+.todo-list__item-text-unchecked {
+  font-size: 20px;
+  color: var(--default-text-color);
+  text-decoration: none;
+}
+
+.todo-list__item-btn {
+  width: 44px;
+  height: 28px;
+  font-size: 14px;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--sys-sub-color);
+  color: var(--default-text-color);
+  margin-right: 15px;
+}
+
+.todo-list__item-checkbox {
+}
+
+/* todo-form */
+
+#todo-form {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 1rem;
+  background-color: var(--sys-sub-color);
+}
+
+#todo-form__input {
+  width: 80%;
+  height: 40px;
+  font-size: 20px;
+  border: none;
+  border-radius: 8px 0 0 8px;
+  background-color: var(--sys-default-bg-color);
+  color: var(--default-text-color);
+  box-sizing: border-box;
+  padding: 0 1rem;
+}
+
+#todo-form__btn {
+  width: 80px;
+  height: 40px;
+  font-size: 20px;
+  border: none;
+  border-radius: 0 8px 8px 0;
+  background-color: var(--sys-default-main-color);
+  color: var(--theme-text-color);
+}
+
+/* checkbox */
+input[type="checkbox"] {
+  width: 24px;
+  height: 24px;
+  appearance: none;
+  border-radius: 20px;
+  background-color: var(--checkbox-bg-color);
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+input:checked[type="checkbox"] {
+  background-color: var(--sys-default-main-color);
+  background-image: url(check_white.png);
+  background-size: 60%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
