@@ -79,7 +79,7 @@ summary,
 time,
 mark,
 audio,
-video {
+video, ul {
   margin: 0;
   padding: 0;
   border: 0;
@@ -106,10 +106,10 @@ section {
 body {
   line-height: 1;
 }
-/* ol,
+ol,
 ul {
   list-style: none;
-} */
+}
 blockquote,
 q {
   quotes: none;
