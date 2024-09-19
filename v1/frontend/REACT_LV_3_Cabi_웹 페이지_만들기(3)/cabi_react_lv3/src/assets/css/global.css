@@ -1,0 +1,23 @@
+@import "reset.css";
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Noto+Sans+KR:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Inter:wght@100..900&family=Noto+Sans+KR:wght@100..900&display=swap');
+
+
+#root {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+
+    --main-color: #9747FF;
+    --sub-color: #B18CFF;
+    --text-color: #7B7B7B;
+    --text-main-color: #333333;
+    --line-color: #BCBCBC;
+    --background-color: #EEEEEE;
+
+    font-family: "Inter", sans-serif, "Do Hyeon";
+}
