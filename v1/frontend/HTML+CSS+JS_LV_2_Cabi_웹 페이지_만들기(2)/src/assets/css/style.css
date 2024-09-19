@@ -1,0 +1,332 @@
+@import "reset.css";
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Noto+Sans+KR:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Inter:wght@100..900&family=Noto+Sans+KR:wght@100..900&display=swap');
+
+
+body {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+
+    --main-color: #9747FF;
+    --sub-color: #B18CFF;
+    --text-color: #7B7B7B;
+    --text-main-color: #333333;
+    --line-color: #BCBCBC;
+    --background-color: #EEEEEE;
+}
+
+.top-navibar {
+    background-color: var(--main-color);
+    height: 55px;
+    width: 100%;
+    padding: 0 2%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.top-navibar__left-side {
+    color: white;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    img {
+        width: 30px;
+        height: 30px;
+    }
+
+    p {
+        font-family: "Do Hyeon", sans-serif;
+        font-size: 20px;
+        font-weight: 400;
+        line-height: 28px;
+        text-align: left;
+        padding-left: 20px;
+    }
+}
+
+.top-navibar__right-side {
+    img {
+        width: 27px;
+        height: 27px;
+    }
+}
+
+.main {
+    display: flex;
+    grid-template-rows: auto 1fr; /* 상단 네비게이션 바가 auto 높이로 오고, 나머지가 1fr로 확장됩니다. */
+    height: calc(100vh - 55px);
+}
+
+
+#left-nav-wrap {
+    display: flex;
+    flex-direction: row;
+    z-index: 1;
+
+    li {
+        align-content: center;
+        font-family: "Inter", sans-serif;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 28px;
+        color: var(--text-color);
+
+        cursor: pointer;
+        border-radius: 10px;
+    }
+
+    .left-nav--select {
+        color: white !important;
+        background-color: var(--main-color);
+    }
+}
+
+li:hover {
+    background-color: var(--main-color);
+    color: white !important;
+}
+
+.left-nav {
+    width: 90px;
+    height: 100%;
+    padding: 30px 10px;
+    border-right: 1px solid var(--line-color);
+
+    li {
+        width: 70px;
+        height: 48px;
+        margin-bottom: 40%;
+        text-align: center;
+    }
+}
+
+.left-nav-section {
+    min-width: 240px;
+    height: 100%;
+    padding: 30px 10px;
+    border-right: 1px solid var(--line-color);
+
+    li {
+        width: 220px;
+        height: 40px;
+        margin: 5px 0;
+        text-align: left;
+        padding-left: 20px;
+    }
+}
+
+#main-cabi {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-cabi__place {
+    color: var(--text-color);
+    padding: 30px 0;
+
+    font-family: "Inter", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 28px;
+    
+    position: absolute; /* 절대 위치를 사용해 중앙 정렬 */
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+}
+
+.main-cabi__box-container {
+    justify-content: center;
+    display: grid;
+    gap: 10px;
+}
+
+.box--full {
+    box-sizing: border-box;
+    padding: 10px;
+    width: 80px;
+    height: 80px;
+    background-color: var(--background-color);
+    color: var(--text-main-color);
+    border-radius: 10px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+
+    .box-top {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        img {
+            width: 16px;
+        }
+    }
+
+    p {
+        font-family: "Inter", sans-serif;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 16.8px;
+        text-align: left;
+    }
+}
+
+.box--available {
+    box-sizing: border-box;
+    padding: 10px;
+    width: 80px;
+    height: 80px;
+    background-color: var(--main-color);
+    color: white;
+    border-radius: 10px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+
+    .box-top {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        img {
+            width: 16px;
+        }
+    }
+
+    p {
+        font-family: "Inter", sans-serif;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 16.8px;
+        text-align: left;
+    }
+}
+
+.bottom-nav {
+    height: 50px;
+    border-top: 1px solid var(--line-color);
+    display: flex;
+    align-items: center;
+    padding: 30px;
+}
+
+.bottom-nav-ul {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+li {
+    font-family: "Inter", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 28px;
+    align-content: center;
+    text-align: center;
+    
+    color: var(--text-color);
+
+    width: 70px;
+    height: 48px;
+
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.bottom-select {
+    color: white !important;
+    background-color: var(--main-color);
+}
+
+.main-cabi__navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px;
+    position: relative;
+}
+
+.nav-button {
+    color: var(--sub-color);
+    background-color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.nav-button:disabled {
+    color: var(--line-color);
+    cursor: not-allowed;
+}
+
+
+@media all and (min-width: 769px) {
+    #left-nav-wrap {
+      display: flex;
+    }
+
+    .bottom-nav {
+        display: none;
+    }
+
+    .main-cabi__box-container {
+        grid-template-columns: repeat(8, 80px);
+    }
+
+    .nav-button {
+        display: none;
+    }
+
+    .main-cabi__place {
+        position: static; /* absolute 위치 해제 */
+        transform: none; /* 중앙 정렬 관련 변환 해제 */
+        margin: 0 auto; /* margin을 이용한 가운데 정렬 */
+    }
+}
+
+@media all and (min-width: 769px) and (max-width: 918px){
+    .main-cabi__box-container {
+        grid-template-columns: repeat(5, 80px);
+    }
+}
+
+@media all and (min-width: 919px) and (max-width: 1100px){
+    .main-cabi__box-container {
+        grid-template-columns: repeat(6, 80px);
+    }
+}
+
+@media all and (max-width: 768px) {
+    #left-nav-wrap {
+      display: none;
+    }
+
+    .bottom-nav {
+        display: flex;
+    }
+
+    .main-cabi__box-container {
+        grid-template-columns: repeat(4, 80px);
+    }
+
+    .nav-button {
+        display: inline-block;
+        padding: 30px;
+    }
+}

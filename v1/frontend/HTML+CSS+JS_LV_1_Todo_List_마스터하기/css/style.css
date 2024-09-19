@@ -1,0 +1,157 @@
+@import "reset.css";
+@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Inter:wght@100..900&family=Noto+Sans+KR:wght@100..900&display=swap');
+
+body {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    text-align: center;
+    box-sizing: border-box;
+
+    --main-color: #F28482;
+    --sub-color: #F5CAC3;
+    --background-color: #F7EDE2;
+
+    background-color: var(--background-color);
+}
+
+input::placeholder {
+    color: #BCBCBC;
+}
+
+h1, p {
+    font-family: "Inter", sans-serif;
+    color: var(--main-color);
+}
+
+h1 {
+    font-size: 80px;
+    font-weight: 800;
+    text-align: center;
+    margin-top: 5%;
+    padding-bottom: 20px;
+}
+
+article {
+    background-color: var(--sub-color);
+    width: 50%;
+    height: 60vh;
+    border-radius: 20px;
+    overflow-y: scroll;
+}
+
+li {
+    background-color: white;
+    color: var(--main-color);
+    width: 90%;
+    height: 6vh;
+    border-radius: 15px;
+    margin: 20px 30px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+
+    list-style-type: disc;
+}
+
+li span {
+    display: inline-block;
+    max-width: calc(100% - 100px); /* 버튼 컨테이너를 제외한 나머지 공간 */
+    white-space: nowrap; /* 텍스트를 한 줄로 유지 */
+    overflow: hidden;    /* 넘친 텍스트를 숨김 */
+    text-overflow: ellipsis; /* 넘친 부분을 '...'으로 표시 */
+}
+
+img {
+    width: 15px;
+    height: 15px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.finished {
+    background-color: rgba(255, 255, 255, 0.3);;
+    text-decoration: line-through;
+}
+
+.todo-form {
+    display: flex;
+    justify-content: center;
+}
+
+.todo-form__input {
+    width: 500px;
+    height: 60px;
+    border-radius: 20px;
+    padding-left: 30px;
+}
+
+.todo-form__button {
+
+    padding-left: 10px;
+    cursor: pointer;
+
+    img {
+        width: 60px;
+        height: 60px;
+    }
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 2% 4%;
+    gap: 30px;
+}
+
+.finishBtn {
+    background-color: transparent;
+    border: 1px solid;
+    border-color: var(--main-color);
+    border-radius: 10px;
+    
+    width: 3vw;
+    height: 3vh;
+
+    cursor: pointer;
+    font: inherit;
+}
+
+.deleteBtn {
+    background-color: var(--main-color);
+    border: 1px solid;
+    border-color: var(--main-color);
+    border-radius: 10px;
+    
+    width: 3vw;
+    height: 3vh;
+
+    cursor: pointer;
+    font: inherit;
+    color: white;
+}
+
+.finishBtn img {
+    display: none;
+}
+
+li:not(.finished) .finishBtn:hover img {
+    display: block;
+}
+
+li.finished .finishBtn img {
+    display: block;
+}
