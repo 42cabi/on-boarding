@@ -5,22 +5,24 @@
 
 /* all */
 :root {
-  --white: #FFFFFF;
+  --white: #ffffff;
 
-  --primary-color: #9747FF;
-  --secondary-color: #B18CFF;
+  --primary-color: #9747ff;
+  --secondary-color: #b18cff;
 
-  --full-cabinet-color: var(--primary-color);
-  --available-cabinet-color: #EEEEEE;
+  --full-cabinet-color: #eeeeee;
+  --available-cabinet-color: var(--primary-color);
 
   --font-color-black: #333333;
-  --font-color-gray: #7B7B7B;
+  --font-color-gray: #7b7b7b;
   --font-color-white: var(--white);
 
-  --line-color: #BCBCBC;
+  --line-color: #bcbcbc;
 }
 
-html, body, #root {
+html,
+body,
+#root {
   display: flex;
   flex-direction: column;
 
@@ -68,7 +70,7 @@ html, body, #root {
   font-family: "Do Hyeon", sans-serif;
   font-size: 24px;
   font-weight: 400;
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 #menu {
@@ -118,7 +120,7 @@ html, body, #root {
 
 .floor-nav__item:hover {
   background-color: var(--primary-color);
-  color: var(--font-color-white)
+  color: var(--font-color-white);
 }
 
 /* left section navigation */
@@ -192,21 +194,17 @@ main {
 }
 
 .full {
-  color: var(--font-color-white);
+  color: var(--font-color-black);
   background-color: var(--full-cabinet-color);
 }
 
 .available {
-  color: var(--font-color-black);
+  color: var(--font-color-white);
   background-color: var(--available-cabinet-color);
-  /* background-position: center;
-  background-repeat: no-repeat;
-  img {
-    background-image: url("../images/user_available.svg");
-  } */
 }
 
-.cabinet__info, .cabinet__username {
+.cabinet__info,
+.cabinet__username {
   width: 100%;
 }
 

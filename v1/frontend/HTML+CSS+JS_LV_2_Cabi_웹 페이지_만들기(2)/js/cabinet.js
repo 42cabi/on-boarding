@@ -1,32 +1,32 @@
 import { cabinetDatas } from "./data.js";
 
 const fullUserImg = "./images/user_full.svg";
-const availableUserImg = "./images/user_available.svg"
+const availableUserImg = "./images/user_available.svg";
 
 const cabinetMap = new Map();
-cabinetDatas.forEach(section => cabinetMap.set(section.section, section.cabinets));
+cabinetDatas.forEach((section) =>
+  cabinetMap.set(section.section, section.cabinets)
+);
 
 const locationTitle = document.getElementById("location-title");
 const cabinetList = document.getElementById("cabinet-list");
 const sectionNavList = document.querySelectorAll(".section-nav__item");
 
 // first render
-setLocationTitle("A");
-cabinetMap.get("A").forEach(obj => createNewCabinet(obj));
+const firstSectionKey = cabinetMap.keys().next().value;
+setLocationTitle(firstSectionKey);
+cabinetMap.get(firstSectionKey).forEach((obj) => createNewCabinet(obj));
 
-sectionNavList.forEach(section => {
+sectionNavList.forEach((section) => {
   section.addEventListener("click", () => {
-    let sectionId;
-    if (section.id === "section-a") sectionId = "A";
-    else if (section.id === "section-b") sectionId = "B";
-    else sectionId = "C";
+    const sectionName = section.id.replace("section-", "");
 
-    sectionNavList.forEach(el => el.classList.remove("item-selected"));
+    sectionNavList.forEach((el) => el.classList.remove("item-selected"));
     section.classList.add("item-selected");
 
-    setLocationTitle(sectionId);
+    setLocationTitle(sectionName);
     cabinetList.innerHTML = "";
-    cabinetMap.get(sectionId).forEach(obj => createNewCabinet(obj));
+    cabinetMap.get(sectionName).forEach((obj) => createNewCabinet(obj));
   });
 });
 
