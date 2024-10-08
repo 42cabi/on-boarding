@@ -1,35 +1,68 @@
 import styled from "styled-components";
 import { useState, useEffect } from "react";
-import { fetchFloorNumbers, fetchSectionsData } from "../api/getCabinetData";
+import { getFloorNumbers, getSectionNumbers } from "../api/getCabinetData";
 
-const LeftNavigation = () => {
-  const [floorData, setFloorData] = useState([]);
-  const [firstFloor, setFirstFloor] = useState(0);
-  const [firstSection, setFirstSection] = useState();
-  const [sectionData, setSectionData] = useState([]);
+const LeftNavigation = ({
+  floors,
+  selectedFloor,
+  selectedSection,
+  setSelectedFloor,
+  setSelectedSection,
+}) => {
+  const handleFloorClick = (number) => {
+    if (number === selectedFloor.number) return;
+    // console.log(`floor clicked: ${number}`);
+    if (number === 0) {
+      setSelectedFloor({
+        number,
+        sections: [],
+      });
+      setSelectedSection(null);
+      return;
+    }
+    getSectionNumbers(number).then((sections) => {
+      setSelectedFloor({
+        number,
+        sections,
+      });
+      setSelectedSection(sections[0]);
+      // console.log(sections);
+    });
+  };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetchFloorNumbers();
-      setFloorData(response);
-    };
-    fetchData();
-  }, []);
-
-  const renderFloorData = () => {
-    return floorData?.map((item, index) => <li key={index}>{item}층</li>);
+  const handleSectionClick = (section) => {
+    if (section === selectedSection) return;
+    // console.log(`section clicked: ${section}`);
+    setSelectedSection(section);
   };
 
   return (
     <LeftNavigationStyled>
       <FloorNavigationStyled>
         <ul>
-          <li>Home</li>
-          {renderFloorData()}
+          {floors.map((floor) => (
+            <li
+              key={floor}
+              className={floor === selectedFloor.number ? "selected" : ""}
+              onClick={() => handleFloorClick(floor)}
+            >
+              {floor === 0 ? "Home" : `${floor}층`}
+            </li>
+          ))}
         </ul>
       </FloorNavigationStyled>
       <SectionNavigation>
-        <ul></ul>
+        <ul>
+          {selectedFloor.sections.map((section) => (
+            <li
+              key={section}
+              className={section === selectedSection ? "selected" : ""}
+              onClick={() => handleSectionClick(section)}
+            >
+              {section}
+            </li>
+          ))}
+        </ul>
       </SectionNavigation>
     </LeftNavigationStyled>
   );
@@ -40,6 +73,10 @@ const LeftNavigationStyled = styled.aside`
   flex-direction: row;
 
   height: 100%;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 const FloorNavigationStyled = styled.nav`
@@ -64,38 +101,25 @@ const FloorNavigationStyled = styled.nav`
     border-radius: 10px;
   }
 
-  li:hover {
+  li:hover,
+  .selected {
     background-color: var(--primary-color);
     color: var(--font-white-000);
   }
 `;
 
-const SectionNavigation = styled.nav`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
+const SectionNavigation = styled(FloorNavigationStyled)`
   width: 240px;
   height: 100%;
   padding: 30px 0;
-  color: var(--font-gray-000);
-  font-family: "Inter", sans-serif;
-  border-right: 1px solid var(--line-color);
 
   li {
-    display: flex;
     justify-content: flex-start;
-    align-items: center;
     padding-left: 32px;
 
     width: 220px;
     height: 40px;
-    border-radius: 10px;
-  }
-
-  li:hover {
-    background-color: var(--primary-color);
-    color: var(--font-white-000);
+    margin: 0;
   }
 `;
 

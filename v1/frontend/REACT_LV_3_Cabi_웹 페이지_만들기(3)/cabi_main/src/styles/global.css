@@ -7,8 +7,8 @@
   --primary-color: #9747ff;
   --secondary-color: #b18cff;
 
-  --full-cabinet-color: var(--primary-color);
-  --available-cabinet-color: #eeeeee;
+  --full-cabinet-color: #eeeeee;
+  --available-cabinet-color: var(--primary-color);
 
   --font-white-000: var(--white);
   --font-black-000: #000000;
