@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Level 1: Cabinets</title>
+    <link href="./css/style.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div id="root">
+      <nav id="top-nav" class="flex-row">
+        <section id="logo" class="flex-row">
+          <img src="images/logo.svg" alt="Cabi Logo" class="logo__image" />
+          <p class="logo__title">Cabi</p>
+        </section>
+        <section id="menu" class="flex-row">
+          <img src="images/account_circle.svg" alt="Account" />
+          <img src="images/package.svg" alt="Package" />
+        </section>
+      </nav>
+      <div id="main-page" class="flex-row">
+        <aside id="left-nav">
+          <nav id="floor-nav" class="flex-col">
+            <ul>
+              <li class="floor-nav__item">Home</li>
+              <li class="floor-nav__item item-selected">2층</li>
+              <li class="floor-nav__item">4층</li>
+              <li class="floor-nav__item">5층</li>
+            </ul>
+          </nav>
+          <nav id="section-nav" class="flex-col">
+            <ul>
+              <li id="section-A" class="section-nav__item item-selected">A</li>
+              <li id="section-B" class="section-nav__item">B</li>
+              <li id="section-C" class="section-nav__item">C</li>
+            </ul>
+          </nav>
+        </aside>
+        <main>
+          <p id="location-title"></p>
+          <div id="cabinet-list"></div>
+        </main>
+      </div>
+      <nav id="tab-bar">
+        <ul id="tab-bar__list">
+          <li class="tab-bar__list__item">Home</li>
+          <li class="tab-bar__list__item item-selected">2층</li>
+          <li class="tab-bar__list__item">4층</li>
+          <li class="tab-bar__list__item">5층</li>
+        </ul>
+      </nav>
+    </div>
+    <script src="./js/cabinet.js" type="module"></script>
+  </body>
+</html>

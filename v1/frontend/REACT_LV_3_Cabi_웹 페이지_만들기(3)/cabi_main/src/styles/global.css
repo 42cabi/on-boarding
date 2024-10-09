@@ -1,0 +1,32 @@
+@import url("https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Inter:wght@100..900&family=Noto+Sans+KR:wght@100..900&display=swap");
+@import url("./reset.css");
+
+:root {
+  --white: #ffffff;
+
+  --primary-color: #9747ff;
+  --secondary-color: #b18cff;
+
+  --full-cabinet-color: #eeeeee;
+  --available-cabinet-color: var(--primary-color);
+
+  --font-white-000: var(--white);
+  --font-black-000: #000000;
+  --font-black-100: #333333;
+  --font-gray-000: #7b7b7b;
+  --font-purple-000: var(--primary-color);
+  --font-purple-100: var(--secondary-color);
+  --font-white-000: var(--white);
+
+  --line-color: #bcbcbc;
+  --shadow-color: #00000040;
+}
+
+html,
+body,
+#root {
+  width: 100vw;
+  height: 100vh;
+
+  font-family: "Noto Sans KR", sans-serif;
+}

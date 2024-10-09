@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width"/>
+    <title>TODO List</title>
+    <link href="style.css" rel="stylesheet"/>
+  </head>
+  <body>
+    <div id="root" class="flex-col">
+      <header>
+        <p id="title">TODO LIST</p>
+      </header>
+      <main>
+        <article class="flex-row">
+          <input id="input-text" type="text" placeholder="Write down your todo-list" maxlength="30" size="100">
+          <button id="add-todo" type="button">
+            <img src="./images/enter_btn.svg" alt="enter button">
+          </button>
+        </article>
+        <section>
+          <div id="btn-list">
+            <button id="show-all">
+              <img src="images/show_all_btn.svg" alt="all list">
+            </button>
+            <button id="show-todo">
+              <img src="images/show_todo_btn.svg" alt="todo list">
+            </button>
+            <button id="show-done">
+              <img src="images/show_done_btn.svg" alt="done list">
+            </button>
+          </div>
+          <ul id="todo-list" class="flex-col"></ul>
+        </section>
+      </main>
+    </div>
+    <script src="todo.js"></script>
+  </body>
+</html>
