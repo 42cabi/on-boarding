@@ -9,13 +9,14 @@ import java.util.Map;
 
 public class Daewoole {
 
-	private int angerLevel;
 	private final int angerLimit;
 	private final Map<String, Integer> angerMap;
+	private int angerLevel;
 
 	public Daewoole() {
 		angerLevel = 0;
 		angerLimit = Utils.getRandomNumber(80, 121);
+		System.out.printf("이번 대욱의 분노 임계값은 %d입니다.\n\n", angerLimit);
 		angerMap = new HashMap<>();
 		angerMap.put(MENT1, Utils.getRandomNumber(0, 21));
 		angerMap.put(MENT2, Utils.getRandomNumber(10, 31));
