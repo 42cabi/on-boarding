@@ -1,26 +1,25 @@
 package com.example.maddaewoole;
 
-import static com.example.maddaewoole.Jpark2.MENT1;
-import static com.example.maddaewoole.Jpark2.MENT2;
-import static com.example.maddaewoole.Jpark2.MENT3;
+import static com.example.maddaewoole.Utils.MENT1;
+import static com.example.maddaewoole.Utils.MENT2;
+import static com.example.maddaewoole.Utils.MENT3;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 
 public class Daewoole {
 
 	private int angerLevel;
-	private int angerLimit;
-	private Map<String, Integer> angerMap;
+	private final int angerLimit;
+	private final Map<String, Integer> angerMap;
 
 	public Daewoole() {
 		angerLevel = 0;
-		angerLimit = new Random().nextInt(41) + 80;
+		angerLimit = Utils.getRandomNumber(80, 121);
 		angerMap = new HashMap<>();
-		angerMap.put(MENT1, new Random().nextInt(21));
-		angerMap.put(MENT2, new Random().nextInt(21) + 10);
-		angerMap.put(MENT3, new Random().nextInt(21) + 30);
+		angerMap.put(MENT1, Utils.getRandomNumber(0, 21));
+		angerMap.put(MENT2, Utils.getRandomNumber(10, 31));
+		angerMap.put(MENT3, Utils.getRandomNumber(30, 51));
 	}
 
 	public int provoked(String ment) {
@@ -37,6 +36,6 @@ public class Daewoole {
 	}
 
 	public int getAngerLevel() {
-		return angerLevel;
+		return this.angerLevel;
 	}
 }
