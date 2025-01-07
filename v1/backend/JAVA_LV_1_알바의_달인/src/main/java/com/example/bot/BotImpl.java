@@ -1,6 +1,7 @@
 package com.example.bot;
 
 import java.util.HashMap;
+import java.util.Iterator;
 
 public class BotImpl implements JiwonBehavior {
 
@@ -36,7 +37,15 @@ public class BotImpl implements JiwonBehavior {
 
 	@Override
 	public void result() {
+		int ret = 0;
+		Iterator<String> it = menu.keySet().iterator();
 
+		while (it.hasNext()) {
+			String key = it.next(); // next를 호출하면 현재의 key를 불러올면서 이터레이터는 다음 값을 가리키게 된다.
+
+			ret += key.length() * menu.get(key);
+		}
+		System.out.printf("총 %d원이요\n", ret * 1000);
 	}
 
 	private enum ReqType {
