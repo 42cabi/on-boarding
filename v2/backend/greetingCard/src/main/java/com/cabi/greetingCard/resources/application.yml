@@ -1,0 +1,31 @@
+spring:
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: update
+  servlet:
+    multipart:
+      max-file-size: 30MB
+      max-request-size: 30MB
+
+cloud:
+  aws:
+    s3:
+      bucket: ${CLOUD_AWS_CREDENTIALS_BUCKET}
+    credentials:
+      access-key: ${CLOUD_AWS_CREDENTIALS_ACCESS_KEY}
+      secret-key: ${CLOUD_AWS_CREDENTIALS_SECRET_KEY}
+    stack:
+      auto: false
+    region:
+      static: ${CLOUD_AWS_REGION_STATIC}
+      auto: false
+
+logging:
+  level:
+    root: DEBUG
+    org.springframework: DEBUG
