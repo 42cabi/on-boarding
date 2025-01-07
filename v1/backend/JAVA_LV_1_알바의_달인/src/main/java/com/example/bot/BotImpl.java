@@ -13,21 +13,21 @@ public class BotImpl implements JiwonBehavior {
 
 	@Override
 	public void takeOrder(String order) {
-		switch (Parse.caseCheck(order)) {
+		switch (Parser.caseCheck(order)) {
 			case ADD_ONE:
-				this.addOne(Parse.split(order));
+				this.addOne(Parser.split(order));
 				break;
 			case ADD_TWO:
-				this.addTwo(Parse.split(order));
+				this.addTwo(Parser.split(order));
 				break;
 			case DELETE:
-				this.delete(Parse.split(order));
+				this.delete(Parser.split(order));
 				break;
 			case FiND:
-				this.find(Parse.split(order));
+				this.find(Parser.split(order));
 				break;
 			case COUNT:
-				this.count(Parse.split(order));
+				this.count(Parser.split(order));
 				break;
 			case END:
 				this.result();
