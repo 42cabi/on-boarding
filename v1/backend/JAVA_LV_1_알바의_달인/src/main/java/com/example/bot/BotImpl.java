@@ -1,5 +1,6 @@
 package com.example.bot;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
@@ -86,11 +87,37 @@ public class BotImpl implements JiwonBehavior {
 		System.out.printf("총 %d원이요\n", ret * 1000);
 	}
 
-	private enum ReqType {
+	public static enum ReqType {
 		ADD_ONE, ADD_TWO, DELETE, FIND, COUNT, END
 	}
 
 }
 
+Public class Parser {
+	private final ArrayList<String>   ret;
+
+	Parser() {
+		ret = new ArrayList<String>();
+	}
+
+	public int caseCheck(String order) {
+		if (order.charAt(order.length() - 1) == '>') {
+			if (order.split(">").length == 1)
+				return (BotImpl.ADD_ONE);
+			else
+				return (BotImpl.ADD_TWO);
+		}
+		else if (order.charAt(order.length() - 1) == '?'){
+			if (order.charAt(order.length() - 2) == '나')
+				return (BotImpl.FIND);
+			if (order.charAt(order.length() - 3) == '마')
+				return (BotImpl.END);
+			else
+				return (BotImpl.COUNT);
+		}
+		else
+			return (BotImpl.DELETE);
+	}
+}
 //parse 클래스를 만든다
 //
