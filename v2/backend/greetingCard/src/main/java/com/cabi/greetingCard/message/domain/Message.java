@@ -62,14 +62,7 @@ public class Message {
 	}
 
 	private boolean isValid() {
-		if (this.context.length() > MAX_LENGTH || this.context.isBlank()) {
-			return false;
-		}
-
-		String extension = imageUrl.substring(imageUrl.lastIndexOf('.') + 1);
-		List<String> allowedExtensions = Arrays.asList("jpg", "jpeg", "png");
-
-		return !allowedExtensions.contains(extension);
+		return this.context.length() <= MAX_LENGTH && !this.context.isBlank();
 	}
 
 	public void updateContext(String context) {

@@ -68,7 +68,10 @@ public class MessageService {
 		}
 		MultipartFile image = imageFile.get();
 		String originalFilename = image.getOriginalFilename();
-		String s3FileName = UUID.randomUUID() + originalFilename.substring(0, 10);
+		String extension = originalFilename.contains(".") ? originalFilename.substring(originalFilename.lastIndexOf(".")) : "";
+		verifyExtensionType(extension);
+		String safeFileName = originalFilename.length() > 10 ? originalFilename.substring(0, 10) : originalFilename;
+		String s3FileName = UUID.randomUUID() + safeFileName + extension;
 
 		ObjectMetadata objectMetadata = new ObjectMetadata();
 		objectMetadata.setContentType(image.getContentType());
@@ -76,6 +79,13 @@ public class MessageService {
 		s3Client.putObject(bucketName, s3FileName, image.getInputStream(), objectMetadata);
 
 		return s3Client.getUrl(bucketName, s3FileName).toString();
+	}
+
+	private void verifyExtensionType(String extension) {
+		List<String> allowedExtensions = List.of(".jpg", ".jpeg", ".png");
+		if (!allowedExtensions.contains(extension)) {
+			throw ExceptionStatus.INVALID_FORMAT_MESSAGE.asGreetingException();
+		}
 	}
 
 	/**
