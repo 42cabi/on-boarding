@@ -1,14 +1,18 @@
 package com.example.bot;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+
+enum ReqType {
+	ADD_ONE, ADD_TWO, DELETE, FIND, COUNT, END
+}
 
 public class BotImpl implements JiwonBehavior {
 
 	private final HashMap<String, Integer> menu;
+	private ReqType reqType;
 
-	private BotImpl() {
+	BotImpl() {
 		menu = new HashMap<String, Integer>();
 	}
 
@@ -24,7 +28,7 @@ public class BotImpl implements JiwonBehavior {
 			case DELETE:
 				this.delete(Parser.split(order));
 				break;
-			case FiND:
+			case FIND:
 				this.find(Parser.split(order));
 				break;
 			case COUNT:
@@ -86,46 +90,36 @@ public class BotImpl implements JiwonBehavior {
 		}
 		System.out.printf("총 %d원이요\n", ret * 1000);
 	}
-
-	public static enum ReqType {
-		ADD_ONE, ADD_TWO, DELETE, FIND, COUNT, END
-	}
-
 }
 
-Public class Parser {
-	Parser() {
-		ret = new ArrayList<String>();
-	}
+class Parser {
 
-	public  String[] split(String order) {
+	public static String[] split(String order) {
 		String[] ret;
 		ret = order.split(">");
 		if (ret.length > 1 && ret[1].indexOf('<') != -1)
-			ret[1]= ret[1].substring(ret[1].indexOf('<'), ret[1].length() - 1);
+			ret[1] = ret[1].substring(ret[1].indexOf('<'), ret[1].length() - 1);
 		ret[0] = ret[0].substring(1, ret[0].length() - 1);
 		return ret;
 	}
 
-
-	public int caseCheck(String order) {
+	public static ReqType caseCheck(String order) {
 		if (order.charAt(order.length() - 1) == '>') {
 			if (order.split(">").length == 1)
-				return (BotImpl.ADD_ONE);
+				return (ReqType.ADD_ONE);
 			else
-				return (BotImpl.ADD_TWO);
-		}
-		else if (order.charAt(order.length() - 1) == '?'){
+				return (ReqType.ADD_TWO);
+		} else if (order.charAt(order.length() - 1) == '?') {
 			if (order.charAt(order.length() - 2) == '나')
-				return (BotImpl.FIND);
+				return (ReqType.FIND);
 			if (order.charAt(order.length() - 3) == '마')
-				return (BotImpl.END);
+				return (ReqType.END);
 			else
-				return (BotImpl.COUNT);
-		}
-		else
-			return (BotImpl.DELETE);
+				return (ReqType.COUNT);
+		} else
+			return (ReqType.DELETE);
 	}
+
 }
 //parse 클래스를 만든다
 //
