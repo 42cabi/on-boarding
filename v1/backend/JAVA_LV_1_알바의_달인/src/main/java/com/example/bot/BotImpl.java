@@ -45,6 +45,7 @@ public class BotImpl implements JiwonBehavior {
 			menu.put(order[0], menu.get(order[0]) + 1);
 		else
 			menu.put(order[0], 1);
+		System.out.printf("네 %d원이요\n", order[0].length() * 1000);
 	}
 
 	private void addTwo(String[] order) {
@@ -54,13 +55,17 @@ public class BotImpl implements JiwonBehavior {
 			else
 				menu.put(order[i], 1);
 		}
+		System.out.printf("네 %d원이요\n", order[0].length() * 1000 + order[1].length() * 1000);
 	}
 
 	private void delete(String[] order) {
-		if (menu.containsKey(order[0]))
+		if (menu.containsKey(order[0])) {
 			menu.put(order[0], menu.get(order[0]) - 1);
-		if (menu.get(order[0]) == 0)
-			menu.remove(order[0]);
+			if (menu.get(order[0]) == 0)
+				menu.remove(order[0]);
+			System.out.println("네");
+		} else
+			System.out.println(order[0] + "안 시키셨어요.");
 	}
 
 	private void find(String[] order) {
