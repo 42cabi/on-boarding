@@ -10,7 +10,6 @@ enum ReqType {
 public class BotImpl implements JiwonBehavior {
 
 	private final HashMap<String, Integer> menu;
-	private ReqType reqType;
 
 	BotImpl() {
 		menu = new HashMap<String, Integer>();
@@ -50,7 +49,6 @@ public class BotImpl implements JiwonBehavior {
 
 	private void addTwo(String[] order) {
 		for (int i = 0; i < order.length; i++) {
-//			System.out.println(order[i]);
 			if (menu.containsKey(order[i]))
 				menu.put(order[i], menu.get(order[i]) + 1);
 			else
@@ -123,6 +121,5 @@ class Parser {
 		} else
 			return (ReqType.DELETE);
 	}
-
 }
 
