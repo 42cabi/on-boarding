@@ -94,11 +94,19 @@ public class BotImpl implements JiwonBehavior {
 }
 
 Public class Parser {
-	private final ArrayList<String>   ret;
-
 	Parser() {
 		ret = new ArrayList<String>();
 	}
+
+	public  String[] split(String order) {
+		String[] ret;
+		ret = order.split(">");
+		if (ret.length > 1 && ret[1].indexOf('<') != -1)
+			ret[1]= ret[1].substring(ret[1].indexOf('<'), ret[1].length() - 1);
+		ret[0] = ret[0].substring(1, ret[0].length() - 1);
+		return ret;
+	}
+
 
 	public int caseCheck(String order) {
 		if (order.charAt(order.length() - 1) == '>') {
