@@ -65,7 +65,7 @@ public class BotImpl implements JiwonBehavior {
 				menu.remove(order[0]);
 			System.out.println("네");
 		} else
-			System.out.println(order[0] + "안 시키셨어요.");
+			System.out.println("<" + order[0] + ">" + "안 시키셨어요");
 	}
 
 	private void find(String[] order) {
@@ -93,7 +93,7 @@ public class BotImpl implements JiwonBehavior {
 
 			ret += key.length() * menu.get(key);
 		}
-		System.out.printf("총 %d원이요\n", ret * 1000);
+		System.out.printf("총 %d원 입니다\n", ret * 1000);
 	}
 }
 
@@ -103,8 +103,8 @@ class Parser {
 		String[] ret;
 		ret = order.split(">");
 		if (ret.length > 1 && ret[1].indexOf('<') != -1)
-			ret[1] = ret[1].substring(ret[1].indexOf('<'), ret[1].length() - 1);
-		ret[0] = ret[0].substring(1, ret[0].length() - 1);
+			ret[1] = ret[1].substring(ret[1].indexOf('<') + 1);
+		ret[0] = ret[0].substring(1);
 		return ret;
 	}
 
