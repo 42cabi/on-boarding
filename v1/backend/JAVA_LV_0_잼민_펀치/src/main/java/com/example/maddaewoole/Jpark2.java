@@ -11,7 +11,7 @@ public class Jpark2 {
 	private final static String POINTCHECK_MENT = "현재 대욱의 분노 수치 : %d\n";
 	private final ArrayList<String> ments;
 
-	Jpark2() {
+	public Jpark2() {
 		ments = new ArrayList<>(List.of(PREVOKE_MENT1, PREVOKE_MENT2, PREVOKE_MENT3));
 	}
 

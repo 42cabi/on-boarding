@@ -19,7 +19,7 @@ public class Daewoole {
 	private int prevokeCount;
 	private boolean punchFlag;
 
-	Daewoole() {
+	public Daewoole() {
 		Random random = new Random();
 		angryPoint = 0;
 		angryLimit = random.nextInt(ANGRYLIMIT_RANGE) + ANGRYLIMIT_DEFAULT;
