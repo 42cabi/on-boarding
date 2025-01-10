@@ -4,23 +4,32 @@ import java.util.HashMap;
 import java.util.Random;
 
 public class Daewoole {
-	private final int angryLimit;
 	private final HashMap<String, Integer> prevokePoints;
+	private final static int ANGRYLIMIT_DEFAULT = 80;
+	private final static int ANGRYLIMIT_RANGE = 41;
+	private final static int PREVOKE_RANGE = 21;
+	private final static int PREVOKE_DEFAULT1 = 10;
+	private final static int PREVOKE_DEFAULT2 = 30;
+	private final static String PREVOKE_MENT1 = "당신의 지각비, 회식비로 대체되었다";
+	private final static String PREVOKE_MENT2 = "코딩 그렇게 하는거 아닌데";
+	private final static String PREVOKE_MENT3 = "오늘 저녁은 감탄계";
+	private final static String PUNCH_MENT = "참지 못한 대욱은 결국 지원에게 잼민 펀치를 날렸다.\n대욱을 도발한 횟수 : ";
+	private final int angryLimit;
 	private int angryPoint;
 	private int prevokeCount;
 	private boolean punchFlag;
 
-	Daewoole() {
+	Daewoole() {~
 		Random random = new Random();
 		angryPoint = 0;
-		angryLimit = random.nextInt(41) + 80;
+		angryLimit = random.nextInt(ANGRYLIMIT_RANGE) + ANGRYLIMIT_DEFAULT;
 		prevokeCount = 0;
 		punchFlag = true;
-		prevokePoints = new HashMap<String, Integer>();
+		prevokePoints = new HashMap<>();
 
-		prevokePoints.put("당신의 지각비, 회식비로 대체되었다", random.nextInt(21));
-		prevokePoints.put("코딩 그렇게 하는거 아닌데", random.nextInt(21) + 10);
-		prevokePoints.put("오늘 저녁은 감탄계", random.nextInt(21) + 30);
+		prevokePoints.put(PREVOKE_MENT1, random.nextInt(PREVOKE_RANGE));
+		prevokePoints.put(PREVOKE_MENT2, random.nextInt(PREVOKE_RANGE) + PREVOKE_DEFAULT1);
+		prevokePoints.put(PREVOKE_MENT3, random.nextInt(PREVOKE_RANGE) + PREVOKE_DEFAULT2);
 	}
 
 	public int getAngryPoint() {
@@ -40,7 +49,7 @@ public class Daewoole {
 	}
 
 	public void punch() {
-		System.out.println("참지 못한 대욱은 결국 지원에게 잼민 펀치를 날렸다."); // println은 무조건 string으로만 출력
-		System.out.printf("대욱을 도발한 횟수 : %d회\n", prevokeCount); //출력 서식을 사용하려면 printf
+		System.out.println(PUNCH_MENT); // println은 무조건 string으로만 출력
+		System.out.printf("%d회\n", prevokeCount); //출력 서식을 사용하려면 printf
 	}
 }
