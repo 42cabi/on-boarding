@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Random;
 
 public class Daewoole {
-	private final HashMap<String, Integer> prevokePoints;
 	private final static int ANGRYLIMIT_DEFAULT = 80;
 	private final static int ANGRYLIMIT_RANGE = 41;
 	private final static int PREVOKE_RANGE = 21;
@@ -14,12 +13,13 @@ public class Daewoole {
 	private final static String PREVOKE_MENT2 = "코딩 그렇게 하는거 아닌데";
 	private final static String PREVOKE_MENT3 = "오늘 저녁은 감탄계";
 	private final static String PUNCH_MENT = "참지 못한 대욱은 결국 지원에게 잼민 펀치를 날렸다.\n대욱을 도발한 횟수 : ";
+	private final HashMap<String, Integer> prevokePoints;
 	private final int angryLimit;
 	private int angryPoint;
 	private int prevokeCount;
 	private boolean punchFlag;
 
-	Daewoole() {~
+	Daewoole() {
 		Random random = new Random();
 		angryPoint = 0;
 		angryLimit = random.nextInt(ANGRYLIMIT_RANGE) + ANGRYLIMIT_DEFAULT;
