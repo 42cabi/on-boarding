@@ -6,7 +6,7 @@ public class Main {
 		Jpark2 jpark2 = new Jpark2();
 		Daewoole daewoole = new Daewoole();
 
-		while (true) {
+		while (daewoole.getPunchFlag()) {
 			String ment;
 			int prevokePoint;
 
@@ -17,7 +17,6 @@ public class Main {
 			System.out.println();
 			if (!daewoole.getPunchFlag()) {
 				daewoole.punch();
-				break;
 			}
 		}
 	}
