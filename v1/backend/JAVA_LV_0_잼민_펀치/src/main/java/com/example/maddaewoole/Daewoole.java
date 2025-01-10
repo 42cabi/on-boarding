@@ -12,7 +12,7 @@ public class Daewoole {
 	private final static String PREVOKE_MENT1 = "당신의 지각비, 회식비로 대체되었다";
 	private final static String PREVOKE_MENT2 = "코딩 그렇게 하는거 아닌데";
 	private final static String PREVOKE_MENT3 = "오늘 저녁은 감탄계";
-	private final static String PUNCH_MENT = "참지 못한 대욱은 결국 지원에게 잼민 펀치를 날렸다.\n대욱을 도발한 횟수 : ";
+	private final static String PUNCH_MENT = "참지 못한 대욱은 결국 지원에게 잼민 펀치를 날렸다.\n대욱을 도발한 횟수 : %d회\n";
 	private final HashMap<String, Integer> prevokePoints;
 	private final int angryLimit;
 	private int angryPoint;
@@ -49,7 +49,6 @@ public class Daewoole {
 	}
 
 	public void punch() {
-		System.out.println(PUNCH_MENT); // println은 무조건 string으로만 출력
-		System.out.printf("%d회\n", prevokeCount); //출력 서식을 사용하려면 printf
+		System.out.printf(PUNCH_MENT, prevokeCount); //출력 서식을 사용하려면 printf
 	}
 }
