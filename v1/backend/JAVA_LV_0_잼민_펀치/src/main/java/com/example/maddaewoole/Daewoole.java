@@ -25,7 +25,6 @@ public class Daewoole {
 	public Daewoole() {
 		angerLevel = 0;
 		angerLimit = Utils.getRandomNumber(ANGER_LIMIT_MIN, ANGER_LIMIT_MAX);
-		System.out.printf("이번 대욱의 분노 임계값은 %d입니다.\n\n", angerLimit);
 		angerMap = new HashMap<>();
 		angerMap.put(MENT1, Utils.getRandomNumber(MENT1_ANGER_MIN, MENT1_ANGER_MAX));
 		angerMap.put(MENT2, Utils.getRandomNumber(MENT2_ANGER_MIN, MENT2_ANGER_MAX));
