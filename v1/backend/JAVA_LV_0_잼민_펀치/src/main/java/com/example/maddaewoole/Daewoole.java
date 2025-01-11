@@ -1,8 +1,8 @@
 package com.example.maddaewoole;
 
-import static com.example.maddaewoole.Utils.MENT1;
-import static com.example.maddaewoole.Utils.MENT2;
-import static com.example.maddaewoole.Utils.MENT3;
+import static com.example.maddaewoole.Jpark2.MENT1;
+import static com.example.maddaewoole.Jpark2.MENT2;
+import static com.example.maddaewoole.Jpark2.MENT3;
 
 import java.util.HashMap;
 import java.util.Map;

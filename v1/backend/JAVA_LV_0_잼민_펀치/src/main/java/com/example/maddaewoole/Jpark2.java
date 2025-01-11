@@ -1,13 +1,13 @@
 package com.example.maddaewoole;
 
-import static com.example.maddaewoole.Utils.MENT1;
-import static com.example.maddaewoole.Utils.MENT2;
-import static com.example.maddaewoole.Utils.MENT3;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class Jpark2 {
+
+	static final String MENT1 = "당신의 지각비, 회식비로 대체되었다";
+	static final String MENT2 = "코딩 그렇게 하는거 아닌데";
+	static final String MENT3 = "오늘 저녁은 감탄계";
 
 	private final List<String> provocations = new ArrayList<>();
 
