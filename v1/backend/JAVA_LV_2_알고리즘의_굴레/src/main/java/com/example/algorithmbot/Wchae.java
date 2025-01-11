@@ -14,10 +14,11 @@ public class Wchae {
 	public String solveAlgorithm(Algorithm algorithm) {
 		Integer solveCount = algorithmMap.getOrDefault(algorithm, 0);
 		// 풀어보지 못한 알고리즘인 경우
-		if (algorithmMap.keySet()
+		boolean isSolvedAlgorithm = algorithmMap.keySet()
 				.stream()
 				.filter(x -> x.isSolution(algorithm))
-				.findAny().isEmpty()) {
+				.findAny().isPresent();
+		if (!isSolvedAlgorithm) {
 			algorithmMap.put(algorithm, 1);
 			return "스트레스 받네...";
 		}
