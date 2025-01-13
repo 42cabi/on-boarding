@@ -17,14 +17,12 @@ public class Daewoole {
 	private final int angryLimit;
 	private int angryPoint;
 	private int prevokeCount;
-	private boolean punchFlag;
 
 	public Daewoole() {
 		Random random = new Random();
 		angryPoint = 0;
 		angryLimit = random.nextInt(ANGRYLIMIT_RANGE) + ANGRYLIMIT_DEFAULT;
 		prevokeCount = 0;
-		punchFlag = true;
 		prevokePoints = new HashMap<>();
 
 		prevokePoints.put(PREVOKE_MENT1, random.nextInt(PREVOKE_RANGE));
@@ -36,16 +34,14 @@ public class Daewoole {
 		return (angryPoint);
 	}
 
-	public boolean getPunchFlag() {
-		return (punchFlag);
+	public boolean isDaewooleAngered() {
+		return angryPoint > angryLimit;
 	}
 
 	public int bePrevoked(String ment) {
 		angryPoint += prevokePoints.get(ment);
 		prevokeCount++;
-		if (angryPoint > angryLimit)
-			punchFlag = false;
-		return (prevokePoints.get(ment));
+		return prevokePoints.get(ment);
 	}
 
 	public void punch() {
