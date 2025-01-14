@@ -17,4 +17,13 @@ public enum OrderMessages {
 	public String getMessage() {
 		return message;
 	}
+
+	public static OrderMessages fromString(String message) {
+		for (OrderMessages enumValue : OrderMessages.values()) {
+			if (enumValue.message.equals(message)) {
+				return enumValue;
+			}
+		}
+		throw new IllegalArgumentException("No enum constant with value " + message);
+	}
 }
