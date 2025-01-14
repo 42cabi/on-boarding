@@ -1,6 +1,7 @@
 package com.example.bot;
 
 public enum OrderMessages {
+	ADD(""),
 	ADD_1("랑"),
 	ADD_2("이랑"),
 	THROW("빼"),
