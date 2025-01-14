@@ -1,4 +1,4 @@
-package com.example.lent;
+package com.example.lent.service;
 
 import static com.example.lent.domain.CabinetConfig.LENDING_PERIOD;
 
@@ -12,6 +12,7 @@ import com.example.lent.exception.CabinetAlreadyLentException;
 import com.example.lent.exception.CabinetNotExistException;
 import com.example.lent.exception.UserAlreadyLentException;
 import com.example.lent.exception.UserBannedException;
+import com.example.lent.repository.LentHistoryRepository;
 import com.example.lent.testutil.CabinetRepository;
 import com.example.lent.testutil.UserRepository;
 import java.util.List;
