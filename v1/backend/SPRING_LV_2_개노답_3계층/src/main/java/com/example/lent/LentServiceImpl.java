@@ -21,18 +21,9 @@ public class LentServiceImpl implements LentService {
 	private final CabinetRepository cabinetRepository;
 	private final UserRepository userRepository;
 
-	@Override
-	public LentResponse lent(LentRequest request) {
-		Cabinet findCabinet = cabinetRepository.findAll()
-				.stream()
-				.filter(cabinet -> cabinet.getCabinetId() == request.getCabinetId())
-				.findFirst()
-				.orElseThrow(() -> new RuntimeException(
-						request.getCabinetId() + "번 사물함이 존재하지 않습니다"));//TODO: 커스텀 예외 클래스 만들기
-
-		User findUser = userRepository.findById(request.getUserId());
-		List<LentHistory> lentHistoryList = lentHistoryRepository.findAll();
-
+	private static void checkCabinetAvailabilityAndUserStatus(Cabinet findCabinet,
+			List<LentHistory> lentHistoryList,
+			User findUser) {
 		// 사물함의 상태가 사용중인 경우
 		if (findCabinet.getCabinetStatus() == CabinetStatus.FULL) {
 			throw new RuntimeException("이미 사용 중인 사물함입니다.");
@@ -51,6 +42,21 @@ public class LentServiceImpl implements LentService {
 		if (findUser.isBanned()) {
 			throw new RuntimeException("사용 정지상태인 유저입니다.");
 		}
+	}
+
+	@Override
+	public LentResponse lent(LentRequest request) {
+		Cabinet findCabinet = cabinetRepository.findAll()
+				.stream()
+				.filter(cabinet -> cabinet.getCabinetId() == request.getCabinetId())
+				.findFirst()
+				.orElseThrow(() -> new RuntimeException(
+						request.getCabinetId() + "번 사물함이 존재하지 않습니다"));//TODO: 커스텀 예외 클래스 만들기
+
+		User findUser = userRepository.findById(request.getUserId());
+		List<LentHistory> lentHistoryList = lentHistoryRepository.findAll();
+
+		checkCabinetAvailabilityAndUserStatus(findCabinet, lentHistoryList, findUser);
 
 		findCabinet.changeStatus(CabinetStatus.FULL);
 		cabinetRepository.save(findCabinet);
