@@ -1,6 +1,5 @@
 package com.example.maddaewoole;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -10,15 +9,13 @@ import java.util.Random;
  */
 public class Jpark2 {
 
-	private static final String[] provocationStrings = {
+	private static final List<String> provocations = List.of(
 			"당신의 지각비, 회식비로 대체되었다",
 			"코딩 그렇게 하는거 아닌데",
 			"오늘 저녁은 감탄계"
-	};
+	);
 
-	private List<String> provocations = Arrays.asList(provocationStrings);
-
-	String prorvoke() {
+	String provoke() {
 		return provocations.get(new Random().nextInt(provocations.size()));
 	}
 
