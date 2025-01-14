@@ -20,7 +20,7 @@ public class Daewoole {
 	private int maxAngerLevel;
 	private Map<String, Integer> angerLevelByProvocation = new HashMap<>();
 
-	Daewoole(List<String> provocations) {
+	public Daewoole(List<String> provocations) {
 		maxAngerLevel = ThreadLocalRandom.current().nextInt(80, 121);
 		int[] minAngerLevels = {0, 10, 30};
 		int[] maxAngerLevels = {20, 30, 50};
@@ -31,5 +31,9 @@ public class Daewoole {
 					minAngerLevels[i], maxAngerLevels[i] + 1
 			));
 		}
+	}
+
+	public int getAngerLevel() {
+		return currentAngerLevel;
 	}
 }
