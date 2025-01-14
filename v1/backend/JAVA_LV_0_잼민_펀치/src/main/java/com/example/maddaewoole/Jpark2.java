@@ -15,6 +15,10 @@ public class Jpark2 {
 			"오늘 저녁은 감탄계"
 	);
 
+	List<String> getProvocations() {
+		return provocations;
+	}
+
 	String provoke() {
 		return provocations.get(new Random().nextInt(provocations.size()));
 	}
