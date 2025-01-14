@@ -34,11 +34,7 @@ public class LentServiceImpl implements LentService {
 		}
 
 		// 유저가 현재 사물함을 대여중인 경우
-		boolean isUserLent = lentHistoryList.stream()
-				.findFirst()
-				.filter(lentHistory -> lentHistory.getLentUserName() == findUser.getName())
-				.isPresent(); // TODO: 가독성이 안좋으니 메서드로 빼기?
-		if (isUserLent) {
+		if (isUserLent(lentHistoryList, findUser)) {
 			throw new UserAlreadyLentException();
 		}
 
@@ -46,6 +42,13 @@ public class LentServiceImpl implements LentService {
 		if (findUser.isBanned()) {
 			throw new UserBannedException();
 		}
+	}
+
+	private static boolean isUserLent(List<LentHistory> lentHistoryList, User findUser) {
+		return lentHistoryList.stream()
+				.findFirst()
+				.filter(lentHistory -> lentHistory.getLentUserName() == findUser.getName())
+				.isPresent();
 	}
 
 	@Override
