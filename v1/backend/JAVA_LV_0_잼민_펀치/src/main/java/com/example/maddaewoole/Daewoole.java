@@ -17,8 +17,8 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Daewoole {
 
 	private int currentAngerLevel = 0;
-	private int maxAngerLevel;
-	private Map<String, Integer> angerLevelByProvocation = new HashMap<>();
+	private final int maxAngerLevel;
+	private final Map<String, Integer> angerLevelByProvocation = new HashMap<>();
 
 	public Daewoole(List<String> provocations) {
 		maxAngerLevel = ThreadLocalRandom.current().nextInt(80, 121);
@@ -33,7 +33,25 @@ public class Daewoole {
 		}
 	}
 
-	public int getAngerLevel() {
+	public int getCurrentAngerLevel() {
 		return currentAngerLevel;
+	}
+
+	public int getAngerLevelByProvocation(String provocation) {
+		return angerLevelByProvocation.getOrDefault(provocation, 0);
+	}
+
+	public boolean isPunch() {
+		return (currentAngerLevel == maxAngerLevel);
+	}
+
+	public void beProvoked(String provocation) {
+		if (currentAngerLevel == maxAngerLevel) {
+			return;
+		}
+		currentAngerLevel = Math.min(
+				currentAngerLevel + angerLevelByProvocation.getOrDefault(provocation, 0),
+				maxAngerLevel
+		);
 	}
 }
