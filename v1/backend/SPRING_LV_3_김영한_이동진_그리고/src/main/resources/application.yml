@@ -1,10 +1,14 @@
 spring:
   datasource:
-    driver-class-name: org.mariadb.jdbc.Driver
     url: jdbc:mariadb://localhost:3306/test?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
     username: root
     password: example
+    driver-class-name: org.mariadb.jdbc.Driver
 
   jpa:
     hibernate:
       ddl-auto: create
+    properties:
+      hibernate:
+        show_sql: true #콘솔에 로그가 나옴
+        format_sql: true #이쁘게 해줌
