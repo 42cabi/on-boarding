@@ -31,4 +31,8 @@ public class Wchae {
 	private boolean trySolving(double solveProbability) {
 		return Math.random() < solveProbability;
 	}
+
+	private void registerAlgorithm(Algorithm algorithm) {
+		algorithmMap.put(algorithm, 0);
+	}
 }
