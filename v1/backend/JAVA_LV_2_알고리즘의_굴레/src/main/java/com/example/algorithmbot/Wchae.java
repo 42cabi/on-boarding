@@ -9,11 +9,24 @@ public class Wchae {
 	private static final double INITIAL_PROBABILITY = 0.1;
 	private static final double PROBABILITY_INCREMENT = 0.1;
 	private static final double MAX_PROBABILITY = 1.0;
+	private static final String SOLVE_FAILURE_MESSAGE = "스트레스 받네…";
 	// ------------------------------------------------------------------------
 
-	private Map<Algorithm, Integer> algorithmMap = new HashMap<>();
+	private final Map<Algorithm, Integer> algorithmMap = new HashMap<>();
 
-	public void solveAlgorithm(Algorithm algorithm) {
+	public String solveAlgorithm(Algorithm algorithm) {
+		Optional<Map.Entry<Algorithm, Integer>> entryOptional = findSameAlgorithm(algorithm);
+		if (entryOptional.isEmpty()) {
+			registerAlgorithm(algorithm);
+			return SOLVE_FAILURE_MESSAGE;
+		}
+		Algorithm registeredAlgorithm = entryOptional.get().getKey();
+		int solveCount = entryOptional.get().getValue();
+		if (trySolving(calculateSolveProbability(solveCount))) {
+			incrementSolveCount(registeredAlgorithm);
+			return algorithm.getSolution();
+		}
+		return SOLVE_FAILURE_MESSAGE;
 	}
 
 	private Optional<Map.Entry<Algorithm, Integer>> findSameAlgorithm(Algorithm algorithm) {
