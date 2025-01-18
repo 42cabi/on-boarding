@@ -2,6 +2,7 @@ package com.example.algorithmbot;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 public class Wchae {
 	// Constants --------------------------------------------------------------
@@ -15,12 +16,10 @@ public class Wchae {
 	public void solveAlgorithm(Algorithm algorithm) {
 	}
 
-	private int getSolveCount(Algorithm algorithm) {
+	private Optional<Map.Entry<Algorithm, Integer>> findSameAlgorithm(Algorithm algorithm) {
 		return algorithmMap.entrySet().stream()
 				.filter(entry -> entry.getKey().isSolution(algorithm))
-				.map(Map.Entry::getValue)
-				.findAny()
-				.orElse(0);
+				.findAny();
 	}
 
 	private double calculateSolveProbability(int solveCount) {
