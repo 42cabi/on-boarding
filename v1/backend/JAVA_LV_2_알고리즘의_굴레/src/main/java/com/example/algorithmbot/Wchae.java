@@ -27,4 +27,8 @@ public class Wchae {
 		return Math.min(INITIAL_PROBABILITY + PROBABILITY_INCREMENT * solveCount,
 				MAX_PROBABILITY);
 	}
+
+	private boolean trySolving(double solveProbability) {
+		return Math.random() < solveProbability;
+	}
 }
