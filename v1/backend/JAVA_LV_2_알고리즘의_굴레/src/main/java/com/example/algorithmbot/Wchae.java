@@ -34,4 +34,8 @@ public class Wchae {
 	private void registerAlgorithm(Algorithm algorithm) {
 		algorithmMap.put(algorithm, 0);
 	}
+
+	private void incrementSolveCount(Algorithm algorithm) {
+		algorithmMap.put(algorithm, algorithmMap.get(algorithm) + 1);
+	}
 }
