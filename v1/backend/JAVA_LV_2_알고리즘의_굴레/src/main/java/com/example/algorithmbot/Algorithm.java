@@ -5,4 +5,6 @@ public interface Algorithm {
 	public boolean isSolution(Algorithm algorithm);
 
 	public String getSolution();
+
+	public String getName();
 }
