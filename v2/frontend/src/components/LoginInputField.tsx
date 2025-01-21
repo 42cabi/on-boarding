@@ -37,7 +37,7 @@ const LoginInputFieldWrapper = styled.div`
 `;
 
 const LoginInputFieldStyled = styled.input<{ $isFocus: boolean }>`
-  width: 100%;
+  width: 350px;
   padding: 0.5rem 1rem;
   font-size: 1rem;
   border: 2px solid ${({ $isFocus }) => ($isFocus ? "#9747ff" : "#D7D7D7")};
