@@ -2,8 +2,8 @@ import SendPage from "./pages/SendPage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import ListPage from "./pages/ListPage";
-import { ReactNode } from "react";
-import PrivateRouteWrapper from "./components/PrivateRoute";
+import { ReactElement } from "react";
+import PrivateRoute from "./components/PrivateRoute";
 
 enum AccessType {
   PUBLIC,
@@ -13,27 +13,27 @@ enum AccessType {
 export interface RouteInfo {
   path: string;
   accessType: AccessType;
-  element: ReactNode;
+  element: ReactElement;
 }
 
 const routesInfo: RouteInfo[] = [
   {
-    path: "login",
+    path: "/",
     accessType: AccessType.PUBLIC,
     element: <LoginPage />,
   },
   {
-    path: "list",
+    path: "/register",
+    accessType: AccessType.PUBLIC,
+    element: <RegisterPage />,
+  },
+  {
+    path: "/list",
     accessType: AccessType.PUBLIC, // PRIVATE
     element: <ListPage />,
   },
   {
-    path: "register",
-    accessType: AccessType.PUBLIC, // PRIVATE
-    element: <RegisterPage />,
-  },
-  {
-    path: "send",
+    path: "/send",
     accessType: AccessType.PUBLIC, // PRIVATE
     element: <SendPage />,
   },
@@ -42,9 +42,7 @@ const routesInfo: RouteInfo[] = [
 const injectProtectedRoute = (routesInfo: RouteInfo[]) => {
   return routesInfo.map((route: RouteInfo) => {
     if (route.accessType === AccessType.PRIVATE) {
-      route.element = (
-        <PrivateRouteWrapper>{route.element}</PrivateRouteWrapper>
-      );
+      route.element = <PrivateRoute>{route.element}</PrivateRoute>;
     }
 
     return route;
