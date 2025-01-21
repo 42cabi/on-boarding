@@ -27,6 +27,7 @@ const LoginPage = () => {
 };
 
 const LoginPageStyled = styled.div`
+  font-family: "Noto Sans KR", sans-serif;
   display: flex;
   flex-direction: column;
   justify-content: center;
