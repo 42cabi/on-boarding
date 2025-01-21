@@ -1,6 +1,12 @@
 import styled from "styled-components";
+import { useRef, useState } from "react";
+import SearchInputField from "../components/SearchInputField";
 
 const SendPage = () => {
+  const idSearchInputRef = useRef<HTMLInputElement>(null);
+  const messageTextAreaRef = useRef<HTMLTextAreaElement>(null);
+  const [isFocused, setIsFocused] = useState(false);
+
   return (
     <WrapperStyled>
       <TitleContainerStyled>알림</TitleContainerStyled>
@@ -10,6 +16,10 @@ const SendPage = () => {
             <FormSubTitleStyled>
               받는이 ( Intra ID / @everyone )<span className="red"> *</span>
             </FormSubTitleStyled>
+            <SearchInputField
+              placeHolder="intra ID or @everyone"
+              inputText={idSearchInputRef}
+            />
             {/* <SlackAlarmSearchBar
                 searchInput={receiverInputRef}
                 renderReceiverInput={renderReceiverInput}
@@ -19,6 +29,14 @@ const SendPage = () => {
             <FormSubTitleStyled>
               메시지 내용<span className="red"> *</span>
             </FormSubTitleStyled>
+            <SendTextFieldStyled
+              placeholder="메시지 내용을 입력하세요"
+              ref={messageTextAreaRef}
+              $isFocus={isFocused}
+              onFocus={() => setIsFocused(true)}
+              onBlur={() => setIsFocused(false)}
+            />
+            {/* textarea length */}
           </FormContainerStyled>
           <FormContainerStyled>
             <FormSubTitleStyled>
@@ -37,6 +55,7 @@ const SendPage = () => {
 export default SendPage;
 
 const WrapperStyled = styled.div`
+  font-family: "Noto Sans KR", sans-serif;
   /* height: 100%; */
   height: 500px;
   display: flex;
@@ -114,6 +133,22 @@ const FormSubTitleStyled = styled.h3`
   margin-bottom: 10px;
   .red {
     color: #ff4e4e;
+  }
+`;
+
+const SendTextFieldStyled = styled.textarea<{ $isFocus: boolean }>`
+  /* TODO: font 및 텍스트 크기 조정(통일) */
+  /* font-family: "Noto Sans KR", sans-serif; */
+  width: 100%;
+  height: 40px;
+  background-color: var(--ref-white);
+  border-radius: 8px;
+  border: 2px solid
+    ${({ $isFocus }) => ($isFocus ? "var(--ref-purple-500)" : "transparent")};
+  text-align: left;
+  padding: 10px;
+  ::placeholder {
+    color: var(--ref-gray-400);
   }
 `;
 
