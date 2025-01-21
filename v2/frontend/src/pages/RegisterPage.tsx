@@ -51,6 +51,7 @@ const RegisterTextStyled = styled.div`
 
 const RegisterButtonStyled = styled.button`
   width: 350px;
+  height: 56px;
   padding: 0.8rem 1rem;
   background-color: #9747ff;
   color: #ffffff;
