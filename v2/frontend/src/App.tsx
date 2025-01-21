@@ -1,11 +1,4 @@
-import {
-  RouterProvider,
-  createBrowserRouter,
-} from "react-router-dom";
-import SendPage from "./pages/SendPage";
-import LoginPage from "./pages/LoginPage";
-import RegisterPage from "./pages/RegisterPage";
-import ListPage from "./pages/ListPage";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { routes } from "./routes";
 
 const router = createBrowserRouter(routes);
