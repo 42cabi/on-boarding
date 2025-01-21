@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import UserInputField from "../components/UserInputField";
 
@@ -19,7 +20,7 @@ const LoginPage = () => {
         onChange={(e) => setPw(e.target.value)}
         placeholder="pw"
       />
-      <RegisterNavStyled>회원가입</RegisterNavStyled>
+      <LinkStyled to="/register">회원가입</LinkStyled>
       <LoginButtonStyled>로그인</LoginButtonStyled>
     </LoginPageStyled>
   );
@@ -42,7 +43,7 @@ const LoginTitleStyled = styled.div`
   margin-bottom: 2rem;
 `;
 
-const RegisterNavStyled = styled.div`
+const LinkStyled = styled(Link)`
   font-size: 1rem;
   color: #9747ff;
   line-height: 2rem;
