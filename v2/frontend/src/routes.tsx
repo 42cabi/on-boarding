@@ -18,7 +18,7 @@ export interface RouteInfo {
 
 const routesInfo: RouteInfo[] = [
   {
-    path: "login",
+    path: "/",
     accessType: AccessType.PUBLIC,
     element: <LoginPage />,
   },
