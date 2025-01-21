@@ -68,36 +68,6 @@
   --ref-black-shadow-300: rgba(0, 0, 0, 0.4);
   --ref-black-shadow-400: rgba(0, 0, 0, 0.8);
 
-  /* cabinet */
-  --full-color: var(--ref-gray-200);
-  --banned-color: var(--ref-gray-700);
-  --broken-color: var(--ref-gray-700);
-  --session-color: var(--ref-gray-200);
-
-  /* custom color */
-  --custom-blue-100: var(--ref-blue-300);
-  --custom-blue-200: var(--ref-blue-500);
-  --custom-blue-300: var(--ref-blue-600);
-  --custom-pink-100: var(--ref-pink-100);
-  --custom-pink-200: var(--ref-pink-200);
-  --custom-pink-300: var(--ref-pink-300);
-  --custom-purple-100: var(--ref-purple-300);
-  --custom-purple-200: var(--ref-purple-500);
-  --custom-orange: var(--ref-orange-100);
-  --custom-yellow: var(--ref-yellow);
-  --custom-green-100: var(--ref-green-300);
-  --custom-green-200: var(--ref-green-400);
-
-  /* component variable */
-  --sys-sub-color: var(--ref-purple-400);
-  --sys-default-sub-color: var(--ref-purple-400);
-  --sys-presentation-sub-color: var(--ref-blue-300);
-  --tooltip-shadow-color: var(--ref-black-shadow-400);
-  --color-picker-border-shadow-color: var(--ref-black-shadow-200);
-  --presentation-detail-available-color: var(--ref-blue-200);
-  --presentation-blue-pagination-btn-color: var(--ref-blue-500);
-  --mine-text-color: var(--ref-black);
-
   /* font variable */
   --main-font: "Noto Sans KR", sans-serif;
   --building-font: "Do Hyeon", sans-serif;
@@ -192,6 +162,11 @@ input {
   font-size: 1rem;
   outline: none;
   background: none;
+  box-sizing: border-box;
+}
+
+textarea {
+  outline: none;
   box-sizing: border-box;
 }
 
