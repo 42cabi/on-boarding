@@ -1,7 +1,4 @@
 import {
-  BrowserRouter,
-  Route,
-  Routes,
   RouterProvider,
   createBrowserRouter,
 } from "react-router-dom";
@@ -11,20 +8,10 @@ import RegisterPage from "./pages/RegisterPage";
 import ListPage from "./pages/ListPage";
 import { routes } from "./routes";
 
-const route = createBrowserRouter(routes);
+const router = createBrowserRouter(routes);
 
 function App() {
-  return (
-    // <BrowserRouter>
-    //   <Routes>
-    //     <Route path="/send" element={<SendPage />} />
-    //     <Route path="/login" element={<LoginPage />} />
-    //     <Route path="/register" element={<RegisterPage />} />
-    //     <Route path="/list" element={<ListPage />} />
-    //   </Routes>
-    // </BrowserRouter>
-    <RouterProvider router={route} />
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;
