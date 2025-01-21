@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
-import LoginInputField from "../components/LoginInputField";
+import UserInputField from "../components/UserInputField";
 
 const LoginPage = () => {
   const [id, setId] = useState("");
@@ -9,17 +9,17 @@ const LoginPage = () => {
   return (
     <LoginPageStyled id="loginPage">
       <LoginTitleStyled>CABI-Onboarding</LoginTitleStyled>
-      <LoginInputField
+      <UserInputField
         value={id}
         onChange={(e) => setId(e.target.value)}
         placeholder="id"
       />
-      <LoginInputField
+      <UserInputField
         value={pw}
         onChange={(e) => setPw(e.target.value)}
         placeholder="pw"
       />
-      <RegisterStyled>회원가입</RegisterStyled>
+      <RegisterNavStyled>회원가입</RegisterNavStyled>
       <LoginButtonStyled>로그인</LoginButtonStyled>
     </LoginPageStyled>
   );
@@ -42,7 +42,7 @@ const LoginTitleStyled = styled.div`
   margin-bottom: 2rem;
 `;
 
-const RegisterStyled = styled.div`
+const RegisterNavStyled = styled.div`
   font-size: 1rem;
   color: #9747ff;
   line-height: 2rem;
@@ -50,7 +50,8 @@ const RegisterStyled = styled.div`
 `;
 
 const LoginButtonStyled = styled.button`
-  padding: 0.5rem 1rem;
+  width: 350px;
+  padding: 0.8rem 1rem;
   background-color: #9747ff;
   color: #ffffff;
   font-size: 1rem;

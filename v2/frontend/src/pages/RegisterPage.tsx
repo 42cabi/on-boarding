@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
-import LoginInputField from "../components/LoginInputField";
+import UserInputField from "../components/UserInputField";
 
 const RegisterPage = () => {
   const [id, setId] = useState("");
@@ -9,18 +9,18 @@ const RegisterPage = () => {
   return (
     <RegisterPageStyled id="RegisterPage">
       <RegisterTitleStyled>CABI-Onboarding</RegisterTitleStyled>
-      <LoginInputField
+      <UserInputField
         value={id}
         onChange={(e) => setId(e.target.value)}
         placeholder="id"
       />
-      <LoginInputField
+      <UserInputField
         value={pw}
         onChange={(e) => setPw(e.target.value)}
         placeholder="pw"
       />
-      <RegisterStyled>비밀번호는 변경할 수 없습니다</RegisterStyled>
-      <LoginButtonStyled>회원가입</LoginButtonStyled>
+      <RegisterTextStyled>비밀번호는 변경할 수 없습니다</RegisterTextStyled>
+      <RegisterButtonStyled>회원가입</RegisterButtonStyled>
     </RegisterPageStyled>
   );
 };
@@ -42,15 +42,16 @@ const RegisterTitleStyled = styled.div`
   margin-bottom: 2rem;
 `;
 
-const RegisterStyled = styled.div`
+const RegisterTextStyled = styled.div`
   font-size: 1rem;
-  color: #9747ff;
+  color: #858486;
   line-height: 2rem;
   margin-top: 1rem;
 `;
 
-const LoginButtonStyled = styled.button`
-  padding: 0.5rem 1rem;
+const RegisterButtonStyled = styled.button`
+  width: 350px;
+  padding: 0.8rem 1rem;
   background-color: #9747ff;
   color: #ffffff;
   font-size: 1rem;
