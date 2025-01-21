@@ -1,11 +1,17 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import MainPage from "./MainPage";
+import SendPage from "./pages/SendPage";
+import LoginPage from "./pages/LoginPage";
+import RegisterPage from "./pages/RegisterPage";
+import ListPage from "./pages/ListPage";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<MainPage />} />
+        <Route path="/send" element={<SendPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/list" element={<ListPage />} />
       </Routes>
     </BrowserRouter>
   );
