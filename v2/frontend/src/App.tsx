@@ -1,9 +1,15 @@
-import { BrowserRouter, Route, Routes, RouterProvider, createBrowserRouter } from "react-router-dom";
+import {
+  BrowserRouter,
+  Route,
+  Routes,
+  RouterProvider,
+  createBrowserRouter,
+} from "react-router-dom";
 import SendPage from "./pages/SendPage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import ListPage from "./pages/ListPage";
-import { routes } from './routes';
+import { routes } from "./routes";
 
 const route = createBrowserRouter(routes);
 
@@ -17,7 +23,7 @@ function App() {
     //     <Route path="/list" element={<ListPage />} />
     //   </Routes>
     // </BrowserRouter>
-    <RouterProvider route={route}/>
+    <RouterProvider router={route} />
   );
 }
 
