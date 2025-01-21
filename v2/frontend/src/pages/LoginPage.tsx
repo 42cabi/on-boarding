@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import UserInputField from "../components/UserInputField";
+import { ReactComponent as NewYearImg } from "../assets/images/newYear.svg";
 
 const LoginPage = () => {
   const [id, setId] = useState("");
@@ -9,19 +10,22 @@ const LoginPage = () => {
 
   return (
     <LoginPageStyled id="loginPage">
-      <LoginTitleStyled>CABI-Onboarding</LoginTitleStyled>
-      <UserInputField
-        value={id}
-        onChange={(e) => setId(e.target.value)}
-        placeholder="id"
-      />
-      <UserInputField
-        value={pw}
-        onChange={(e) => setPw(e.target.value)}
-        placeholder="pw"
-      />
-      <LinkStyled to="/register">회원가입</LinkStyled>
-      <LoginButtonStyled>로그인</LoginButtonStyled>
+      <NewYearImg />
+      <LoginSectionStyled>
+        <LoginTitleStyled>CABI-Onboarding</LoginTitleStyled>
+        <UserInputField
+          value={id}
+          onChange={(e) => setId(e.target.value)}
+          placeholder="id"
+        />
+        <UserInputField
+          value={pw}
+          onChange={(e) => setPw(e.target.value)}
+          placeholder="pw"
+        />
+        <LinkStyled to="/register">회원가입</LinkStyled>
+        <LoginButtonStyled>로그인</LoginButtonStyled>
+      </LoginSectionStyled>
     </LoginPageStyled>
   );
 };
@@ -37,10 +41,19 @@ const LoginPageStyled = styled.div`
   background-color: #f9f9f9;
 `;
 
+const LoginSectionStyled = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+`;
+
 const LoginTitleStyled = styled.div`
   font-size: 2rem;
   font-weight: 700;
   line-height: 3rem;
+  margin-top: 2rem;
   margin-bottom: 2rem;
 `;
 
