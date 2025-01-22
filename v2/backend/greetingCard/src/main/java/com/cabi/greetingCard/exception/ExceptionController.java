@@ -15,7 +15,7 @@ public class ExceptionController {
 	@ExceptionHandler(GreetingException.class)
 	public ResponseEntity<?> serviceExceptionHandler(GreetingException e) {
 		return ResponseEntity
-				.status(e.status.getErrorCode())
+				.status(e.status.getStatusCode())
 				.body(e.status);
 	}
 }
