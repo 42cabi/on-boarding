@@ -8,6 +8,7 @@ import java.io.IOException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -46,13 +47,19 @@ public class MessageController {
 	 *
 	 * @param userName
 	 * @param pageable
+	 * @param category
 	 * @return
 	 */
 	@GetMapping("")
-	public MessageResponsePaginationDto getAllMessages(
+	public ResponseEntity<MessageResponsePaginationDto> getAllMessages(
 			@CookieValue(name = "userName") String userName,
-			Pageable pageable) {
-		return messageService.getEveryoneMessage(userName, pageable);
+			Pageable pageable,
+			int category) {
+		MessageResponsePaginationDto messages = messageService.getMessages(userName, pageable,
+				category);
+
+		return ResponseEntity.ok()
+				.body(messages);
 	}
 
 	/**

@@ -9,5 +9,5 @@ import lombok.Getter;
 public class MessageResponsePaginationDto {
 
 	private List<MessageResponseDto> messages;
-	private Long totalLength;
+	private int totalLength;
 }

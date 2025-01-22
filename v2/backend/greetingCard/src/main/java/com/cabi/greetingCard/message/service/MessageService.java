@@ -8,7 +8,9 @@ import com.cabi.greetingCard.dto.MessageRequestDto;
 import com.cabi.greetingCard.dto.MessageResponseDto;
 import com.cabi.greetingCard.dto.MessageResponsePaginationDto;
 import com.cabi.greetingCard.exception.ExceptionStatus;
+import com.cabi.greetingCard.mapper.MessageMapper;
 import com.cabi.greetingCard.message.domain.Message;
+import com.cabi.greetingCard.message.domain.MessageCategory;
 import com.cabi.greetingCard.message.repository.MessageRepository;
 import com.cabi.greetingCard.user.domain.User;
 import com.cabi.greetingCard.user.repository.UserRepository;
@@ -22,7 +24,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -37,6 +41,7 @@ public class MessageService {
 	private final MessageRepository messageRepository;
 	private final AmazonS3 s3Client;
 	private final UserRepository userRepository;
+	private final MessageMapper messageMapper;
 	@Value("${cloud.aws.s3.bucket}")
 	private String bucketName;
 
@@ -143,7 +148,7 @@ public class MessageService {
 		Page<Message> receivedMessages;
 
 		List<MessageResponseDto> messageDtos = new ArrayList<>();
-		return new MessageResponsePaginationDto(messageDtos, 0L);
+		return new MessageResponsePaginationDto(messageDtos, 0);
 	}
 
 	/**
@@ -157,7 +162,7 @@ public class MessageService {
 		Page<Message> receivedMessages;
 
 		List<MessageResponseDto> messageDtos = new ArrayList<>();
-		return new MessageResponsePaginationDto(messageDtos, 0L);
+		return new MessageResponsePaginationDto(messageDtos, 0);
 	}
 
 	/**
@@ -170,7 +175,7 @@ public class MessageService {
 	public MessageResponsePaginationDto getSentMessages(String userName, Pageable pageable) {
 		Page<Message> sentMessages;
 		List<MessageResponseDto> messageDtos = new ArrayList<>();
-		return new MessageResponsePaginationDto(messageDtos, 0L);
+		return new MessageResponsePaginationDto(messageDtos, 0);
 	}
 
 	/**
@@ -187,6 +192,82 @@ public class MessageService {
 		Message message = messageRepository.findById(messageId)
 				.orElseThrow(ExceptionStatus.NOT_FOUND_MESSAGE::asGreetingException);
 		message.updateContext(context);
+	}
+
+	/**
+	 * 조건에 맞는 메세지 리스트를 반환합니다. 페이징 처리가 되며 카테고리마다 다른 결과를 반환합니다.
+	 *
+	 * @param userName
+	 * @param pageable
+	 * @return
+	 */
+	@Transactional
+	public MessageResponsePaginationDto getMessages(String userName, Pageable pageable,
+			int category) {
+		PageRequest pageRequest = PageRequest.of(pageable.getPageNumber() - 1,
+				pageable.getPageSize(),
+				Sort.by("created").descending());
+		Page<Message> messageList = splitByCategory(userName, category, pageRequest);
+		List<MessageResponseDto> messageResponseDtoList = messageList.stream()
+				.map(message -> messageMapper.toMessageResponseDto(message,
+						userName.equals(message.getSenderName()))).toList();
+		return new MessageResponsePaginationDto(messageResponseDtoList,
+				messageList.getTotalPages());
+	}
+
+	/**
+	 * 카테고리에 맞게 데이터를 조회하는 메서드를 호출하고 리턴값을 반환합니다.
+	 *
+	 * @param userName
+	 * @param category
+	 * @param pageRequest
+	 * @return
+	 */
+	private Page<Message> splitByCategory(String userName, int category, PageRequest pageRequest) {
+		Page<Message> messageList;
+		if (category == MessageCategory.TO_EVERYONE.getNumber()) {
+			messageList = getMessagesSendEveryone(pageRequest);
+		} else if (category == MessageCategory.TO_ME.getNumber()) {
+			messageList = getMessagesSendMe(userName, pageRequest);
+		} else if (category == MessageCategory.FROM_ME.getNumber()) {
+			messageList = getMessagesFromMe(userName, pageRequest);
+		} else {
+			throw ExceptionStatus.INVALID_QUERYSTRING.asGreetingException();
+		}
+		return messageList;
+	}
+
+	/**
+	 * 내가 보낸 메세지들을 조회합니다.
+	 *
+	 * @param userName
+	 * @param pageRequest
+	 * @return
+	 */
+	private Page<Message> getMessagesFromMe(String userName, PageRequest pageRequest) {
+		return messageRepository.findAllBySenderName(userName, pageRequest);
+	}
+
+	/**
+	 * 모두에게 보내진 메세지들을 조회합니다.
+	 *
+	 * @param pageRequest
+	 * @return
+	 */
+	private Page<Message> getMessagesSendEveryone(PageRequest pageRequest) {
+		return messageRepository.findAllByReceiverName(MessageCategory.TO_EVERYONE.getName(),
+				pageRequest);
+	}
+
+	/**
+	 * 나에게 보내진 메세지들을 조회합니다.
+	 *
+	 * @param userName
+	 * @param pageRequest
+	 * @return
+	 */
+	private Page<Message> getMessagesSendMe(String userName, PageRequest pageRequest) {
+		return messageRepository.findAllByReceiverName(userName, pageRequest);
 	}
 }
 
