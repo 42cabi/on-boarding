@@ -37,10 +37,14 @@ public class UserController {
 		userService.registerUser(userInfoDto.getName(), userInfoDto.getPassword());
 	}
 
-	@GetMapping("/test2")
-	public UserSearchDto searchUser(@RequestParam(name = "name") String name,
-			@CookieValue(name = "userName") String userName) {
-		return userService.searchUserByName(name);
+	@GetMapping("/search/name")
+	public ResponseEntity<?> searchUser(@RequestParam(name = "input") String input,
+			@CookieValue(name = "name") String userName) {
+
+		UserSearchDto users = userService.searchUserByName(input, userName);
+
+		return ResponseEntity.ok()
+				.body(users);
 	}
 
 	/**

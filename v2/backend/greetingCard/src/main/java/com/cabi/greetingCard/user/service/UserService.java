@@ -4,7 +4,8 @@ import com.cabi.greetingCard.dto.UserSearchDto;
 import com.cabi.greetingCard.exception.ExceptionStatus;
 import com.cabi.greetingCard.user.domain.User;
 import com.cabi.greetingCard.user.repository.UserRepository;
-import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseCookie;
@@ -93,11 +94,19 @@ public class UserService {
 	/**
 	 * 파라미터를 포함하고 있는 user정보들 중 name만을 List 형식으로 반환
 	 *
-	 * @param name
+	 * @param input
+	 * @param userName
 	 * @return
 	 */
-	public UserSearchDto searchUserByName(String name) {
-		return new UserSearchDto(new ArrayList<>());
+	public UserSearchDto searchUserByName(String input, String userName) {
+		List<User> userList = userRepository.findAllByNameStartingWithOrderByName(input);
+
+		// 현재 로그인한 userName과 일치한다면 삭제
+		userList.removeIf(user -> user.getName().equals(userName));
+
+		List<String> nameList = userList.stream().map(User::getName).collect(Collectors.toList());
+
+		return new UserSearchDto(nameList);
 	}
 
 	/**
