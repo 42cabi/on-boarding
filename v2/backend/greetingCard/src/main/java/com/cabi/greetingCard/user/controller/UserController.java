@@ -40,7 +40,7 @@ public class UserController {
 
 	@GetMapping("/search/name")
 	public ResponseEntity<?> searchUser(@RequestParam(name = "input") String input,
-			@CookieValue(name = "name") String userName) {
+			@CookieValue(name = "userName") String userName) {
 
 		UserSearchDto users = userService.searchUserByName(input, userName);
 
