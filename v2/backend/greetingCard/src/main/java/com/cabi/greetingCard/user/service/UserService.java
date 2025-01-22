@@ -25,8 +25,9 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class UserService {
 
+	private static final int USER_NAME_LENGTH_LIMIT = 10;
+	private static final int COOKIE_MAX_AGE = 24 * 60 * 60;
 	private final UserRepository userRepository;
-
 	private Set<String> groupNames;
 
 	@PostConstruct
@@ -43,7 +44,7 @@ public class UserService {
 	 */
 	public void registerUser(String name, String password) {
 		verifyDuplicatedName(name);
-		verifyNameLengthUnder10(name);
+		verifyNameLength(name);
 		verifyNameIsNumericOrAlphabet(name); // 하나의 메서드로 따로 빼는게 나을까? 코드만 복잡해지는게 아닌지?
 		User user = new User(name, password);
 		userRepository.save(user);
@@ -65,8 +66,8 @@ public class UserService {
 	 *
 	 * @param name
 	 */
-	private void verifyNameLengthUnder10(String name) {
-		if (name.length() > 10) {
+	private void verifyNameLength(String name) {
+		if (name.length() > USER_NAME_LENGTH_LIMIT) {
 			throw ExceptionStatus.INVALID_NAME.asGreetingException(); //TODO : 모든 exception에 에러코드 넣어야 함
 		}
 	}
@@ -99,7 +100,7 @@ public class UserService {
 
 		// 성공하면 쿠키를 주자!
 		return ResponseCookie.from("name", name)
-				.maxAge(24 * 60 * 60) // 유효 기간 1일
+				.maxAge(COOKIE_MAX_AGE) // 유효 기간 1일
 				.path("/") // 경로 설정
 				.build();
 	}
