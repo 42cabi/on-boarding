@@ -65,6 +65,12 @@ public class UserService {
 		return cookie;
 	}
 
+	public void verifyUserExists(String userName) {
+		if (!userRepository.existsUserByName(userName)) {
+			throw ExceptionStatus.UNAUTHORIZED.asGreetingException();
+		}
+	}
+
 	/**
 	 * 파라미터를 포함하고 있는 user정보들 중 name만을 List 형식으로 반환
 	 *

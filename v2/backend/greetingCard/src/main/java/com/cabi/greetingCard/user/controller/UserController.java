@@ -40,6 +40,11 @@ public class UserController {
 		userService.registerUser(userInfoDto.getName(), userInfoDto.getPassword());
 	}
 
+	@GetMapping("/auth")
+	public void authUser(@CookieValue(name = "userName", required = false) String userName) {
+		userService.verifyUserExists(userName);
+	}
+
 	@GetMapping("/search/name")
 	public UserSearchDto searchUser(@RequestParam(name = "input") String prefix,
 			@CookieValue(name = "userName", required = false) String userName) {
