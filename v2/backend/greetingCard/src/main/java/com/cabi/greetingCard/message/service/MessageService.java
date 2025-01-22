@@ -86,7 +86,7 @@ public class MessageService {
 		List<User> userList = userRepository.findAll();
 		userList.removeIf(user -> user.getName().equals(userName));
 		List<Message> messageList = userList.stream()
-				.map(user -> Message.of(userName, user.getName(),
+				.map(user -> Message.of(userName, messageData.getReceiverName(),
 						messageData.getContext(), imageUrl, LocalDateTime.now()))
 				.toList();
 		messageRepository.saveAll(messageList);
