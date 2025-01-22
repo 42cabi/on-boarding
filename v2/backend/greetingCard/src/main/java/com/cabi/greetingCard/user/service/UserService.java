@@ -47,10 +47,19 @@ public class UserService {
 	 * <p>
 	 * 진짜 있는 유저일까? 비밀번호는 맞게 입력했을까?, 성공하면 쿠키를 주자!
 	 */
-	public void login(String name, String password) {
-		User user;
+	public Cookie login(String name, String password) {
+		User user = userRepository.findByName(name)
+			.orElseThrow(ExceptionStatus.LOGIN_FAIL::asGreetingException);
+		if (!user.getPassword().equals(password)) {
+			throw ExceptionStatus.LOGIN_FAIL.asGreetingException();
+		}
 
-		Cookie cookie = new Cookie("쿠키는 어떻게, 왜 쓰는걸까요?", "파라미터는 뭘 줘야하지?");
+		Cookie cookie = new Cookie("userName", user.getName());
+		cookie.setPath("/");
+		cookie.setMaxAge(60 * 60 * 24 * 365);
+		cookie.setHttpOnly(true);
+
+		return cookie;
 	}
 
 	/**

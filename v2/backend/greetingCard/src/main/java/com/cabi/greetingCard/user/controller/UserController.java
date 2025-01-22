@@ -3,8 +3,11 @@ package com.cabi.greetingCard.user.controller;
 import com.cabi.greetingCard.dto.UserInfoDto;
 import com.cabi.greetingCard.dto.UserSearchDto;
 import com.cabi.greetingCard.user.service.UserService;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -53,8 +56,10 @@ public class UserController {
 	 * @param userInfoDto
 	 * @return
 	 */
-	@PostMapping("/test3")
-	public void login(@RequestBody UserInfoDto userInfoDto) {
-		userService.login(userInfoDto.getName(), userInfoDto.getPassword());
+	@PostMapping("/login")
+	public ResponseEntity<?> login(HttpServletResponse response, @RequestBody UserInfoDto userInfoDto) {
+		Cookie cookie = userService.login(userInfoDto.getName(), userInfoDto.getPassword());
+		response.addCookie(cookie);
+		return ResponseEntity.ok().build();
 	}
 }
