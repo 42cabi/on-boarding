@@ -4,14 +4,16 @@ import com.cabi.greetingCard.dto.UserSearchDto;
 import com.cabi.greetingCard.exception.ExceptionStatus;
 import com.cabi.greetingCard.user.domain.User;
 import com.cabi.greetingCard.user.repository.UserRepository;
-import jakarta.servlet.http.Cookie;
 import java.util.ArrayList;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseCookie;
 import org.springframework.stereotype.Service;
 
 /**
  * 이 어노테이션은 또 멀까? 컴포넌트 서치가 머더라? Autowired는 또 머지..
  */
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class UserService {
@@ -71,10 +73,21 @@ public class UserService {
 	 * <p>
 	 * 진짜 있는 유저일까? 비밀번호는 맞게 입력했을까?, 성공하면 쿠키를 주자!
 	 */
-	public void login(String name, String password) {
-		User user;
+	public ResponseCookie login(String name, String password) {
+		// 진짜 있는 유저일까?
+		User loginUser = userRepository.findByName(name)
+				.orElseThrow(ExceptionStatus.NOT_FOUND_USER::asGreetingException);
 
-		Cookie cookie = new Cookie("쿠키는 어떻게, 왜 쓰는걸까요?", "파라미터는 뭘 줘야하지?");
+		// 비밀번호는 맞게 입력했을까?
+		if (!loginUser.getPassword().equals(password)) {
+			throw ExceptionStatus.UNAUTHORIZED_PASSWORD.asGreetingException();
+		}
+
+		// 성공하면 쿠키를 주자!
+		return ResponseCookie.from("name", name)
+				.maxAge(24 * 60 * 60) // 유효 기간 1일
+				.path("/") // 경로 설정
+				.build();
 	}
 
 	/**

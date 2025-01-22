@@ -4,6 +4,9 @@ import com.cabi.greetingCard.dto.UserInfoDto;
 import com.cabi.greetingCard.dto.UserSearchDto;
 import com.cabi.greetingCard.user.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseCookie;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -52,8 +55,15 @@ public class UserController {
 	 * @param userInfoDto
 	 * @return
 	 */
-	@PostMapping("/test3")
-	public void login(@RequestBody UserInfoDto userInfoDto) {
-		userService.login(userInfoDto.getName(), userInfoDto.getPassword());
+	@PostMapping("/login")
+	public ResponseEntity<?> login(@RequestBody UserInfoDto userInfoDto) {
+		ResponseCookie cookie = userService.login(userInfoDto.getName(), userInfoDto.getPassword());
+
+		HttpHeaders headers = new HttpHeaders();
+		headers.add(HttpHeaders.SET_COOKIE, cookie.toString());
+
+		return ResponseEntity.ok()
+				.headers(headers)
+				.build();
 	}
 }
