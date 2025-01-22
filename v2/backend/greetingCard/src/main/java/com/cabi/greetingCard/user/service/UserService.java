@@ -1,6 +1,7 @@
 package com.cabi.greetingCard.user.service;
 
 import com.cabi.greetingCard.dto.UserSearchDto;
+import com.cabi.greetingCard.exception.ExceptionStatus;
 import com.cabi.greetingCard.user.domain.User;
 import com.cabi.greetingCard.user.repository.UserRepository;
 import jakarta.servlet.http.Cookie;
@@ -36,6 +37,9 @@ public class UserService {
 	 * @param name
 	 */
 	public void verifyDuplicatedName(String name) {
+		if (userRepository.existsUserByName(name)) {
+			throw ExceptionStatus.DUPLICATED_NAME.asGreetingException();
+		}
 	}
 
 	/**
