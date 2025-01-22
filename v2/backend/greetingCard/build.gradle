@@ -39,6 +39,8 @@ dependencies {
     implementation 'com.amazonaws:aws-java-sdk-s3:1.11.1000'
     implementation 'org.mariadb.jdbc:mariadb-java-client'
 
+    // 테스트용 h2 database
+    runtimeOnly 'com.h2database:h2'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
