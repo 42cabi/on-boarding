@@ -1,5 +1,7 @@
 package com.cabi.greetingCard.message.service;
 
+import static com.cabi.greetingCard.user.domain.GroupNames.GROUP_EVERYONE;
+
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.cabi.greetingCard.dto.MessageRequestDto;
@@ -8,6 +10,8 @@ import com.cabi.greetingCard.dto.MessageResponsePaginationDto;
 import com.cabi.greetingCard.exception.ExceptionStatus;
 import com.cabi.greetingCard.message.domain.Message;
 import com.cabi.greetingCard.message.repository.MessageRepository;
+import com.cabi.greetingCard.user.domain.User;
+import com.cabi.greetingCard.user.repository.UserRepository;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -28,12 +32,20 @@ import org.springframework.web.multipart.MultipartFile;
 @Slf4j
 public class MessageService {
 
-	private static final String EVERYONE = "@everyone";
+	static final int MESSAGE_LENGTH_LIMIT = 42;
 
 	private final MessageRepository messageRepository;
 	private final AmazonS3 s3Client;
+	private final UserRepository userRepository;
 	@Value("${cloud.aws.s3.bucket}")
 	private String bucketName;
+
+	private static void verifyValidMessageFormat(MessageRequestDto messageData) {
+		if (messageData.getContext().isEmpty()
+				|| messageData.getContext().length() > MESSAGE_LENGTH_LIMIT) {
+			throw ExceptionStatus.INVALID_FORMAT_MESSAGE.asGreetingException();
+		}
+	}
 
 	/**
 	 * 메세지 보내기
@@ -46,12 +58,39 @@ public class MessageService {
 	public void sendMessage(String userName, MessageRequestDto messageData) throws IOException {
 		String imageUrl = saveImage(messageData.getImage());
 
+		if (messageData.getReceiverName().equals(GROUP_EVERYONE)) {
+			sendMessageToAll(messageData, userName, imageUrl);
+			return;
+		}
+
+		verifyExistUser(messageData);
+		verifyValidMessageFormat(messageData);
+
 		Message message =
 				Message.of(userName, messageData.getReceiverName(), messageData.getContext(),
 						imageUrl, LocalDateTime.now());
+
 		messageRepository.save(message);
 	}
 
+	private void verifyExistUser(MessageRequestDto messageData) {
+		if (!userRepository.existsByName(messageData.getReceiverName())) {
+			throw ExceptionStatus.NOT_FOUND_USER.asGreetingException();
+		}
+	}
+
+	@Transactional
+	public void sendMessageToAll(MessageRequestDto messageData, String userName, String imageUrl) {
+		verifyValidMessageFormat(messageData);
+
+		List<User> userList = userRepository.findAll();
+		userList.removeIf(user -> user.getName().equals(userName));
+		List<Message> messageList = userList.stream()
+				.map(user -> Message.of(userName, user.getName(),
+						messageData.getContext(), imageUrl, LocalDateTime.now()))
+				.toList();
+		messageRepository.saveAll(messageList);
+	}
 
 	/**
 	 * 수정할 부분 없읍니다!
@@ -68,9 +107,11 @@ public class MessageService {
 		}
 		MultipartFile image = imageFile.get();
 		String originalFilename = image.getOriginalFilename();
-		String extension = originalFilename.contains(".") ? originalFilename.substring(originalFilename.lastIndexOf(".")) : "";
+		String extension = originalFilename.contains(".") ? originalFilename.substring(
+				originalFilename.lastIndexOf(".")) : "";
 		verifyExtensionType(extension);
-		String safeFileName = originalFilename.length() > 10 ? originalFilename.substring(0, 10) : originalFilename;
+		String safeFileName = originalFilename.length() > 10 ? originalFilename.substring(0, 10)
+				: originalFilename;
 		String s3FileName = UUID.randomUUID() + safeFileName + extension;
 
 		ObjectMetadata objectMetadata = new ObjectMetadata();

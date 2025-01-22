@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/주요 리소스가 누구지..")
+@RequestMapping("/messages")
 @Slf4j
 public class MessageController {
 
