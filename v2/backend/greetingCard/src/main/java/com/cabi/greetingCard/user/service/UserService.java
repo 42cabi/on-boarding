@@ -99,4 +99,21 @@ public class UserService {
 	public UserSearchDto searchUserByName(String name) {
 		return new UserSearchDto(new ArrayList<>());
 	}
+
+	/**
+	 * 로그인 권한이 필요한 페이지마다 현재 로그인한 유저가 유효한지 확인합니다.
+	 *
+	 * @param name
+	 */
+	public void checkAuth(String name) {
+		// 잘못된 쿠키인 경우
+		if (name.equals("none")) {
+			throw ExceptionStatus.INVALID_COOKIE.asGreetingException();
+		}
+
+		// 쿠키에 유저이름이 있지만 데이터베이스와 일치하지 않는 경우
+		if (!userRepository.existsByName(name)) {
+			throw ExceptionStatus.NOT_FOUND_USER.asGreetingException();
+		}
+	}
 }

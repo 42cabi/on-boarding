@@ -66,4 +66,15 @@ public class UserController {
 				.headers(headers)
 				.build();
 	}
+
+	/**
+	 * 요청 헤더에 있는 쿠키를 확인하고 유효한 유저인지 확인합니다.
+	 */
+	@GetMapping("/auth")
+	public ResponseEntity<?> checkAuth(
+			@CookieValue(value = "name", defaultValue = "none") String name) {
+		userService.checkAuth(name);
+
+		return ResponseEntity.ok().build();
+	}
 }
