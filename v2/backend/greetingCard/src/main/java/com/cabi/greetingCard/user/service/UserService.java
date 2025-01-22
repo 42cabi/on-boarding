@@ -1,7 +1,9 @@
 package com.cabi.greetingCard.user.service;
 
+import com.cabi.greetingCard.dto.GroupSearchDTO;
 import com.cabi.greetingCard.dto.UserSearchDto;
 import com.cabi.greetingCard.exception.ExceptionStatus;
+import com.cabi.greetingCard.user.domain.Group;
 import com.cabi.greetingCard.user.domain.User;
 import com.cabi.greetingCard.user.repository.UserRepository;
 import jakarta.servlet.http.Cookie;
@@ -77,5 +79,13 @@ public class UserService {
 				.toList();
 
 		return new UserSearchDto(names);
+	}
+
+	public GroupSearchDTO searchGroupByName(String prefix) {
+		List<String> groupNames = Group.getNames().stream()
+				.filter(name -> name.startsWith(prefix))
+				.toList();
+
+		return new GroupSearchDTO(groupNames);
 	}
 }

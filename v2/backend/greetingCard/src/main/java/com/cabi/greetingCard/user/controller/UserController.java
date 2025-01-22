@@ -1,5 +1,6 @@
 package com.cabi.greetingCard.user.controller;
 
+import com.cabi.greetingCard.dto.GroupSearchDTO;
 import com.cabi.greetingCard.dto.UserInfoDto;
 import com.cabi.greetingCard.dto.UserSearchDto;
 import com.cabi.greetingCard.exception.ExceptionStatus;
@@ -46,6 +47,15 @@ public class UserController {
 			throw ExceptionStatus.UNAUTHORIZED.asGreetingException();
 		}
 		return userService.searchUserByName(prefix, userName);
+	}
+
+	@GetMapping("/search/group")
+	public GroupSearchDTO searchGroup(@RequestParam(name = "input") String prefix,
+			@CookieValue(name = "userName", required = false) String userName) {
+		if (userName == null) {
+			throw ExceptionStatus.UNAUTHORIZED.asGreetingException();
+		}
+		return userService.searchGroupByName(prefix);
 	}
 
 	/**
