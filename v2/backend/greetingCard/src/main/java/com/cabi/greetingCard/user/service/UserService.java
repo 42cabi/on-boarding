@@ -1,10 +1,16 @@
 package com.cabi.greetingCard.user.service;
 
+import static com.cabi.greetingCard.user.domain.GroupNames.GROUP_EVERYONE;
+
+import com.cabi.greetingCard.dto.GroupSearchDto;
 import com.cabi.greetingCard.dto.UserSearchDto;
 import com.cabi.greetingCard.exception.ExceptionStatus;
 import com.cabi.greetingCard.user.domain.User;
 import com.cabi.greetingCard.user.repository.UserRepository;
+import jakarta.annotation.PostConstruct;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,6 +26,13 @@ import org.springframework.stereotype.Service;
 public class UserService {
 
 	private final UserRepository userRepository;
+
+	private Set<String> groupNames;
+
+	@PostConstruct
+	public void init() {
+		groupNames = new HashSet<>(List.of(GROUP_EVERYONE));
+	}
 
 	/**
 	 * 새로운 유저를 등록합니다
@@ -107,6 +120,13 @@ public class UserService {
 		List<String> nameList = userList.stream().map(User::getName).collect(Collectors.toList());
 
 		return new UserSearchDto(nameList);
+	}
+
+	public GroupSearchDto searchGroupByName(String input) {
+		List<String> list = groupNames.stream().filter(group -> group.startsWith("@" + input))
+				.toList();
+
+		return new GroupSearchDto(list);
 	}
 
 	/**

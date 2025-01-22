@@ -1,5 +1,6 @@
 package com.cabi.greetingCard.user.controller;
 
+import com.cabi.greetingCard.dto.GroupSearchDto;
 import com.cabi.greetingCard.dto.UserInfoDto;
 import com.cabi.greetingCard.dto.UserSearchDto;
 import com.cabi.greetingCard.user.service.UserService;
@@ -47,6 +48,15 @@ public class UserController {
 				.body(users);
 	}
 
+	@GetMapping("/search/group")
+	public ResponseEntity<?> searchGroup(@RequestParam(name = "input") String input) {
+
+		GroupSearchDto groups = userService.searchGroupByName(input);
+
+		return ResponseEntity.ok()
+				.body(groups);
+	}
+
 	/**
 	 * 로그인 기능
 	 * <p>
@@ -81,4 +91,6 @@ public class UserController {
 
 		return ResponseEntity.ok().build();
 	}
+
+
 }
