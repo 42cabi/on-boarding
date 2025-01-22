@@ -45,10 +45,16 @@ public class MessageService {
 	@Value("${cloud.aws.s3.bucket}")
 	private String bucketName;
 
-	private static void verifyValidMessageFormat(MessageRequestDto messageData) {
-		if (messageData.getContext().isEmpty()
-				|| messageData.getContext().length() > MESSAGE_LENGTH_LIMIT) {
+	private static void verifyValidMessageFormat(String context) {
+		if (context.isEmpty()
+				|| context.length() > MESSAGE_LENGTH_LIMIT) {
 			throw ExceptionStatus.INVALID_FORMAT_MESSAGE.asGreetingException();
+		}
+	}
+
+	private static void verifyUserAuthorized(String userName, Message message) {
+		if (!message.getSenderName().equals(userName)) {
+			throw ExceptionStatus.UNAUTHORIZED_USER.asGreetingException();
 		}
 	}
 
@@ -69,7 +75,7 @@ public class MessageService {
 		}
 
 		verifyExistUser(messageData);
-		verifyValidMessageFormat(messageData);
+		verifyValidMessageFormat(messageData.getContext());
 
 		Message message =
 				Message.of(userName, messageData.getReceiverName(), messageData.getContext(),
@@ -86,7 +92,7 @@ public class MessageService {
 
 	@Transactional
 	public void sendMessageToAll(MessageRequestDto messageData, String userName, String imageUrl) {
-		verifyValidMessageFormat(messageData);
+		verifyValidMessageFormat(messageData.getContext());
 
 		List<User> userList = userRepository.findAll();
 		userList.removeIf(user -> user.getName().equals(userName));
@@ -191,6 +197,8 @@ public class MessageService {
 	public void updateMessageContext(String userName, Long messageId, String context) {
 		Message message = messageRepository.findById(messageId)
 				.orElseThrow(ExceptionStatus.NOT_FOUND_MESSAGE::asGreetingException);
+		verifyUserAuthorized(userName, message);
+		verifyValidMessageFormat(context);
 		message.updateContext(context);
 	}
 

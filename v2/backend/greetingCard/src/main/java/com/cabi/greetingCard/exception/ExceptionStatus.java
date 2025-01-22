@@ -13,6 +13,7 @@ public enum ExceptionStatus {
 
 	NOT_FOUND_MESSAGE(HttpStatus.NOT_FOUND, "존재하지 않는 메세지입니다"),
 	UNAUTHORIZED_PASSWORD(HttpStatus.UNAUTHORIZED, "비밀번호가 일치하지 않습니다"),
+	UNAUTHORIZED_USER(HttpStatus.UNAUTHORIZED, "권한이 없는 유저입니다."),
 	DUPLICATED_NAME(HttpStatus.UNAUTHORIZED, "중복된 아이디입니다."),
 	INVALID_NAME(HttpStatus.BAD_REQUEST, "형식에 맞지 않는 아이디입니다."),
 	INVALID_PASSWORD(HttpStatus.BAD_REQUEST, "형식에 맞지 않는 비밀번호입니다."),

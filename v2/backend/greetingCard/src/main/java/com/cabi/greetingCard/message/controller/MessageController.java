@@ -12,9 +12,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -89,10 +89,18 @@ public class MessageController {
 		return messageService.getSentMessages(userName, pageable);
 	}
 
-	@PatchMapping("/{test4}")
-	public void updateMessageContext(@CookieValue(name = "userName") String userName,
-			@PathVariable(name = "test?") Long messageId,
+	/**
+	 * 메세지 내용을 수정합니다.
+	 *
+	 * @param userName
+	 * @param messageId
+	 * @param requestDto
+	 */
+	@PutMapping("/{messageId}")
+	public ResponseEntity<?> updateMessageContext(@CookieValue(name = "userName") String userName,
+			@PathVariable(name = "messageId") Long messageId,
 			@RequestBody RequestDto requestDto) {
 		messageService.updateMessageContext(userName, messageId, requestDto.getContext());
+		return ResponseEntity.ok().build();
 	}
 }
