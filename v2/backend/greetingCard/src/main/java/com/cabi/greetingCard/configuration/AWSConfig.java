@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * 해당 파일은 수정하지 않아도 됩니다. 따봉 6기가 config를 작성해뒀다구!
  * <p>
- * 동작하지 않는다면 에러 로그를 확인하고 .env 파일을 제대로 넣었는지 확인해보세요!!
+ * 동작하지 않는다면 에러 로그를 확인하고 application.properties 파일을 제대로 넣었는지 확인해보세요!!
  */
 @Configuration
 public class AWSConfig {

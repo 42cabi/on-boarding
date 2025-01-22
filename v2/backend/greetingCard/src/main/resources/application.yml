@@ -12,7 +12,7 @@ spring:
       max-file-size: 30MB
       max-request-size: 30MB
   config:
-    import: optional:file:.env[.properties]
+    import: application.properties
 
 cloud:
   aws:

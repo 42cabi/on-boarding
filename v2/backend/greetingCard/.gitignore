@@ -37,3 +37,4 @@ out/
 ### VS Code ###
 .vscode/
 .env
+v2/backend/greetingCard/src/main/resources/application.properties
