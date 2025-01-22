@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/주체가누구지..")
+@RequestMapping("/users")
 public class UserController {
 
 	private final UserService userService;
@@ -29,7 +29,7 @@ public class UserController {
 	/**
 	 * PostMapping, GetMapping이 머지??
 	 */
-	@PostMapping("/test1")
+	@PostMapping("/register")
 	public void registerUser(@RequestBody UserInfoDto userInfoDto) {
 		userService.registerUser(userInfoDto.getName(), userInfoDto.getPassword());
 	}

@@ -1,6 +1,7 @@
 package com.cabi.greetingCard.user.service;
 
 import com.cabi.greetingCard.dto.UserSearchDto;
+import com.cabi.greetingCard.exception.ExceptionStatus;
 import com.cabi.greetingCard.user.domain.User;
 import com.cabi.greetingCard.user.repository.UserRepository;
 import jakarta.servlet.http.Cookie;
@@ -26,8 +27,32 @@ public class UserService {
 	 */
 	public void registerUser(String name, String password) {
 		verifyDuplicatedName(name);
+		verifyNameLengthUnder10(name);
+		verifyNameIsNumericOrAlphabet(name); // 하나의 메서드로 따로 빼는게 나을까? 코드만 복잡해지는게 아닌지?
 		User user = new User(name, password);
 		userRepository.save(user);
+	}
+
+	/**
+	 * 유저 이름이 영어 + 숫자로만 구성되어 있는지 확인합니다.
+	 *
+	 * @param name
+	 */
+	private void verifyNameIsNumericOrAlphabet(String name) {
+		if (name == null || !name.matches("^[a-zA-Z0-9]+$")) {
+			throw ExceptionStatus.INVALID_NAME.asGreetingException();
+		}
+	}
+
+	/**
+	 * 유저 이름의 길이가 10자 이내인지 확인합니다
+	 *
+	 * @param name
+	 */
+	private void verifyNameLengthUnder10(String name) {
+		if (name.length() > 10) {
+			throw ExceptionStatus.INVALID_NAME.asGreetingException(); //TODO : 모든 exception에 에러코드 넣어야 함
+		}
 	}
 
 	/**
@@ -36,6 +61,9 @@ public class UserService {
 	 * @param name
 	 */
 	public void verifyDuplicatedName(String name) {
+		if (userRepository.existsByName(name)) {
+			throw ExceptionStatus.DUPLICATED_NAME.asGreetingException();
+		}
 	}
 
 	/**
