@@ -3,6 +3,7 @@ package com.cabi.greetingCard.user.controller;
 import com.cabi.greetingCard.dto.UserInfoDto;
 import com.cabi.greetingCard.dto.UserSearchDto;
 import com.cabi.greetingCard.user.service.UserService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,7 +31,7 @@ public class UserController {
 	 * PostMapping, GetMapping이 머지??
 	 */
 	@PostMapping("/register")
-	public void registerUser(@RequestBody UserInfoDto userInfoDto) {
+	public void registerUser(@RequestBody @Valid UserInfoDto userInfoDto) {
 		userService.registerUser(userInfoDto.getName(), userInfoDto.getPassword());
 	}
 

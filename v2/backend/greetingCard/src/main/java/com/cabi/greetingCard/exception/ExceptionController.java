@@ -1,6 +1,10 @@
 package com.cabi.greetingCard.exception;
 
+import com.cabi.greetingCard.dto.UserInfoDto;
+import java.util.HashMap;
+import java.util.Map;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -11,6 +15,27 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
  */
 @RestControllerAdvice
 public class ExceptionController {
+
+	// DTO별 입력 값 검증 에러 맵
+	private static final Map<Class<?>, Map<String, ExceptionStatus>> validationExceptions = new HashMap<>();
+
+	static {
+		// DTO별 입력 값 검증 에러 맵 초기화
+		validationExceptions.put(UserInfoDto.class, Map.of(
+				"name", ExceptionStatus.INVALID_NAME,
+				"password", ExceptionStatus.INVALID_PASSWORD
+		));
+	}
+
+	@ExceptionHandler(MethodArgumentNotValidException.class)
+	public ResponseEntity<?> validationExceptionHandler(MethodArgumentNotValidException e) {
+		Map<String, ExceptionStatus> exceptionStatusMap = validationExceptions.get(
+				e.getParameter().getParameterType());
+		ExceptionStatus exceptionStatus = exceptionStatusMap.get(e.getFieldError().getField());
+		return ResponseEntity
+				.status(exceptionStatus.getStatusCode())
+				.body(exceptionStatus);
+	}
 
 	@ExceptionHandler(GreetingException.class)
 	public ResponseEntity<?> serviceExceptionHandler(GreetingException e) {
