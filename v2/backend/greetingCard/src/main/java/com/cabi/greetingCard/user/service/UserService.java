@@ -6,6 +6,7 @@ import com.cabi.greetingCard.user.domain.User;
 import com.cabi.greetingCard.user.repository.UserRepository;
 import jakarta.servlet.http.Cookie;
 import java.util.ArrayList;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -49,7 +50,7 @@ public class UserService {
 	 */
 	public Cookie login(String name, String password) {
 		User user = userRepository.findByName(name)
-			.orElseThrow(ExceptionStatus.LOGIN_FAIL::asGreetingException);
+				.orElseThrow(ExceptionStatus.LOGIN_FAIL::asGreetingException);
 		if (!user.getPassword().equals(password)) {
 			throw ExceptionStatus.LOGIN_FAIL.asGreetingException();
 		}
@@ -65,10 +66,16 @@ public class UserService {
 	/**
 	 * 파라미터를 포함하고 있는 user정보들 중 name만을 List 형식으로 반환
 	 *
-	 * @param name
+	 * @param prefix
+	 * @param userName
 	 * @return
 	 */
-	public UserSearchDto searchUserByName(String name) {
-		return new UserSearchDto(new ArrayList<>());
+	public UserSearchDto searchUserByName(String prefix, String userName) {
+		List<String> names = userRepository.findByNameStartingWith(prefix).stream()
+				.map(User::getName)
+				.filter(name -> !name.equals(userName))
+				.toList();
+
+		return new UserSearchDto(names);
 	}
 }

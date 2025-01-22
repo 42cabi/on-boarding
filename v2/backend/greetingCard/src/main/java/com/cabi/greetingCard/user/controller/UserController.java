@@ -2,6 +2,7 @@ package com.cabi.greetingCard.user.controller;
 
 import com.cabi.greetingCard.dto.UserInfoDto;
 import com.cabi.greetingCard.dto.UserSearchDto;
+import com.cabi.greetingCard.exception.ExceptionStatus;
 import com.cabi.greetingCard.user.service.UserService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
@@ -38,10 +39,13 @@ public class UserController {
 		userService.registerUser(userInfoDto.getName(), userInfoDto.getPassword());
 	}
 
-	@GetMapping("/test2")
-	public UserSearchDto searchUser(@RequestParam(name = "name") String name,
-			@CookieValue(name = "userName") String userName) {
-		return userService.searchUserByName(name);
+	@GetMapping("/search/name")
+	public UserSearchDto searchUser(@RequestParam(name = "input") String prefix,
+			@CookieValue(name = "userName", required = false) String userName) {
+		if (userName == null) {
+			throw ExceptionStatus.UNAUTHORIZED.asGreetingException();
+		}
+		return userService.searchUserByName(prefix, userName);
 	}
 
 	/**
