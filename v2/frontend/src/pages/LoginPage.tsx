@@ -9,23 +9,21 @@ const LoginPage = () => {
   const [pw, setPw] = useState("");
 
   return (
-    <LoginPageStyled id="loginPage">
+    <LoginPageStyled id="LoginPage">
       <NewYearImg />
-      <LoginSectionStyled>
-        <LoginTitleStyled>CABI-Onboarding</LoginTitleStyled>
-        <UserInputField
-          value={id}
-          onChange={(e) => setId(e.target.value)}
-          placeholder="id"
-        />
-        <UserInputField
-          value={pw}
-          onChange={(e) => setPw(e.target.value)}
-          placeholder="pw"
-        />
-        <LinkStyled to="/register">회원가입</LinkStyled>
-        <LoginButtonStyled>로그인</LoginButtonStyled>
-      </LoginSectionStyled>
+      <LoginTitleStyled>CABI-Onboarding</LoginTitleStyled>
+      <UserInputField
+        value={id}
+        onChange={(e) => setId(e.target.value)}
+        placeholder="id"
+      />
+      <UserInputField
+        value={pw}
+        onChange={(e) => setPw(e.target.value)}
+        placeholder="pw"
+      />
+      <LinkStyled to="/register">회원가입</LinkStyled>
+      <LoginButtonStyled>로그인</LoginButtonStyled>
     </LoginPageStyled>
   );
 };
@@ -39,14 +37,6 @@ const LoginPageStyled = styled.div`
   width: 100%;
   height: 100vh;
   background-color: #f9f9f9;
-`;
-
-const LoginSectionStyled = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
 `;
 
 const LoginTitleStyled = styled.div`
@@ -66,7 +56,7 @@ const LinkStyled = styled(Link)`
 
 const LoginButtonStyled = styled.button`
   width: 350px;
-  height: 56px;
+  height: 54px;
   padding: 0.8rem 1rem;
   background-color: #9747ff;
   color: #ffffff;

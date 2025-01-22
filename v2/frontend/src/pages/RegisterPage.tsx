@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { ReactComponent as NewYearImg } from "../assets/images/newYear.svg";
 import styled from "styled-components";
 import UserInputField from "../components/UserInputField";
 
@@ -8,6 +9,7 @@ const RegisterPage = () => {
 
   return (
     <RegisterPageStyled id="RegisterPage">
+      <NewYearImg />
       <RegisterTitleStyled>CABI-Onboarding</RegisterTitleStyled>
       <UserInputField
         value={id}
@@ -40,6 +42,7 @@ const RegisterTitleStyled = styled.div`
   font-size: 2rem;
   font-weight: 700;
   line-height: 3rem;
+  margin-top: 2rem;
   margin-bottom: 2rem;
 `;
 
@@ -52,7 +55,7 @@ const RegisterTextStyled = styled.div`
 
 const RegisterButtonStyled = styled.button`
   width: 350px;
-  height: 56px;
+  height: 54px;
   padding: 0.8rem 1rem;
   background-color: #9747ff;
   color: #ffffff;
