@@ -99,7 +99,7 @@ public class UserService {
 		}
 
 		// 성공하면 쿠키를 주자!
-		return ResponseCookie.from("name", name)
+		return ResponseCookie.from("userName", name)
 				.maxAge(COOKIE_MAX_AGE) // 유효 기간 1일
 				.path("/") // 경로 설정
 				.build();
