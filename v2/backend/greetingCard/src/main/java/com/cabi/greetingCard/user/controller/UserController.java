@@ -38,6 +38,13 @@ public class UserController {
 		userService.registerUser(userInfoDto.getName(), userInfoDto.getPassword());
 	}
 
+	/**
+	 * input값으로 시작하는 유저들의 목록을 반환합니다.
+	 *
+	 * @param input
+	 * @param userName
+	 * @return
+	 */
 	@GetMapping("/search/name")
 	public ResponseEntity<?> searchUser(@RequestParam(name = "input") String input,
 			@CookieValue(name = "userName") String userName) {
@@ -48,6 +55,12 @@ public class UserController {
 				.body(users);
 	}
 
+	/**
+	 * input값으로 시작하는 그룹들의 목록을 반환합니다.
+	 *
+	 * @param input
+	 * @return
+	 */
 	@GetMapping("/search/group")
 	public ResponseEntity<?> searchGroup(@RequestParam(name = "input") String input) {
 

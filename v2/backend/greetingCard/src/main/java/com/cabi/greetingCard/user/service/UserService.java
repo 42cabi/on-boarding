@@ -50,39 +50,6 @@ public class UserService {
 	}
 
 	/**
-	 * 유저 이름이 영어 + 숫자로만 구성되어 있는지 확인합니다.
-	 *
-	 * @param name
-	 */
-	private void verifyNameIsNumericOrAlphabet(String name) {
-		if (name == null || !name.matches("^[a-zA-Z0-9]+$")) {
-			throw ExceptionStatus.INVALID_NAME.asGreetingException();
-		}
-	}
-
-	/**
-	 * 유저 이름의 길이가 10자 이내인지 확인합니다
-	 *
-	 * @param name
-	 */
-	private void verifyNameLength(String name) {
-		if (name.length() > USER_NAME_LENGTH_LIMIT) {
-			throw ExceptionStatus.INVALID_NAME.asGreetingException(); //TODO : 모든 exception에 에러코드 넣어야 함
-		}
-	}
-
-	/**
-	 * 중복된 name 검증 기능
-	 *
-	 * @param name
-	 */
-	public void verifyDuplicatedName(String name) {
-		if (userRepository.existsByName(name)) {
-			throw ExceptionStatus.DUPLICATED_NAME.asGreetingException();
-		}
-	}
-
-	/**
 	 * 로그인을 시도합니다
 	 * <p>
 	 * 진짜 있는 유저일까? 비밀번호는 맞게 입력했을까?, 성공하면 쿠키를 주자!
@@ -105,7 +72,7 @@ public class UserService {
 	}
 
 	/**
-	 * 파라미터를 포함하고 있는 user정보들 중 name만을 List 형식으로 반환
+	 * input값으로 시작하는 유저들의 이름 목록을 반환합니다. 로그인한 유저의 이름은 제외됩니다.
 	 *
 	 * @param input
 	 * @param userName
@@ -120,6 +87,12 @@ public class UserService {
 		return new UserSearchDto(nameList);
 	}
 
+	/**
+	 * input값으로 시작하는 그룹들의 목록을 반환합니다.
+	 *
+	 * @param input
+	 * @return
+	 */
 	public GroupSearchDto searchGroupByName(String input) {
 		List<String> list = groupNames.stream().filter(group -> group.startsWith("@" + input))
 				.toList();
@@ -143,4 +116,39 @@ public class UserService {
 			throw ExceptionStatus.NOT_FOUND_USER.asGreetingException();
 		}
 	}
+
+
+	/**
+	 * 유저 이름이 영어 + 숫자로만 구성되어 있는지 확인합니다.
+	 *
+	 * @param name
+	 */
+	private void verifyNameIsNumericOrAlphabet(String name) {
+		if (name == null || !name.matches("^[a-zA-Z0-9]+$")) {
+			throw ExceptionStatus.INVALID_NAME.asGreetingException();
+		}
+	}
+
+	/**
+	 * 유저 이름의 길이가 10자 이내인지 확인합니다
+	 *
+	 * @param name
+	 */
+	private void verifyNameLength(String name) {
+		if (name.length() > USER_NAME_LENGTH_LIMIT) {
+			throw ExceptionStatus.INVALID_NAME.asGreetingException();
+		}
+	}
+
+	/**
+	 * 중복된 name 검증 기능
+	 *
+	 * @param name
+	 */
+	public void verifyDuplicatedName(String name) {
+		if (userRepository.existsByName(name)) {
+			throw ExceptionStatus.DUPLICATED_NAME.asGreetingException();
+		}
+	}
+
 }

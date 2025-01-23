@@ -16,7 +16,6 @@ import com.cabi.greetingCard.user.domain.User;
 import com.cabi.greetingCard.user.repository.UserRepository;
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -90,12 +89,13 @@ public class MessageService {
 		messageRepository.save(message);
 	}
 
-	private void verifyExistUser(MessageRequestDto messageData) {
-		if (!userRepository.existsByName(messageData.getReceiverName())) {
-			throw ExceptionStatus.NOT_FOUND_USER.asGreetingException();
-		}
-	}
-
+	/**
+	 * 로그인한 유저를 제외한 모두에게 메세지를 보냅니다.
+	 *
+	 * @param messageData
+	 * @param userName
+	 * @param imageUrl
+	 */
 	@Transactional
 	public void sendMessageToAll(MessageRequestDto messageData, String userName, String imageUrl) {
 		verifyValidMessageFormat(messageData.getContext());
@@ -144,50 +144,6 @@ public class MessageService {
 		if (!allowedExtensions.contains(extension)) {
 			throw ExceptionStatus.INVALID_FORMAT_MESSAGE.asGreetingException();
 		}
-	}
-
-	/**
-	 * receiverName을 everyone으로 받은 메세지 조회
-	 * <p>
-	 * dto는 왜쓰는걸까용?
-	 *
-	 * @param userName
-	 * @param page
-	 * @param size
-	 * @return
-	 */
-	public MessageResponsePaginationDto getEveryoneMessage(String userName, Pageable pageable) {
-		Page<Message> receivedMessages;
-
-		List<MessageResponseDto> messageDtos = new ArrayList<>();
-		return new MessageResponsePaginationDto(messageDtos, 0);
-	}
-
-	/**
-	 * 내가 받은 메세지 조회
-	 *
-	 * @param userName
-	 * @param pageable
-	 * @return
-	 */
-	public MessageResponsePaginationDto getReceivedMessages(String userName, Pageable pageable) {
-		Page<Message> receivedMessages;
-
-		List<MessageResponseDto> messageDtos = new ArrayList<>();
-		return new MessageResponsePaginationDto(messageDtos, 0);
-	}
-
-	/**
-	 * 내가 보낸 메세지 조회
-	 *
-	 * @param userName
-	 * @param pageable
-	 * @return
-	 */
-	public MessageResponsePaginationDto getSentMessages(String userName, Pageable pageable) {
-		Page<Message> sentMessages;
-		List<MessageResponseDto> messageDtos = new ArrayList<>();
-		return new MessageResponsePaginationDto(messageDtos, 0);
 	}
 
 	/**
@@ -289,5 +245,12 @@ public class MessageService {
 	private Page<Message> getMessagesSendMe(String userName, PageRequest pageRequest) {
 		return messageRepository.findAllByReceiverName(userName, pageRequest);
 	}
+
+	private void verifyExistUser(MessageRequestDto messageData) {
+		if (!userRepository.existsByName(messageData.getReceiverName())) {
+			throw ExceptionStatus.NOT_FOUND_USER.asGreetingException();
+		}
+	}
+
 }
 

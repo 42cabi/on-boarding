@@ -33,6 +33,7 @@ spring:
       pageable:
         default-page-size: 5
 
+
 cloud:
   aws:
     s3:
@@ -50,3 +51,7 @@ logging:
   level:
     root: INFO
     org.springframework: INFO
+
+server:
+  servlet:
+    context-path: /api

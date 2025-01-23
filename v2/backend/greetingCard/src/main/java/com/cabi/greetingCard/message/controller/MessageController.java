@@ -63,33 +63,6 @@ public class MessageController {
 	}
 
 	/**
-	 * 모두에게 덕담 메세지 보내기
-	 *
-	 * @param userName
-	 * @param message
-	 * @throws IOException
-	 */
-	@PostMapping("/test1")
-	public void postAllUsers(@CookieValue(name = "userName") String userName,
-			@ModelAttribute MessageRequestDto message) throws IOException {
-		messageService.sendMessage(userName, message);
-	}
-
-	@GetMapping("/test2")
-	public MessageResponsePaginationDto getReceivedMessages(
-			@CookieValue(name = "userName") String userName,
-			Pageable pageable) {
-		return messageService.getReceivedMessages(userName, pageable);
-	}
-
-	@GetMapping("/test3")
-	public MessageResponsePaginationDto getSentMessages(
-			@CookieValue(name = "userName") String userName,
-			Pageable pageable) {
-		return messageService.getSentMessages(userName, pageable);
-	}
-
-	/**
 	 * 메세지 내용을 수정합니다.
 	 *
 	 * @param userName
