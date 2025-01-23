@@ -11,7 +11,6 @@ import jakarta.annotation.PostConstruct;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseCookie;
@@ -113,12 +112,10 @@ public class UserService {
 	 * @return
 	 */
 	public UserSearchDto searchUserByName(String input, String userName) {
-		List<User> userList = userRepository.findAllByNameStartingWithOrderByName(input);
-
-		// 현재 로그인한 userName과 일치한다면 삭제
-		userList.removeIf(user -> user.getName().equals(userName));
-
-		List<String> nameList = userList.stream().map(User::getName).collect(Collectors.toList());
+		List<String> nameList = userRepository.findAllByNameStartingWithOrderByName(input).stream()
+				.map(User::getName)
+				.filter(name -> !name.equals(userName))
+				.toList();
 
 		return new UserSearchDto(nameList);
 	}
