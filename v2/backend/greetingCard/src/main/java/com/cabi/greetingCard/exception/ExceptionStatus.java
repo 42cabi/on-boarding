@@ -20,7 +20,8 @@ public enum ExceptionStatus {
 	NOT_FOUND_USER(HttpStatus.NOT_FOUND, "존재하지 않는 유저입니디.", "008"),
 	INVALID_QUERYSTRING(HttpStatus.BAD_REQUEST, "잘못된 쿼리스트링입니다.", "009"),
 	UNAUTHORIZED(HttpStatus.UNAUTHORIZED, "권한이 없습니다.", "010"),
-	NOT_FOUND_MESSAGE(HttpStatus.NOT_FOUND, "존재하지 않는 메세지입니다", "011");
+	NOT_FOUND_MESSAGE(HttpStatus.NOT_FOUND, "존재하지 않는 메세지입니다", "011"),
+	SENDER_EQUAL_RECEIVER(HttpStatus.BAD_REQUEST, "보내는 사람과 받는 사람이 같습니다.", "013");
 
 	private final int httpCode;
 	private final String message;

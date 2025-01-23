@@ -81,12 +81,19 @@ public class MessageService {
 
 		verifyExistUser(messageData);
 		verifyValidMessageFormat(messageData.getContext());
+		verifySenderNotEqualReceiver(userName, messageData);
 
 		Message message =
 				Message.of(userName, messageData.getReceiverName(), messageData.getContext(),
 						imageUrl, LocalDateTime.now());
 
 		messageRepository.save(message);
+	}
+
+	private void verifySenderNotEqualReceiver(String userName, MessageRequestDto messageData) {
+		if (userName.equals(messageData.getReceiverName())) {
+			throw ExceptionStatus.SENDER_EQUAL_RECEIVER.asGreetingException();
+		}
 	}
 
 	/**
