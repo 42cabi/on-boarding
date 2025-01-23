@@ -55,16 +55,13 @@ public class UserService {
 	 * 진짜 있는 유저일까? 비밀번호는 맞게 입력했을까?, 성공하면 쿠키를 주자!
 	 */
 	public ResponseCookie login(String name, String password) {
-		// 진짜 있는 유저일까?
 		User loginUser = userRepository.findByName(name)
 				.orElseThrow(ExceptionStatus.LOGIN_FAIL::asGreetingException);
 
-		// 비밀번호는 맞게 입력했을까?
 		if (!loginUser.getPassword().equals(password)) {
 			throw ExceptionStatus.LOGIN_FAIL.asGreetingException();
 		}
 
-		// 성공하면 쿠키를 주자!
 		return ResponseCookie.from("userName", name)
 				.maxAge(COOKIE_MAX_AGE) // 유효 기간 1일
 				.path("/") // 경로 설정
@@ -117,34 +114,18 @@ public class UserService {
 		}
 	}
 
-
-	/**
-	 * 유저 이름이 영어 + 숫자로만 구성되어 있는지 확인합니다.
-	 *
-	 * @param name
-	 */
 	private void verifyNameIsNumericOrAlphabet(String name) {
 		if (name == null || !name.matches("^[a-zA-Z0-9]+$")) {
 			throw ExceptionStatus.INVALID_NAME.asGreetingException();
 		}
 	}
 
-	/**
-	 * 유저 이름의 길이가 10자 이내인지 확인합니다
-	 *
-	 * @param name
-	 */
 	private void verifyNameLength(String name) {
 		if (name.length() > USER_NAME_LENGTH_LIMIT) {
 			throw ExceptionStatus.INVALID_NAME.asGreetingException();
 		}
 	}
 
-	/**
-	 * 중복된 name 검증 기능
-	 *
-	 * @param name
-	 */
 	public void verifyDuplicatedName(String name) {
 		if (userRepository.existsByName(name)) {
 			throw ExceptionStatus.DUPLICATED_NAME.asGreetingException();

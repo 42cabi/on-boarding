@@ -258,6 +258,5 @@ public class MessageService {
 			throw ExceptionStatus.NOT_FOUND_USER.asGreetingException();
 		}
 	}
-
 }
 
