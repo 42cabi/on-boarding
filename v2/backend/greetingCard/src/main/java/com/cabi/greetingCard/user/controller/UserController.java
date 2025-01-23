@@ -86,7 +86,7 @@ public class UserController {
 	 */
 	@GetMapping("/auth")
 	public ResponseEntity<?> checkAuth(
-			@CookieValue(value = "name", defaultValue = "none") String name) {
+			@CookieValue(value = "name", required = false) String name) {
 		userService.checkAuth(name);
 
 		return ResponseEntity.ok().build();

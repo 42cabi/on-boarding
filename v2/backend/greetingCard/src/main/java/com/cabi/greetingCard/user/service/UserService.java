@@ -137,7 +137,7 @@ public class UserService {
 	 */
 	public void checkAuth(String name) {
 		// 잘못된 쿠키인 경우
-		if (name.equals("none")) {
+		if (name == null) {
 			throw ExceptionStatus.INVALID_COOKIE.asGreetingException();
 		}
 
