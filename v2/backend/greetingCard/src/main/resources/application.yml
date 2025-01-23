@@ -28,6 +28,10 @@ spring:
       hibernate:
         show_sql: true #콘솔에 로그가 나옴
         format_sql: true #이쁘게 해줌
+  data:
+    web:
+      pageable:
+        default-page-size: 5
 
 cloud:
   aws:

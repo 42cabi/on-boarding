@@ -90,11 +90,11 @@ public class UserService {
 	public ResponseCookie login(String name, String password) {
 		// 진짜 있는 유저일까?
 		User loginUser = userRepository.findByName(name)
-				.orElseThrow(ExceptionStatus.NOT_FOUND_USER::asGreetingException);
+				.orElseThrow(ExceptionStatus.LOGIN_FAIL::asGreetingException);
 
 		// 비밀번호는 맞게 입력했을까?
 		if (!loginUser.getPassword().equals(password)) {
-			throw ExceptionStatus.UNAUTHORIZED_PASSWORD.asGreetingException();
+			throw ExceptionStatus.LOGIN_FAIL.asGreetingException();
 		}
 
 		// 성공하면 쿠키를 주자!
@@ -135,7 +135,7 @@ public class UserService {
 	public void checkAuth(String name) {
 		// 잘못된 쿠키인 경우
 		if (name == null) {
-			throw ExceptionStatus.INVALID_COOKIE.asGreetingException();
+			throw ExceptionStatus.UNAUTHORIZED.asGreetingException();
 		}
 
 		// 쿠키에 유저이름이 있지만 데이터베이스와 일치하지 않는 경우

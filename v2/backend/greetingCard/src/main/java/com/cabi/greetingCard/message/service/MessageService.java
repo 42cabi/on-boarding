@@ -54,7 +54,13 @@ public class MessageService {
 
 	private static void verifyUserAuthorized(String userName, Message message) {
 		if (!message.getSenderName().equals(userName)) {
-			throw ExceptionStatus.UNAUTHORIZED_USER.asGreetingException();
+			throw ExceptionStatus.UNAUTHORIZED.asGreetingException();
+		}
+	}
+
+	private static void verifyValidPageInfo(Pageable pageable) {
+		if (pageable.getPageNumber() < 0 || pageable.getPageSize() <= 0) {
+			throw ExceptionStatus.INVALID_QUERYSTRING.asGreetingException();
 		}
 	}
 
@@ -212,13 +218,19 @@ public class MessageService {
 	@Transactional
 	public MessageResponsePaginationDto getMessages(String userName, Pageable pageable,
 			int category) {
+		verifyValidPageInfo(pageable);
+
+		// pageNumber는 프론트에서 1부터 인덱싱하기 때문에 -1을 해주고 있음
 		PageRequest pageRequest = PageRequest.of(pageable.getPageNumber() - 1,
 				pageable.getPageSize(),
 				Sort.by("created").descending());
+
 		Page<Message> messageList = splitByCategory(userName, category, pageRequest);
+
 		List<MessageResponseDto> messageResponseDtoList = messageList.stream()
 				.map(message -> messageMapper.toMessageResponseDto(message,
 						userName.equals(message.getSenderName()))).toList();
+
 		return new MessageResponsePaginationDto(messageResponseDtoList,
 				messageList.getTotalPages());
 	}
