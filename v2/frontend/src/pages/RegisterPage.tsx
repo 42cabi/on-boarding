@@ -32,18 +32,20 @@ const RegisterPage = () => {
     <RegisterPageStyled id="RegisterPage">
       <NewYearImg />
       <RegisterTitleStyled>CABI-Onboarding</RegisterTitleStyled>
-      <UserInputField
-        type="text"
-        value={id}
-        onChange={(e) => setId(e.target.value)}
-        placeholder="id"
-      />
-      <UserInputField
-        type="password"
-        value={pw}
-        onChange={(e) => setPw(e.target.value)}
-        placeholder="pw"
-      />
+      <form>
+        <UserInputField
+          type="text"
+          value={id}
+          onChange={(e) => setId(e.target.value)}
+          placeholder="id"
+        />
+        <UserInputField
+          type="current-password"
+          value={pw}
+          onChange={(e) => setPw(e.target.value)}
+          placeholder="pw"
+        />
+      </form>
       <RegisterTextStyled>비밀번호는 변경할 수 없습니다</RegisterTextStyled>
       <RegisterButtonStyled onClick={handleRegister}>
         회원가입
