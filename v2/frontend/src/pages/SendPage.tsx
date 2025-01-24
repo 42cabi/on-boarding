@@ -4,6 +4,7 @@ import SearchInputField from "../components/SearchInputField";
 import { Link } from "react-router";
 import axios from "axios";
 import ImageUploader from "../components/ImageUploader";
+import { sendMessage } from "../api/messages";
 
 const SendPage = () => {
   const [searchInputText, setSearchInputText] = useState("");
@@ -21,7 +22,7 @@ const SendPage = () => {
     }
 
     try {
-      const response = await axios.post("/messages", formData);
+      const response = await sendMessage({data: formData});
       alert("메시지가 성공적으로 전송되었습니다.");
     } catch (error) {
       alert(error);
@@ -159,7 +160,6 @@ const FormButtonContainerStyled = styled.div`
 const FormButtonStyled = styled.button`
   width: 100px;
   height: 30px;
-  /* padding: 10px 16px; */
   font-size: 0.875rem;
   background-color: #9747ff;
   color: #ffffff;
