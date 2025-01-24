@@ -9,8 +9,8 @@ const RegisterPage = () => {
   const [id, setId] = useState("");
   const [pw, setPw] = useState("");
   const navigate = useNavigate();
-  const idRegex = "/^[A-Za-z0-9]{1,10}$/";
-  const pwRegex = "/^(?!.*(.)\\1{3})[A-Za-z0-9]+$/";
+  const idRegex = /^[A-Za-z0-9]{1,10}$/;
+  const pwRegex = /^(?!.*(.)\1{3})[A-Za-z0-9]+$/;
 
   const handleRegister = async () => {
     try {
@@ -31,7 +31,7 @@ const RegisterPage = () => {
         <UserInputField
           type="text"
           value={id}
-          pattern={idRegex}
+          pattern={idRegex.source}
           autocomplete="username"
           onChange={(e) => setId(e.target.value)}
           placeholder="id"
@@ -39,7 +39,7 @@ const RegisterPage = () => {
         <UserInputField
           type="password"
           value={pw}
-          pattern={pwRegex}
+          pattern={pwRegex.source}
           autocomplete="current-password"
           onChange={(e) => setPw(e.target.value)}
           placeholder="pw"
