@@ -13,6 +13,13 @@ const SendPage = () => {
   const [isFocused, setIsFocused] = useState(false);
   const [file, setFile] = useState<File | null>(null);
   const navigate = useNavigate();
+  const maxLength = 42;
+
+  const handleInput = () => {
+    if (!messageTextAreaRef.current) return;
+    messageTextAreaRef.current.style.height = "auto";
+    messageTextAreaRef.current.style.height = `${messageTextAreaRef.current.scrollHeight}px`;
+  };
 
   const handleSubmit = async () => {
     if (!searchInputText) return alert("받는이를 입력해주세요.");
@@ -36,8 +43,7 @@ const SendPage = () => {
     }
   };
 
-
-  const HandleLogout = async() => {
+  const HandleLogout = async () => {
     try {
       const response = await logout();
       alert("로그아웃.");
@@ -45,12 +51,12 @@ const SendPage = () => {
     } catch (error) {
       alert(error);
     }
-}
+  };
 
   return (
     <WrapperStyled>
       <LogoutWrapperStyled>
-      <button onClick={HandleLogout}>로그아웃</button>
+        <button onClick={HandleLogout}>로그아웃</button>
       </LogoutWrapperStyled>
       <LinkWrapperStyled>
         <Link to="/">덕담 보러 가기</Link>
@@ -70,6 +76,7 @@ const SendPage = () => {
             </FormSubTitleStyled>
             <SendTextFieldStyled
               placeholder="메시지 내용을 입력하세요"
+              onInput={handleInput}
               ref={messageTextAreaRef}
               $isFocus={isFocused}
               onFocus={() => setIsFocused(true)}
@@ -105,22 +112,22 @@ const WrapperStyled = styled.div`
 `;
 
 const LogoutWrapperStyled = styled.div`
-width: 100%;
-display: flex;
-justify-content: flex-start;
-/* background-color: #f5f5f5; */
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  /* background-color: #f5f5f5; */
 
-button {
-  width: 100px;
-  height: 30px;
-  /* background-color: #9747ff; */
-  color: #999999;
-  /* font-weight: 700; */
-  font-size: 0.875rem;
-  border: 1px solid #ffffff;
-  border-radius: 4px;
-  cursor: pointer;
-}
+  button {
+    width: 100px;
+    height: 30px;
+    /* background-color: #9747ff; */
+    color: #999999;
+    /* font-weight: 700; */
+    font-size: 0.875rem;
+    border: 1px solid #ffffff;
+    border-radius: 4px;
+    cursor: pointer;
+  }
 `;
 
 const LinkWrapperStyled = styled.div`
@@ -176,10 +183,12 @@ const FormSubTitleStyled = styled.h3`
 `;
 
 const SendTextFieldStyled = styled.textarea<{ $isFocus: boolean }>`
-  /* TODO: font 및 텍스트 크기 조정(통일) */
-  /* font-family: "Noto Sans KR", sans-serif; */
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 16px;
   width: 100%;
-  height: 40px;
+  /* min-height: 40px; */
+  max-height: 200px;
+  resize: none;
   background-color: var(--ref-white);
   border-radius: 8px;
   border: 2px solid
