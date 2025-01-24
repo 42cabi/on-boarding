@@ -5,7 +5,6 @@ import { Link } from "react-router";
 import axios from "axios";
 import ImageUploader from "../components/ImageUploader";
 
-
 const SendPage = () => {
   const [searchInputText, setSearchInputText] = useState("");
   const messageTextAreaRef = useRef<HTMLTextAreaElement>(null);
@@ -64,10 +63,7 @@ const SendPage = () => {
             <FormSubTitleStyled>
               사진<span> ( jpg, jpeg, png )</span>
             </FormSubTitleStyled>
-            <ImageUploader
-            setFile={setFile}
-            file={file}
-            />
+            <ImageUploader setFile={setFile} file={file} />
           </FormContainerStyled>
           <FormButtonContainerStyled>
             <FormButtonStyled onClick={handleSubmit}>보내기</FormButtonStyled>
@@ -165,9 +161,9 @@ const FormButtonContainerStyled = styled.div`
 `;
 
 const FormButtonStyled = styled.button`
-  width: auto;
-  height: auto;
-  padding: 10px 16px;
+  width: 100px;
+  height: 30px;
+  /* padding: 10px 16px; */
   font-size: 0.875rem;
   background-color: #9747ff;
   color: #ffffff;
@@ -175,5 +171,4 @@ const FormButtonStyled = styled.button`
   border: 1px solid #ffffff;
   border-radius: 4px;
   cursor: pointer;
-
 `;
