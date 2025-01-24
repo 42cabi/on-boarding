@@ -34,18 +34,20 @@ const LoginPage = () => {
     <LoginPageStyled id="LoginPage">
       <NewYearImg />
       <LoginTitleStyled>CABI-Onboarding</LoginTitleStyled>
-      <UserInputField
-        type="text"
-        value={id}
-        onChange={(e) => setId(e.target.value)}
-        placeholder="id"
-      />
-      <UserInputField
-        type="password"
-        value={pw}
-        onChange={(e) => setPw(e.target.value)}
-        placeholder="pw"
-      />
+      <form>
+        <UserInputField
+          type="text"
+          value={id}
+          onChange={(e) => setId(e.target.value)}
+          placeholder="id"
+        />
+        <UserInputField
+          type="current-password"
+          value={pw}
+          onChange={(e) => setPw(e.target.value)}
+          placeholder="pw"
+        />
+      </form>
       <LinkStyled to="/register">회원가입</LinkStyled>
       <LoginButtonStyled onClick={handleLogin}>로그인</LoginButtonStyled>
     </LoginPageStyled>
