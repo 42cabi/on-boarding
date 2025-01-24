@@ -23,9 +23,9 @@ const SendPage = () => {
       formData.append("image", file);
     }
 
-      console.log(formData);
+    console.log(formData);
     try {
-      const response = await sendMessage(formData );
+      const response = await sendMessage(formData);
       alert("메시지가 성공적으로 전송되었습니다.");
     } catch (error) {
       alert(error);
@@ -36,7 +36,7 @@ const SendPage = () => {
   return (
     <WrapperStyled>
       <LinkWrapperStyled>
-        <Link to="/list">덕담 보러 가기</Link>
+        <Link to="/">덕담 보러 가기</Link>
       </LinkWrapperStyled>
       <TitleContainerStyled>덕담 보내기</TitleContainerStyled>
       <ContainerStyled>
