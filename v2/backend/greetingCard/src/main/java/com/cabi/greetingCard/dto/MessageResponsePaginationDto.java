@@ -10,4 +10,5 @@ public class MessageResponsePaginationDto {
 
 	private List<MessageResponseDto> messages;
 	private int totalLength;
+	private int currentPage;
 }
