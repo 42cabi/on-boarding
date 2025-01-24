@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useRef, useState } from "react";
+import { ChangeEvent, useRef, useState } from "react";
 import SearchInputField from "../components/SearchInputField";
 import { Link, useNavigate } from "react-router";
 import ImageUploader from "../components/ImageUploader";
@@ -8,17 +8,26 @@ import { al } from "react-router/dist/development/fog-of-war-DLtn2OLr";
 import { logout } from "../api/users";
 
 const SendPage = () => {
-  const [searchInputText, setSearchInputText] = useState("");
+  const [searchInputText, setSearchInputText] = useState<string>("");
   const messageTextAreaRef = useRef<HTMLTextAreaElement>(null);
-  const [isFocused, setIsFocused] = useState(false);
+  const [text, setText] = useState<string>("");
+  const [textLength, setTextLength] = useState<number>(0);
+  const [isFocused, setIsFocused] = useState<boolean>(false);
   const [file, setFile] = useState<File | null>(null);
   const navigate = useNavigate();
   const maxLength = 42;
 
-  const handleInput = () => {
-    if (!messageTextAreaRef.current) return;
-    messageTextAreaRef.current.style.height = "auto";
-    messageTextAreaRef.current.style.height = `${messageTextAreaRef.current.scrollHeight}px`;
+  const handleInputChanged = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    // 글자 폭에 따른 자동 길이 조절
+    const currentValue = messageTextAreaRef.current;
+    if (!currentValue) return;
+    currentValue.style.height = "auto";
+    currentValue.style.height = `${currentValue.scrollHeight}px`;
+
+    // 글자 수 세기 및 제한
+    const inputText = e.target.value.slice(0, maxLength);
+    setText(inputText);
+    setTextLength(inputText.length);
   };
 
   const handleSubmit = async () => {
@@ -35,7 +44,7 @@ const SendPage = () => {
 
     console.log(formData);
     try {
-      const response = await sendMessage(formData);
+      await sendMessage(formData);
       alert("메시지가 성공적으로 전송되었습니다.");
     } catch (error) {
       alert(error);
@@ -45,7 +54,7 @@ const SendPage = () => {
 
   const HandleLogout = async () => {
     try {
-      const response = await logout();
+      await logout();
       alert("로그아웃.");
       navigate("/login");
     } catch (error) {
@@ -76,13 +85,16 @@ const SendPage = () => {
             </FormSubTitleStyled>
             <SendTextFieldStyled
               placeholder="메시지 내용을 입력하세요"
-              onInput={handleInput}
+              value={text}
+              onChange={handleInputChanged}
               ref={messageTextAreaRef}
               $isFocus={isFocused}
               onFocus={() => setIsFocused(true)}
               onBlur={() => setIsFocused(false)}
             />
-            {/* textarea length */}
+            <TextLengthStyled>
+              {textLength} / {maxLength}
+            </TextLengthStyled>
           </FormContainerStyled>
           <FormContainerStyled>
             <FormSubTitleStyled>
@@ -115,14 +127,11 @@ const LogoutWrapperStyled = styled.div`
   width: 100%;
   display: flex;
   justify-content: flex-start;
-  /* background-color: #f5f5f5; */
 
   button {
     width: 100px;
     height: 30px;
-    /* background-color: #9747ff; */
     color: #999999;
-    /* font-weight: 700; */
     font-size: 0.875rem;
     border: 1px solid #ffffff;
     border-radius: 4px;
@@ -186,7 +195,7 @@ const SendTextFieldStyled = styled.textarea<{ $isFocus: boolean }>`
   font-family: "Noto Sans KR", sans-serif;
   font-size: 16px;
   width: 100%;
-  /* min-height: 40px; */
+  min-height: 40px;
   max-height: 200px;
   resize: none;
   background-color: var(--ref-white);
@@ -198,6 +207,14 @@ const SendTextFieldStyled = styled.textarea<{ $isFocus: boolean }>`
   ::placeholder {
     color: var(--ref-gray-400);
   }
+`;
+
+const TextLengthStyled = styled.div`
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 12px;
+  color: var(--ref-gray-600);
+  text-align: right;
+  margin-top: 4;
 `;
 
 const FormButtonContainerStyled = styled.div`
