@@ -13,9 +13,9 @@ export const register = async (data: object) => {
 };
 
 export const searchGroup = async (params: object) => {
-  return service.get(`/users/search/groups`, { params });
+  return service.get(`/users/search/group`, { params });
 };
 
 export const searchName = async (params: object) => {
-  return service.get(`/users/search/names`, { params });
+  return service.get(`/users/search/name`, { params });
 };
