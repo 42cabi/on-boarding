@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import styled from "styled-components";
 
 type LoginInputFieldProps = {
+  type?: string;
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder?: string;
 };
 
 const LoginInputField: React.FC<LoginInputFieldProps> = ({
+  type,
   value,
   onChange,
   placeholder,
@@ -17,6 +19,7 @@ const LoginInputField: React.FC<LoginInputFieldProps> = ({
   return (
     <LoginInputFieldWrapper>
       <LoginInputFieldStyled
+        type={type}
         value={value}
         onChange={onChange}
         placeholder={placeholder}
