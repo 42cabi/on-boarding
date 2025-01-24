@@ -80,7 +80,8 @@ const DeleteButtonStyled = styled.button`
   height: 100%;
   padding-bottom: 3px;
   color: red;
-  font-weight: bold;
+  font-size: 14px;
+  font-weight: 500;
   cursor: pointer;
 `;
 
