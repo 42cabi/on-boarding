@@ -1,15 +1,18 @@
 import styled from "styled-components";
 import { useRef, useState } from "react";
 import SearchInputField from "../components/SearchInputField";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import ImageUploader from "../components/ImageUploader";
 import { sendMessage } from "../api/messages";
+import { al } from "react-router/dist/development/fog-of-war-DLtn2OLr";
+import { logout } from "../api/users";
 
 const SendPage = () => {
   const [searchInputText, setSearchInputText] = useState("");
   const messageTextAreaRef = useRef<HTMLTextAreaElement>(null);
   const [isFocused, setIsFocused] = useState(false);
   const [file, setFile] = useState<File | null>(null);
+  const navigate = useNavigate();
 
   const handleSubmit = async () => {
     if (!searchInputText) return alert("받는이를 입력해주세요.");
@@ -33,8 +36,22 @@ const SendPage = () => {
     }
   };
 
+
+  const HandleLogout = async() => {
+    try {
+      const response = await logout();
+      alert("로그아웃.");
+      navigate("/login");
+    } catch (error) {
+      alert(error);
+    }
+}
+
   return (
     <WrapperStyled>
+      <LogoutWrapperStyled>
+      <button onClick={HandleLogout}>로그아웃</button>
+      </LogoutWrapperStyled>
       <LinkWrapperStyled>
         <Link to="/">덕담 보러 가기</Link>
       </LinkWrapperStyled>
@@ -85,6 +102,25 @@ const WrapperStyled = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 60px 0;
+`;
+
+const LogoutWrapperStyled = styled.div`
+width: 100%;
+display: flex;
+justify-content: flex-start;
+/* background-color: #f5f5f5; */
+
+button {
+  width: 100px;
+  height: 30px;
+  /* background-color: #9747ff; */
+  color: #999999;
+  /* font-weight: 700; */
+  font-size: 0.875rem;
+  border: 1px solid #ffffff;
+  border-radius: 4px;
+  cursor: pointer;
+}
 `;
 
 const LinkWrapperStyled = styled.div`
