@@ -183,8 +183,7 @@ public class MessageService {
 			int category) {
 		verifyValidPageInfo(pageable);
 
-		// pageNumber는 프론트에서 1부터 인덱싱하기 때문에 -1을 해주고 있음
-		PageRequest pageRequest = PageRequest.of(pageable.getPageNumber() - 1,
+		PageRequest pageRequest = PageRequest.of(pageable.getPageNumber(),
 				pageable.getPageSize(),
 				Sort.by("created").descending());
 
@@ -195,7 +194,7 @@ public class MessageService {
 						userName.equals(message.getSenderName()))).toList();
 
 		return new MessageResponsePaginationDto(messageResponseDtoList,
-				messageList.getTotalPages());
+				messageList.getTotalPages(), pageable.getPageNumber());
 	}
 
 	/**
