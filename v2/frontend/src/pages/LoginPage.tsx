@@ -29,8 +29,8 @@ const LoginPage = () => {
       if (response.status === 200) {
         navigate("/list");
       }
-    } catch (error) {
-      // TODO: 에러 처리
+    } catch (error: any) {
+      alert(error.response.data.message);
     }
   };
 

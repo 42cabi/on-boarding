@@ -24,8 +24,8 @@ const RegisterPage = () => {
     try {
       const data = { name: id, password: pw };
       const response = await register(data);
-    } catch (error) {
-      // TODO: 에러 처리
+    } catch (error: any) {
+      alert(error.response.data.message);
     }
   };
   return (
