@@ -44,6 +44,8 @@ const injectProtectedRoute = (routesInfo: RouteInfo[]) => {
   return routesInfo.map((route: RouteInfo) => {
     if (route.accessType === AccessType.PRIVATE) {
       route.element = <PrivateRoute>{route.element}</PrivateRoute>;
+    } else if (route.accessType === AccessType.PUBLIC) {
+      route.element = <PublicRoute>{route.element}</PublicRoute>;
     }
 
     return route;
