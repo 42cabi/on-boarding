@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import UserInputField from "../components/UserInputField";
 import { ReactComponent as NewYearImg } from "../assets/images/newYear.svg";
@@ -8,6 +8,7 @@ import { login } from "../api/users";
 const LoginPage = () => {
   const [id, setId] = useState("");
   const [pw, setPw] = useState("");
+  const navigate = useNavigate();
 
   const handleLogin = async () => {
     const idRegex = /^[A-Za-z0-9]{1,10}$/;
@@ -25,6 +26,9 @@ const LoginPage = () => {
     try {
       const data = { name: id, password: pw };
       const response = await login(data);
+      if (response.status === 200) {
+        navigate("/list");
+      }
     } catch (error) {
       // TODO: 에러 처리
     }
