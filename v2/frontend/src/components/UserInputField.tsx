@@ -3,16 +3,18 @@ import styled from "styled-components";
 
 type LoginInputFieldProps = {
   type?: string;
-  autocomplete?: string;
   value: string;
+  pattern?: string;
+  autocomplete?: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder?: string;
 };
 
 const LoginInputField: React.FC<LoginInputFieldProps> = ({
   type,
-  autocomplete,
   value,
+  pattern,
+  autocomplete,
   onChange,
   placeholder,
 }) => {
@@ -23,6 +25,7 @@ const LoginInputField: React.FC<LoginInputFieldProps> = ({
       <LoginInputFieldStyled
         type={type}
         value={value}
+        pattern={pattern}
         autoComplete={autocomplete}
         onChange={onChange}
         placeholder={placeholder}
