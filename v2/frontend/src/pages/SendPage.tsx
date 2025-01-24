@@ -4,7 +4,6 @@ import SearchInputField from "../components/SearchInputField";
 import { Link, useNavigate } from "react-router";
 import ImageUploader from "../components/ImageUploader";
 import { sendMessage } from "../api/messages";
-import { al } from "react-router/dist/development/fog-of-war-DLtn2OLr";
 import { logout } from "../api/users";
 
 const SendPage = () => {
@@ -46,6 +45,7 @@ const SendPage = () => {
     try {
       await sendMessage(formData);
       alert("메시지가 성공적으로 전송되었습니다.");
+      navigate("/");
     } catch (error) {
       alert(error);
       console.log(error);
