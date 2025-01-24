@@ -1,23 +1,25 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
+import { searchGroup, searchName } from "../api/users";
+import { al } from "react-router/dist/development/fog-of-war-DLtn2OLr";
 
-const mockUsers = [
-  "kristine",
-  "insong",
-  "samin",
-  "jinhokim",
-  "inshin",
-  "minjakim",
-  "minylee",
-  "seushin",
-  "minsikim",
-  "minjkim2",
-];
+// const mockUsers = [
+//   "kristine",
+//   "insong",
+//   "samin",
+//   "jinhokim",
+//   "inshin",
+//   "minjakim",
+//   "minylee",
+//   "seushin",
+//   "minsikim",
+//   "minjkim2",
+// ];
 
-const mockSearch = (searchTerm: string) => {
-  return mockUsers.filter((user) => user.includes(searchTerm));
-};
+// const mockSearch = (searchTerm: string) => {
+//   return mockUsers.filter((user) => user.includes(searchTerm));
+// };
 
 const SearchInputField = ({
   setSearchInputText,
@@ -29,19 +31,25 @@ const SearchInputField = ({
   const [inputValue, setInputValue] = useState("");
 
   useEffect(() => {
-    const debounceTimer = setTimeout(() => {
+    const debounceTimer = setTimeout(async () => {
       // API call
-      // if (inputValue.length) {
-      //   try {
-      //     axios.get("/users/search/name?input=" + inputValue)
-      //     .then((response) =>{
-      //       setSearchResult(response.data);
-      //     })
-      //   } catch (error: any) {
-      //     console.log(error);
-      //   }}
+      if(inputValue == "@everyone"){
+        try {
+          const res = await searchGroup({ input: inputValue });
+          setSearchResult(res.data);
+        } catch (error: any) {
+          alert(error.response.data.message);
+      }}
 
-      if (inputValue.length) setSearchResult(mockSearch(inputValue));
+      if (inputValue.length) {
+        try {
+          const res = await searchName({ input: inputValue });
+          setSearchResult(res.data);
+        } catch (error: any) {
+          alert(error.response.data.message);
+        }}
+
+      // if (inputValue.length) setSearchResult(mockSearch(inputValue));
     }, 1000); // 1초
 
     return () => {
