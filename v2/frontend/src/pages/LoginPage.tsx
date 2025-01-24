@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import UserInputField from "../components/UserInputField";
@@ -9,6 +9,8 @@ const LoginPage = () => {
   const [id, setId] = useState("");
   const [pw, setPw] = useState("");
   const navigate = useNavigate();
+
+  useEffect(() => {});
 
   const handleLogin = async () => {
     const idRegex = /^[A-Za-z0-9]{1,10}$/;
@@ -27,7 +29,7 @@ const LoginPage = () => {
       const data = { name: id, password: pw };
       const response = await login(data);
       if (response.status === 200) {
-        navigate("/list");
+        navigate("/");
       }
     } catch (error: any) {
       alert(error.response.data.message);

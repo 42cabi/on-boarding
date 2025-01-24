@@ -3,10 +3,12 @@ import { ReactComponent as NewYearImg } from "../assets/images/newYear.svg";
 import styled from "styled-components";
 import UserInputField from "../components/UserInputField";
 import { register } from "../api/users";
+import { useNavigate } from "react-router";
 
 const RegisterPage = () => {
   const [id, setId] = useState("");
   const [pw, setPw] = useState("");
+  const navigate = useNavigate();
 
   const handleRegister = async () => {
     const idRegex = /^[A-Za-z0-9]{1,10}$/;
@@ -24,6 +26,9 @@ const RegisterPage = () => {
     try {
       const data = { name: id, password: pw };
       const response = await register(data);
+      if (response.status === 200) {
+        navigate("/login");
+      }
     } catch (error: any) {
       alert(error.response.data.message);
     }

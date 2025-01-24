@@ -4,6 +4,7 @@ import RegisterPage from "./pages/RegisterPage";
 import ListPage from "./pages/ListPage";
 import { ReactElement } from "react";
 import PrivateRoute from "./components/PrivateRoute";
+import PublicRoute from "./components/PublicRoute";
 
 enum AccessType {
   PUBLIC,
@@ -19,6 +20,11 @@ export interface RouteInfo {
 const routesInfo: RouteInfo[] = [
   {
     path: "/",
+    accessType: AccessType.PRIVATE,
+    element: <ListPage />,
+  },
+  {
+    path: "/login",
     accessType: AccessType.PUBLIC,
     element: <LoginPage />,
   },
@@ -28,13 +34,8 @@ const routesInfo: RouteInfo[] = [
     element: <RegisterPage />,
   },
   {
-    path: "/list",
-    accessType: AccessType.PUBLIC, // PRIVATE
-    element: <ListPage />,
-  },
-  {
     path: "/send",
-    accessType: AccessType.PUBLIC, // PRIVATE
+    accessType: AccessType.PRIVATE,
     element: <SendPage />,
   },
 ];
