@@ -3,10 +3,32 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import UserInputField from "../components/UserInputField";
 import { ReactComponent as NewYearImg } from "../assets/images/newYear.svg";
+import { login } from "../api/users";
 
 const LoginPage = () => {
   const [id, setId] = useState("");
   const [pw, setPw] = useState("");
+
+  const handleLogin = async () => {
+    const idRegex = /^[A-Za-z0-9]{1,10}$/;
+    const pwRegex = /^[A-Za-z0-9]+$/;
+    const fourInARowRegex = /(.)\1{3}/;
+
+    const isValid =
+      idRegex.test(id) && pwRegex.test(pw) && !fourInARowRegex.test(pw);
+
+    if (!isValid) {
+      alert("로그인 실패");
+      return;
+    }
+
+    try {
+      const data = { name: id, password: pw };
+      const response = await login(data);
+    } catch (error) {
+      // TODO: 에러 처리
+    }
+  };
 
   return (
     <LoginPageStyled id="LoginPage">
@@ -23,7 +45,7 @@ const LoginPage = () => {
         placeholder="pw"
       />
       <LinkStyled to="/register">회원가입</LinkStyled>
-      <LoginButtonStyled>로그인</LoginButtonStyled>
+      <LoginButtonStyled onClick={handleLogin}>로그인</LoginButtonStyled>
     </LoginPageStyled>
   );
 };
