@@ -2,7 +2,6 @@ import styled from "styled-components";
 import { useRef, useState } from "react";
 import SearchInputField from "../components/SearchInputField";
 import { Link } from "react-router";
-import axios from "axios";
 import ImageUploader from "../components/ImageUploader";
 import { sendMessage } from "../api/messages";
 
@@ -13,6 +12,9 @@ const SendPage = () => {
   const [file, setFile] = useState<File | null>(null);
 
   const handleSubmit = async () => {
+    if (!searchInputText) return alert("받는이를 입력해주세요.");
+    if (!messageTextAreaRef.current?.value)
+      return alert("메시지 내용을 입력해주세요.");
     const formData = new FormData();
 
     formData.append("receiverName", searchInputText);
@@ -21,11 +23,13 @@ const SendPage = () => {
       formData.append("image", file);
     }
 
+      console.log(formData);
     try {
-      const response = await sendMessage({data: formData});
+      const response = await sendMessage(formData );
       alert("메시지가 성공적으로 전송되었습니다.");
     } catch (error) {
       alert(error);
+      console.log(error);
     }
   };
 

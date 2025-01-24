@@ -41,6 +41,7 @@ const SearchInputField = ({
   const handleSearch = async (e: { target: { value: string } }) => {
     const value = e.target.value;
     setInputValue(value);
+    setSearchInputText(value);
   };
 
   const setSearchName = (value: string) => {
