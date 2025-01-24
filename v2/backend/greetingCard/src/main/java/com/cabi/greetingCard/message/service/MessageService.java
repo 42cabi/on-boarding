@@ -1,7 +1,5 @@
 package com.cabi.greetingCard.message.service;
 
-import static com.cabi.greetingCard.user.domain.GroupNames.GROUP_EVERYONE;
-
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.cabi.greetingCard.dto.MessageRequestDto;
@@ -12,8 +10,8 @@ import com.cabi.greetingCard.mapper.MessageMapper;
 import com.cabi.greetingCard.message.domain.Message;
 import com.cabi.greetingCard.message.domain.MessageCategory;
 import com.cabi.greetingCard.message.repository.MessageRepository;
-import com.cabi.greetingCard.user.domain.User;
 import com.cabi.greetingCard.user.repository.UserRepository;
+import com.cabi.greetingCard.user.service.UserService;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -41,6 +39,7 @@ public class MessageService {
 	private final AmazonS3 s3Client;
 	private final UserRepository userRepository;
 	private final MessageMapper messageMapper;
+	private final UserService userService;
 	@Value("${cloud.aws.s3.bucket}")
 	private String bucketName;
 
@@ -72,12 +71,9 @@ public class MessageService {
 	 */
 	@Transactional
 	public void sendMessage(String userName, MessageRequestDto messageData) throws IOException {
-		String imageUrl = saveImage(messageData.getImage());
+		userService.checkAuth(userName);
 
-		if (messageData.getReceiverName().equals(GROUP_EVERYONE)) {
-			sendMessageToAll(messageData, userName, imageUrl);
-			return;
-		}
+		String imageUrl = saveImage(messageData.getImage());
 
 		verifyExistUser(messageData);
 		verifyValidMessageFormat(messageData.getContext());
@@ -94,26 +90,6 @@ public class MessageService {
 		if (userName.equals(messageData.getReceiverName())) {
 			throw ExceptionStatus.SENDER_EQUAL_RECEIVER.asGreetingException();
 		}
-	}
-
-	/**
-	 * 로그인한 유저를 제외한 모두에게 메세지를 보냅니다.
-	 *
-	 * @param messageData
-	 * @param userName
-	 * @param imageUrl
-	 */
-	@Transactional
-	public void sendMessageToAll(MessageRequestDto messageData, String userName, String imageUrl) {
-		verifyValidMessageFormat(messageData.getContext());
-
-		List<User> userList = userRepository.findAll();
-		userList.removeIf(user -> user.getName().equals(userName));
-		List<Message> messageList = userList.stream()
-				.map(user -> Message.of(userName, messageData.getReceiverName(),
-						messageData.getContext(), imageUrl, LocalDateTime.now()))
-				.toList();
-		messageRepository.saveAll(messageList);
 	}
 
 	/**
@@ -253,7 +229,8 @@ public class MessageService {
 	}
 
 	private void verifyExistUser(MessageRequestDto messageData) {
-		if (!userRepository.existsByName(messageData.getReceiverName())) {
+		if (!userRepository.existsByName(messageData.getReceiverName())
+				&& !userService.checkGroupExists(messageData.getReceiverName())) {
 			throw ExceptionStatus.NOT_FOUND_USER.asGreetingException();
 		}
 	}

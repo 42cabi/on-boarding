@@ -37,7 +37,7 @@ public class MessageController {
 	 * @throws IOException
 	 */
 	@PostMapping("")
-	public void sendMessage(@CookieValue(name = "userName") String userName,
+	public void sendMessage(@CookieValue(name = "userName", required = false) String userName,
 			@ModelAttribute MessageRequestDto messageData) throws IOException {
 		messageService.sendMessage(userName, messageData);
 	}

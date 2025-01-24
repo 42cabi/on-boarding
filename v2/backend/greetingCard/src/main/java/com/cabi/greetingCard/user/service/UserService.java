@@ -110,8 +110,13 @@ public class UserService {
 
 		// 쿠키에 유저이름이 있지만 데이터베이스와 일치하지 않는 경우
 		if (!userRepository.existsByName(name)) {
+			System.out.println("다람쥐");
 			throw ExceptionStatus.NOT_FOUND_USER.asGreetingException();
 		}
+	}
+
+	public boolean checkGroupExists(String groupName) {
+		return groupNames.contains(groupName);
 	}
 
 	private void verifyNameIsNumericOrAlphabet(String name) {
