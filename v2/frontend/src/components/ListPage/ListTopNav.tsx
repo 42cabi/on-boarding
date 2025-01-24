@@ -1,11 +1,22 @@
 import { Link } from "react-router";
+import styled from "styled-components";
 
 const ListTopNav = () => {
   return (
-    <nav>
-      <Link to="/send">덕담 보내러 가기</Link>
-    </nav>
+    <>
+      <LinkWrapperStyled>
+        <Link to="/send">덕담 보내러 가기</Link>
+      </LinkWrapperStyled>
+    </>
   );
 };
+
+const LinkWrapperStyled = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  color: #9747ff;
+  font-size: 0.875rem;
+`;
 
 export default ListTopNav;

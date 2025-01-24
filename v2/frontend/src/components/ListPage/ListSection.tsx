@@ -1,0 +1,71 @@
+import { useCallback, useEffect, useState } from "react";
+import { Filter, LIST_SIZE } from "../../constant";
+import Message from "./ListInterfaces";
+import CategoryButtons from "./section/CategoryButtons";
+import MessageList from "./section/MessageList";
+import MoreButtons from "./section/MoreButtons";
+import { getMessages } from "../../api/messages";
+
+const ListSection = () => {
+  const [items, setItems] = useState<Message[]>([]);
+  const [nextPage, setNextPage] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
+  const [category, setCategory] = useState(Filter.TO_EVERYONE);
+  const [isLast, setIsLast] = useState(false);
+
+  const fetchItems = useCallback(async () => {
+    if (isLast || isLoading) return;
+
+    try {
+      setIsLoading(true);
+      const res = await getMessages({
+        page: nextPage,
+        size: LIST_SIZE,
+        category,
+      });
+
+      if (res.data.messages.length === 0) {
+        setIsLast(true);
+        return;
+      }
+
+      setItems((prev) =>
+        nextPage === 0 ? res.data.messages : [...prev, ...res.data.messages]
+      );
+      setNextPage(res.data.currentPage + 1);
+      setIsLast(res.data.currentPage >= res.data.totalLength);
+    } catch (error) {
+      console.error("Failed to fetch messages:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  }, [category, nextPage]);
+
+  const handleChangedCategory = (category: Filter) => {
+    setCategory(category);
+    setNextPage(0);
+    setItems([]);
+    setIsLast(false);
+  };
+
+  useEffect(() => {
+    fetchItems();
+  }, [category]);
+
+  return (
+    <>
+      <CategoryButtons
+        currentCategory={category}
+        handleChangedCategory={handleChangedCategory}
+      />
+      <MessageList items={items} isLoading={isLoading} />
+      <MoreButtons
+        fetchItems={fetchItems}
+        isLoading={isLoading}
+        isLast={isLast}
+      />
+    </>
+  );
+};
+
+export default ListSection;
