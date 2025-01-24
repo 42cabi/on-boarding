@@ -43,25 +43,6 @@ public class MessageService {
 	@Value("${cloud.aws.s3.bucket}")
 	private String bucketName;
 
-	private static void verifyValidMessageFormat(String context) {
-		if (context.isEmpty()
-				|| context.length() > MESSAGE_LENGTH_LIMIT) {
-			throw ExceptionStatus.INVALID_FORMAT_MESSAGE.asGreetingException();
-		}
-	}
-
-	private static void verifyUserAuthorized(String userName, Message message) {
-		if (!message.getSenderName().equals(userName)) {
-			throw ExceptionStatus.UNAUTHORIZED.asGreetingException();
-		}
-	}
-
-	private static void verifyValidPageInfo(Pageable pageable) {
-		if (pageable.getPageNumber() < 0 || pageable.getPageSize() <= 0) {
-			throw ExceptionStatus.INVALID_QUERYSTRING.asGreetingException();
-		}
-	}
-
 	/**
 	 * 메세지 보내기
 	 *
@@ -84,12 +65,6 @@ public class MessageService {
 						imageUrl, LocalDateTime.now());
 
 		messageRepository.save(message);
-	}
-
-	private void verifySenderNotEqualReceiver(String userName, MessageRequestDto messageData) {
-		if (userName.equals(messageData.getReceiverName())) {
-			throw ExceptionStatus.SENDER_EQUAL_RECEIVER.asGreetingException();
-		}
 	}
 
 	/**
@@ -232,6 +207,31 @@ public class MessageService {
 		if (!userRepository.existsByName(messageData.getReceiverName())
 				&& !userService.checkGroupExists(messageData.getReceiverName())) {
 			throw ExceptionStatus.NOT_FOUND_USER.asGreetingException();
+		}
+	}
+
+	private void verifyValidMessageFormat(String context) {
+		if (context.isEmpty()
+				|| context.length() > MESSAGE_LENGTH_LIMIT) {
+			throw ExceptionStatus.INVALID_FORMAT_MESSAGE.asGreetingException();
+		}
+	}
+
+	private void verifyUserAuthorized(String userName, Message message) {
+		if (!message.getSenderName().equals(userName)) {
+			throw ExceptionStatus.UNAUTHORIZED.asGreetingException();
+		}
+	}
+
+	private void verifyValidPageInfo(Pageable pageable) {
+		if (pageable.getPageNumber() < 0 || pageable.getPageSize() <= 0) {
+			throw ExceptionStatus.INVALID_QUERYSTRING.asGreetingException();
+		}
+	}
+
+	private void verifySenderNotEqualReceiver(String userName, MessageRequestDto messageData) {
+		if (userName.equals(messageData.getReceiverName())) {
+			throw ExceptionStatus.SENDER_EQUAL_RECEIVER.asGreetingException();
 		}
 	}
 }
