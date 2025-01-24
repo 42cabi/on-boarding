@@ -4,22 +4,6 @@ import styled from "styled-components";
 import { searchGroup, searchName } from "../api/users";
 import { al } from "react-router/dist/development/fog-of-war-DLtn2OLr";
 
-// const mockUsers = [
-//   "kristine",
-//   "insong",
-//   "samin",
-//   "jinhokim",
-//   "inshin",
-//   "minjakim",
-//   "minylee",
-//   "seushin",
-//   "minsikim",
-//   "minjkim2",
-// ];
-
-// const mockSearch = (searchTerm: string) => {
-//   return mockUsers.filter((user) => user.includes(searchTerm));
-// };
 
 const SearchInputField = ({
   setSearchInputText,
@@ -33,23 +17,27 @@ const SearchInputField = ({
   useEffect(() => {
     const debounceTimer = setTimeout(async () => {
       // API call
-      if(inputValue == "@everyone"){
+
+      if (inputValue == "") return;
+      if (inputValue[0] === "@") {
         try {
           const res = await searchGroup({ input: inputValue });
+          console.log("res : ", res.data);
           setSearchResult(res.data);
         } catch (error: any) {
           alert(error.response.data.message);
-      }}
+        }
+      }
 
       if (inputValue.length) {
         try {
           const res = await searchName({ input: inputValue });
           setSearchResult(res.data);
         } catch (error: any) {
-          alert(error.response.data.message);
-        }}
+          // alert(error.response.data.message);
+        }
+      }
 
-      // if (inputValue.length) setSearchResult(mockSearch(inputValue));
     }, 1000); // 1초
 
     return () => {
