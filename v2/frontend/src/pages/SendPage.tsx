@@ -1,29 +1,50 @@
 import styled from "styled-components";
 import { useRef, useState } from "react";
 import SearchInputField from "../components/SearchInputField";
+import { Link } from "react-router";
+import axios from "axios";
+import ImageUploader from "../components/ImageUploader";
 
 const SendPage = () => {
-  const idSearchInputRef = useRef<HTMLInputElement>(null);
+  const [searchInputText, setSearchInputText] = useState("");
   const messageTextAreaRef = useRef<HTMLTextAreaElement>(null);
   const [isFocused, setIsFocused] = useState(false);
+  const [file, setFile] = useState<File | null>(null);
+
+  const handleSubmit = async () => {
+    const formData = new FormData();
+
+    formData.append("receiverName", searchInputText);
+    formData.append("context", messageTextAreaRef.current?.value || "");
+    if (file) {
+      formData.append("image", file);
+    }
+
+    try {
+      const response = await axios.post("/messages", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      alert("메시지가 성공적으로 전송되었습니다.");
+    } catch (error) {
+      alert(error);
+    }
+  };
 
   return (
     <WrapperStyled>
-      <TitleContainerStyled>알림</TitleContainerStyled>
+      <LinkWrapperStyled>
+        <Link to="/list">덕담 보러 가기</Link>
+      </LinkWrapperStyled>
+      <TitleContainerStyled>덕담 보내기</TitleContainerStyled>
       <ContainerStyled>
-        <FormWappingStyled>
+        <FormWrapperStyled>
           <FormContainerStyled>
             <FormSubTitleStyled>
               받는이 ( Intra ID / @everyone )<span className="red"> *</span>
             </FormSubTitleStyled>
-            <SearchInputField
-              placeHolder="intra ID or @everyone"
-              inputText={idSearchInputRef}
-            />
-            {/* <SlackAlarmSearchBar
-                searchInput={receiverInputRef}
-                renderReceiverInput={renderReceiverInput}
-              /> */}
+            <SearchInputField setSearchInputText={setSearchInputText} />
           </FormContainerStyled>
           <FormContainerStyled>
             <FormSubTitleStyled>
@@ -42,11 +63,12 @@ const SendPage = () => {
             <FormSubTitleStyled>
               사진<span> ( jpg, jpeg, png )</span>
             </FormSubTitleStyled>
+            <ImageUploader setFile={setFile} file={file} />
           </FormContainerStyled>
           <FormButtonContainerStyled>
-            <FormButtonStyled>보내기</FormButtonStyled>
+            <FormButtonStyled onClick={handleSubmit}>보내기</FormButtonStyled>
           </FormButtonContainerStyled>
-        </FormWappingStyled>
+        </FormWrapperStyled>
       </ContainerStyled>
     </WrapperStyled>
   );
@@ -56,13 +78,21 @@ export default SendPage;
 
 const WrapperStyled = styled.div`
   font-family: "Noto Sans KR", sans-serif;
-  /* height: 100%; */
   height: 500px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
   padding: 60px 0;
+`;
+
+const LinkWrapperStyled = styled.div`
+  width: 80%;
+  height: 50px;
+  display: flex;
+  justify-content: flex-end;
+  color: #9747ff;
+  font-size: 0.875rem;
 `;
 
 const TitleContainerStyled = styled.div`
@@ -85,35 +115,7 @@ const ContainerStyled = styled.div`
   margin-bottom: 40px;
 `;
 
-const SubTitleStyled = styled.h2`
-  font-size: 1.25rem;
-  font-weight: 700;
-  margin-bottom: 20px;
-`;
-
-const CapsuleWrappingStyled = styled.div`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
-`;
-
-const CapsuleButtonStyled = styled.span<{
-  channelBtnIsClicked?: boolean;
-  templateBtnIsClicked?: boolean;
-}>`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 8px 20px;
-  background: #f5f5f5;
-  border: 1px solid #ffffff;
-  border-radius: 22px;
-  cursor: pointer;
-`;
-
-const FormWappingStyled = styled.div`
+const FormWrapperStyled = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -152,26 +154,6 @@ const SendTextFieldStyled = styled.textarea<{ $isFocus: boolean }>`
   }
 `;
 
-const FormTextareaStyled = styled.textarea`
-  color: var(--normal-text-color);
-  box-sizing: border-box;
-  width: 100%;
-  min-height: 200px;
-  background-color: #3d3f40;
-  border-radius: 8px;
-  border: 1px solid #ffffff;
-  resize: none;
-  outline: none;
-  :focus {
-    border: 1px solid #9747ff;
-  }
-  text-align: left;
-  padding: 10px;
-  ::placeholder {
-    color: var(--line-color);
-  }
-`;
-
 const FormButtonContainerStyled = styled.div`
   width: 100%;
   display: flex;
@@ -179,9 +161,9 @@ const FormButtonContainerStyled = styled.div`
 `;
 
 const FormButtonStyled = styled.button`
-  width: auto;
-  height: auto;
-  padding: 10px 16px;
+  width: 100px;
+  height: 30px;
+  /* padding: 10px 16px; */
   font-size: 0.875rem;
   background-color: #9747ff;
   color: #ffffff;
@@ -189,7 +171,4 @@ const FormButtonStyled = styled.button`
   border: 1px solid #ffffff;
   border-radius: 4px;
   cursor: pointer;
-  /* :hover {
-    opacity: 0.85;
-  } */
 `;
