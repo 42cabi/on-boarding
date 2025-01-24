@@ -2,11 +2,32 @@ import { useState } from "react";
 import { ReactComponent as NewYearImg } from "../assets/images/newYear.svg";
 import styled from "styled-components";
 import UserInputField from "../components/UserInputField";
+import { register } from "../api/users";
 
 const RegisterPage = () => {
   const [id, setId] = useState("");
   const [pw, setPw] = useState("");
 
+  const handleRegister = async () => {
+    const idRegex = /^[A-Za-z0-9]{1,10}$/;
+    const pwRegex = /^[A-Za-z0-9]+$/;
+    const fourInARowRegex = /(.)\1{3}/;
+
+    const isValid =
+      idRegex.test(id) && pwRegex.test(pw) && !fourInARowRegex.test(pw);
+
+    if (!isValid) {
+      alert("로그인 실패");
+      return;
+    }
+
+    try {
+      const data = { name: id, password: pw };
+      const response = await register(data);
+    } catch (error) {
+      // TODO: 에러 처리
+    }
+  };
   return (
     <RegisterPageStyled id="RegisterPage">
       <NewYearImg />
@@ -22,7 +43,9 @@ const RegisterPage = () => {
         placeholder="pw"
       />
       <RegisterTextStyled>비밀번호는 변경할 수 없습니다</RegisterTextStyled>
-      <RegisterButtonStyled>회원가입</RegisterButtonStyled>
+      <RegisterButtonStyled onClick={handleRegister}>
+        회원가입
+      </RegisterButtonStyled>
     </RegisterPageStyled>
   );
 };
