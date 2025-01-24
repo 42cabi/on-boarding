@@ -1,9 +1,6 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { searchGroup, searchName } from "../api/users";
-import { al } from "react-router/dist/development/fog-of-war-DLtn2OLr";
-
 
 const SearchInputField = ({
   setSearchInputText,
@@ -11,48 +8,39 @@ const SearchInputField = ({
   setSearchInputText: (searchTerm: string) => void;
 }) => {
   const [isFocused, setIsFocused] = useState(false);
-  const [searchResult, setSearchResult] = useState<string[]>([]);
+  const [searchResult, setSearchResult] = useState<{ names: string[] }>({
+    names: [],
+  });
   const [inputValue, setInputValue] = useState("");
 
   useEffect(() => {
     const debounceTimer = setTimeout(async () => {
-      // API call
-
-      if (inputValue == "") return;
-      if (inputValue[0] === "@") {
-        try {
-          const res = await searchGroup({ input: inputValue });
-          console.log("res : ", res.data);
-          setSearchResult(res.data);
-        } catch (error: any) {
-          alert(error.response.data.message);
-        }
+      if (inputValue == "") {
+        setSearchResult({ names: [] });
+        return;
       }
-
-      if (inputValue.length) {
-        try {
+      try {
+        if (inputValue[0] === "@") {
+          const res = await searchGroup({ input: inputValue });
+          setSearchResult(res.data);
+        } else {
           const res = await searchName({ input: inputValue });
           setSearchResult(res.data);
-        } catch (error: any) {
-          // alert(error.response.data.message);
         }
+      } catch (error: any) {
+        alert(error.response.data.message);
+        setSearchResult({ names: [] });
       }
-
-    }, 1000); // 1초
+    }, 500);
 
     return () => {
       clearTimeout(debounceTimer);
     };
   }, [inputValue]);
 
-  const handleSearch = (e: { target: { value: string } }) => {
-    if (e.target.value === "") {
-      setSearchResult([]);
-      setInputValue("");
-      setSearchInputText("");
-    }
-    setInputValue(e.target.value);
-    setSearchInputText(e.target.value);
+  const handleSearch = async (e: { target: { value: string } }) => {
+    const value = e.target.value;
+    setInputValue(value);
   };
 
   const setSearchName = (value: string) => {
@@ -70,14 +58,14 @@ const SearchInputField = ({
           placeholder="intra id / @everyone"
           onChange={handleSearch}
           onFocus={() => setIsFocused(true)}
-          onBlur={() => setIsFocused(false)}
+          onBlur={() => setTimeout(() => setIsFocused(false), 200)}
           $isFocus={isFocused}
         />
         {isFocused && (
           <SearchResultStyled>
-            {searchResult.length > 0 && (
+            {searchResult.names?.length > 0 && (
               <SearchUlStyled>
-                {searchResult.map((result) => (
+                {searchResult.names.map((result) => (
                   <SearchLiStyled
                     key={result}
                     onMouseDown={() => setSearchName(result)}
