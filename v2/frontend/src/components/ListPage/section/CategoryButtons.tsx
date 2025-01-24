@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Filter } from "../../constant";
+import { Filter } from "../../../constant";
 
 const CategoryButtons = ({
   currentCategory,
@@ -9,7 +9,7 @@ const CategoryButtons = ({
   handleChangedCategory: (category: Filter) => void;
 }) => {
   return (
-    <div>
+    <ButtonWrapper>
       <ButtonStyled
         onClick={() => handleChangedCategory(Filter.TO_EVERYONE)}
         $isActived={currentCategory === Filter.TO_EVERYONE}
@@ -28,12 +28,27 @@ const CategoryButtons = ({
       >
         From.me
       </ButtonStyled>
-    </div>
+    </ButtonWrapper>
   );
 };
 
+const ButtonWrapper = styled.div`
+  background-color: #d0d0d0;
+  width: fit-content;
+  height: fit-content;
+  border-radius: 10px;
+  margin: 10px 0;
+`;
+
 const ButtonStyled = styled.button<{ $isActived: boolean }>`
-  background-color: ${(props) => (props.$isActived ? "red" : "blue")};
+  background-color: ${(props) => (props.$isActived ? `#9747FF` : `#d0d0d0`)};
+  width: fit-content;
+  height: 30px;
+  border-radius: 10px;
+  padding: 5px 10px;
+  color: ${(props) => (props.$isActived ? `#ffffff` : `#000000`)};
+  font-size: 14px;
+  font-weight: 600;
 `;
 
 export default CategoryButtons;
