@@ -35,11 +35,13 @@ const LoginPage = () => {
       <NewYearImg />
       <LoginTitleStyled>CABI-Onboarding</LoginTitleStyled>
       <UserInputField
+        type="text"
         value={id}
         onChange={(e) => setId(e.target.value)}
         placeholder="id"
       />
       <UserInputField
+        type="password"
         value={pw}
         onChange={(e) => setPw(e.target.value)}
         placeholder="pw"
