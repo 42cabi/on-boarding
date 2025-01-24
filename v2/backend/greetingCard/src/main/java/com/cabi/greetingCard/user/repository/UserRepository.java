@@ -1,6 +1,8 @@
 package com.cabi.greetingCard.user.repository;
 
 import com.cabi.greetingCard.user.domain.User;
+import java.util.List;
+import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -10,4 +12,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 
+	boolean existsByName(String name);
+
+	Optional<User> findByName(String name);
+
+	List<User> findAllByNameStartingWithOrderByName(String input);
 }

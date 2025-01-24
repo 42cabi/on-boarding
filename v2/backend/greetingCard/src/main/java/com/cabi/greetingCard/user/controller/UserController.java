@@ -1,9 +1,13 @@
 package com.cabi.greetingCard.user.controller;
 
+import com.cabi.greetingCard.dto.GroupSearchDto;
 import com.cabi.greetingCard.dto.UserInfoDto;
 import com.cabi.greetingCard.dto.UserSearchDto;
 import com.cabi.greetingCard.user.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseCookie;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/주체가누구지..")
+@RequestMapping("/users")
 public class UserController {
 
 	private final UserService userService;
@@ -29,15 +33,41 @@ public class UserController {
 	/**
 	 * PostMapping, GetMapping이 머지??
 	 */
-	@PostMapping("/test1")
+	@PostMapping("/register")
 	public void registerUser(@RequestBody UserInfoDto userInfoDto) {
 		userService.registerUser(userInfoDto.getName(), userInfoDto.getPassword());
 	}
 
-	@GetMapping("/test2")
-	public UserSearchDto searchUser(@RequestParam(name = "name") String name,
+	/**
+	 * input값으로 시작하는 유저들의 목록을 반환합니다.
+	 *
+	 * @param input
+	 * @param userName
+	 * @return
+	 */
+	@GetMapping("/search/name")
+	public ResponseEntity<?> searchUser(@RequestParam(name = "input") String input,
 			@CookieValue(name = "userName") String userName) {
-		return userService.searchUserByName(name);
+
+		UserSearchDto users = userService.searchUserByName(input, userName);
+
+		return ResponseEntity.ok()
+				.body(users);
+	}
+
+	/**
+	 * input값으로 시작하는 그룹들의 목록을 반환합니다.
+	 *
+	 * @param input
+	 * @return
+	 */
+	@GetMapping("/search/group")
+	public ResponseEntity<?> searchGroup(@RequestParam(name = "input") String input) {
+
+		GroupSearchDto groups = userService.searchGroupByName(input);
+
+		return ResponseEntity.ok()
+				.body(groups);
 	}
 
 	/**
@@ -52,8 +82,28 @@ public class UserController {
 	 * @param userInfoDto
 	 * @return
 	 */
-	@PostMapping("/test3")
-	public void login(@RequestBody UserInfoDto userInfoDto) {
-		userService.login(userInfoDto.getName(), userInfoDto.getPassword());
+	@PostMapping("/login")
+	public ResponseEntity<?> login(@RequestBody UserInfoDto userInfoDto) {
+		ResponseCookie cookie = userService.login(userInfoDto.getName(), userInfoDto.getPassword());
+
+		HttpHeaders headers = new HttpHeaders();
+		headers.add(HttpHeaders.SET_COOKIE, cookie.toString());
+
+		return ResponseEntity.ok()
+				.headers(headers)
+				.build();
 	}
+
+	/**
+	 * 요청 헤더에 있는 쿠키를 확인하고 유효한 유저인지 확인합니다.
+	 */
+	@GetMapping("/auth")
+	public ResponseEntity<?> checkAuth(
+			@CookieValue(value = "userName", required = false) String name) {
+		userService.checkAuth(name);
+
+		return ResponseEntity.ok().build();
+	}
+
+
 }

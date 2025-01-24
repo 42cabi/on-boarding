@@ -1,18 +1,38 @@
+#spring:
+#  datasource:
+#    driver-class-name: org.mariadb.jdbc.Driver
+#    url: ${DB_URL}
+#    username: ${DB_USERNAME}
+#    password: ${DB_PASSWORD}
+#  jpa:
+#    hibernate:
+#      ddl-auto: update
+#  servlet:
+#    multipart:
+#      max-file-size: 30MB
+#      max-request-size: 30MB
+#  config:
+#    import: application.properties
+
 spring:
   datasource:
-    driver-class-name: org.mariadb.jdbc.Driver
-    url: ${DB_URL}
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:tcp://localhost/~/onboarding
+    username: root
+    password: 1234
+
   jpa:
     hibernate:
       ddl-auto: update
-  servlet:
-    multipart:
-      max-file-size: 30MB
-      max-request-size: 30MB
-  config:
-    import: optional:file:.env[.properties]
+    properties:
+      hibernate:
+        show_sql: true #콘솔에 로그가 나옴
+        format_sql: true #이쁘게 해줌
+  data:
+    web:
+      pageable:
+        default-page-size: 5
+
 
 cloud:
   aws:
@@ -31,3 +51,7 @@ logging:
   level:
     root: INFO
     org.springframework: INFO
+
+server:
+  servlet:
+    context-path: /api
