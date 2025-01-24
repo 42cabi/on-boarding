@@ -38,12 +38,14 @@ const LoginPage = () => {
         <UserInputField
           type="text"
           value={id}
+          autocomplete="username"
           onChange={(e) => setId(e.target.value)}
           placeholder="id"
         />
         <UserInputField
-          type="current-password"
+          type="password"
           value={pw}
+          autocomplete="current-password"
           onChange={(e) => setPw(e.target.value)}
           placeholder="pw"
         />

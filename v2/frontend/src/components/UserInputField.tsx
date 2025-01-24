@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 type LoginInputFieldProps = {
   type?: string;
+  autocomplete?: string;
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder?: string;
@@ -10,6 +11,7 @@ type LoginInputFieldProps = {
 
 const LoginInputField: React.FC<LoginInputFieldProps> = ({
   type,
+  autocomplete,
   value,
   onChange,
   placeholder,
@@ -21,6 +23,7 @@ const LoginInputField: React.FC<LoginInputFieldProps> = ({
       <LoginInputFieldStyled
         type={type}
         value={value}
+        autoComplete={autocomplete}
         onChange={onChange}
         placeholder={placeholder}
         $isFocus={isFocused}
