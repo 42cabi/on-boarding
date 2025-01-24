@@ -19,3 +19,10 @@ export const searchGroup = async (params: object) => {
 export const searchName = async (params: object) => {
   return service.get(`/users/search/name`, { params });
 };
+
+
+// 벡엔드에서 구현 필요
+//localStorage.clear();
+export const logout = async () => {
+  return service.get("/users/logout");
+}
