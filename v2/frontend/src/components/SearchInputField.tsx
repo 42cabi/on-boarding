@@ -91,12 +91,14 @@ const SearchWrapperStyled = styled.div`
 const SearchInputFieldStyled = styled.input<{ $isFocus: boolean }>`
   width: 100%;
   height: 40px;
-  background-color: #ffffff;
+  background-color: var(--ref-white);
   border-radius: 8px;
   text-align: left;
   padding: 10px;
   border-radius: 8px;
-  border: 2px solid ${({ $isFocus }) => ($isFocus ? "#9747ff" : "#ffffff")};
+  border: 2px solid
+    ${({ $isFocus }) =>
+      $isFocus ? "var(--ref-purple-500)" : "var(--ref-white)"};
   text-align: left;
 `;
 
@@ -105,7 +107,7 @@ const SearchResultStyled = styled.div`
   position: absolute;
   z-index: 1000;
   border-radius: 8px;
-  background-color: #ffffff;
+  background-color: var(--ref-white);
 `;
 
 const SearchUlStyled = styled.ul`
@@ -123,8 +125,8 @@ const SearchLiStyled = styled.li`
   border-radius: 8px;
   cursor: pointer;
   &:hover {
-    background-color: #9747ff;
-    color: #ffffff;
+    background-color: var(--ref-purple-500);
+    color: var(--ref-white);
   }
 `;
 

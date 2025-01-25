@@ -15,7 +15,7 @@ const LinkWrapperStyled = styled.div`
   width: 100%;
   display: flex;
   justify-content: flex-end;
-  color: #9747ff;
+  color: var(--ref-purple-500);
   font-size: 0.875rem;
 `;
 

@@ -61,7 +61,7 @@ const RegisterPageStyled = styled.div`
   align-items: center;
   width: 100%;
   height: 100vh;
-  background-color: #f9f9f9;
+  background-color: var(--ref-gray-100);
 `;
 
 const RegisterTitleStyled = styled.div`
@@ -74,7 +74,7 @@ const RegisterTitleStyled = styled.div`
 
 const RegisterTextStyled = styled.div`
   font-size: 1rem;
-  color: #858486;
+  color: var(--ref-gray-500);
   line-height: 2rem;
   margin-top: 1rem;
 `;
@@ -83,8 +83,8 @@ const RegisterButtonStyled = styled.button`
   width: 350px;
   height: 54px;
   padding: 0.8rem 1rem;
-  background-color: #9747ff;
-  color: #ffffff;
+  background-color: var(--ref-purple-500);
+  color: var(--ref-white);
   font-size: 1rem;
   border: none;
   border-radius: 4px;

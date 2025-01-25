@@ -62,7 +62,7 @@ const LoginPageStyled = styled.div`
   align-items: center;
   width: 100%;
   height: 100vh;
-  background-color: #f9f9f9;
+  background-color: var(--ref-gray-100);
 `;
 
 const LoginTitleStyled = styled.div`
@@ -75,7 +75,7 @@ const LoginTitleStyled = styled.div`
 
 const LinkStyled = styled(Link)`
   font-size: 1rem;
-  color: #9747ff;
+  color: var(--ref-purple-500);
   line-height: 2rem;
   margin-top: 1rem;
 `;
@@ -84,8 +84,8 @@ const LoginButtonStyled = styled.button`
   width: 350px;
   height: 54px;
   padding: 0.8rem 1rem;
-  background-color: #9747ff;
-  color: #ffffff;
+  background-color: var(--ref-purple-500);
+  color: var(--ref-white);
   font-size: 1rem;
   border: none;
   border-radius: 4px;

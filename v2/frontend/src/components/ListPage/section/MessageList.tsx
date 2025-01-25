@@ -52,7 +52,7 @@ const MessageBoxStyled = styled.div`
 const EmptyState = styled.div`
   text-align: center;
   padding: 2rem;
-  color: #666;
+  color: var(--ref-gray-600);
 `;
 
 const ModalOverlay = styled.div`
@@ -61,7 +61,7 @@ const ModalOverlay = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.7);
+  background: var(--ref-black);
   display: flex;
   align-items: center;
   justify-content: center;

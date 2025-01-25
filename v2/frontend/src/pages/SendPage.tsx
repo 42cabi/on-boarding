@@ -131,9 +131,9 @@ const LogoutWrapperStyled = styled.div`
   button {
     width: 100px;
     height: 30px;
-    color: #999999;
+    color: var(--ref-gray-500);
     font-size: 0.875rem;
-    border: 1px solid #ffffff;
+    border: 1px solid var(--ref-white);
     border-radius: 4px;
     cursor: pointer;
   }
@@ -144,7 +144,7 @@ const LinkWrapperStyled = styled.div`
   height: 50px;
   display: flex;
   justify-content: flex-end;
-  color: #9747ff;
+  color: var(--ref-purple-500);
   font-size: 0.875rem;
 `;
 
@@ -173,7 +173,7 @@ const FormWrapperStyled = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  background-color: #f5f5f5;
+  background-color: var(--ref-gray-100);
   border-radius: 10px;
   padding: 30px 20px;
   gap: 20px;
@@ -184,10 +184,10 @@ const FormContainerStyled = styled.div`
 `;
 const FormSubTitleStyled = styled.h3`
   font-size: 0.875rem;
-  color: #7b7b7b;
+  color: var(--ref-gray-500);
   margin-bottom: 10px;
   .red {
-    color: #ff4e4e;
+    color: var(--ref-red-200);
   }
 `;
 
@@ -227,10 +227,10 @@ const FormButtonStyled = styled.button`
   width: 100px;
   height: 30px;
   font-size: 0.875rem;
-  background-color: #9747ff;
-  color: #ffffff;
+  background-color: var(--ref-purple-500);
+  color: var(--ref-white);
   font-weight: 700;
-  border: 1px solid #ffffff;
+  border: 1px solid var(--ref-white);
   border-radius: 4px;
   cursor: pointer;
 `;

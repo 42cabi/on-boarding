@@ -43,7 +43,7 @@ const MessageBoxStyled = styled.div`
   display: flex;
   align-items: center;
   padding: 1rem;
-  border: 1px solid #ddd;
+  border: 1px solid var(--ref-gray-300);
   border-radius: 28px;
   margin-bottom: 1rem;
 `;
@@ -57,7 +57,7 @@ const ImgStyled = styled.img`
 
 const SenderReceiverStyled = styled.div`
   width: 100%;
-  color: #666666;
+  color: var(--ref-gray-500);
   font-size: 14px;
 `;
 

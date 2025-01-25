@@ -33,7 +33,7 @@ const CategoryButtons = ({
 };
 
 const ButtonWrapper = styled.div`
-  background-color: #d0d0d0;
+  background-color: var(--ref-gray-300);
   width: fit-content;
   height: fit-content;
   border-radius: 10px;
@@ -41,12 +41,14 @@ const ButtonWrapper = styled.div`
 `;
 
 const ButtonStyled = styled.button<{ $isActived: boolean }>`
-  background-color: ${(props) => (props.$isActived ? `#9747FF` : `#d0d0d0`)};
+  background-color: ${(props) =>
+    props.$isActived ? `var(--ref-purple-500)` : `var(--ref-gray-300)`};
   width: fit-content;
   height: 30px;
   border-radius: 10px;
   padding: 5px 10px;
-  color: ${(props) => (props.$isActived ? `#ffffff` : `#000000`)};
+  color: ${(props) =>
+    props.$isActived ? `var(--ref-white)` : `var(--ref-black)`};
   font-size: 14px;
   font-weight: 600;
 `;

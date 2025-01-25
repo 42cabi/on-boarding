@@ -51,13 +51,15 @@ const LoginInputFieldStyled = styled.input<{ $isFocus: boolean }>`
   padding: 0.5rem 0.8rem;
   text-align: left;
   font-size: 1rem;
-  border: 2px solid ${({ $isFocus }) => ($isFocus ? "#9747ff" : "#D7D7D7")};
+  border: 2px solid
+    ${({ $isFocus }) =>
+      $isFocus ? "var(--ref-purple-500)" : "var(--ref-gray-300)"};
   border-radius: 4px;
   outline: none;
   transition: border-color 0.3s;
 
   &::placeholder {
-    color: #858486;
+    color: var(--ref-gray-500);
   }
 `;
 
