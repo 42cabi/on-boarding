@@ -44,6 +44,11 @@ const MessageBox = ({
     setInputValue(e.target.value);
   };
 
+  const handleCancel = () => {
+    setInputValue(context);
+    setIsEditing(false);
+  };
+
   return (
     <>
       <MessageBoxStyled>
@@ -75,14 +80,7 @@ const MessageBox = ({
                 {isEditing ? "완료" : "수정"}
               </ButtonStyled>
               {isEditing && (
-                <ButtonStyled
-                  onClick={() => {
-                    setInputValue(context);
-                    setIsEditing(false);
-                  }}
-                >
-                  취소
-                </ButtonStyled>
+                <ButtonStyled onClick={handleCancel}>취소</ButtonStyled>
               )}
             </ButtonGroupStyled>
           </ContextWrapperStyled>
