@@ -25,7 +25,7 @@ const PublicRoute = ({
     };
 
     checkAuthStatus();
-  }, []);
+  }, [location.pathname]);
 
   if (isLoading) {
     return <div>Loading...</div>;

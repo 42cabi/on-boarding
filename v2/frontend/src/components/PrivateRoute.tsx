@@ -25,7 +25,7 @@ const PrivateRoute = ({
     };
 
     checkAuthStatus();
-  }, []);
+  }, [location.pathname]);
 
   if (isLoading) {
     return <div>Loading...</div>;
