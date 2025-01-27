@@ -21,7 +21,8 @@ const MessageList = ({ items, isLoading }: MessageListProps) => {
       <MessageBoxStyled>
         {items.map((item) => (
           <MessageBox
-            key={`message_box_${item.messageId}`}
+            key={`message_box_${item.id}`}
+            messageId={item.id}
             senderName={item.senderName}
             receiverName={item.receiverName}
             context={item.context}

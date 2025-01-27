@@ -1,5 +1,5 @@
 interface Message {
-  messageId: string;
+  id: number;
   senderName: string;
   receiverName: string;
   context: string;
