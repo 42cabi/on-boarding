@@ -8,28 +8,28 @@ const SearchInputField = ({
   setSearchInputText: (searchTerm: string) => void;
 }) => {
   const [isFocused, setIsFocused] = useState(false);
-  const [searchResult, setSearchResult] = useState<{ names: string[] }>({
-    names: [],
-  });
+  const [searchList, setSearchList] = useState<string[]>([]);
   const [inputValue, setInputValue] = useState("");
 
   useEffect(() => {
     const debounceTimer = setTimeout(async () => {
       if (inputValue == "") {
-        setSearchResult({ names: [] });
+        setSearchList([]);
         return;
       }
       try {
         if (inputValue[0] === "@") {
-          const res = await searchGroup({ input: "everyone" });
-          setSearchResult(res.data);
+          const searchTerm = inputValue.slice(1).trim();
+          const res = await searchGroup({ input: searchTerm });
+          setSearchList(res.data.groupNames);
         } else {
           const res = await searchName({ input: inputValue });
-          setSearchResult(res.data);
+          console.log(res.data.names);
+          setSearchList(res.data.names);
         }
       } catch (error: any) {
         alert(error.response.data.message);
-        setSearchResult({ names: [] });
+        setSearchList([]);
       }
     }, 500);
 
@@ -64,9 +64,9 @@ const SearchInputField = ({
         />
         {isFocused && (
           <SearchResultStyled>
-            {searchResult.names?.length > 0 && (
+            {searchList.length > 0 && (
               <SearchUlStyled>
-                {searchResult.names.map((result) => (
+                {searchList.map((result) => (
                   <SearchLiStyled
                     key={result}
                     onMouseDown={() => setSearchName(result)}
