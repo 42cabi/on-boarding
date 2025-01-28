@@ -21,7 +21,7 @@ const SearchInputField = ({
       }
       try {
         if (inputValue[0] === "@") {
-          const res = await searchGroup({ input: inputValue });
+          const res = await searchGroup({ input: "everyone" });
           setSearchResult(res.data);
         } else {
           const res = await searchName({ input: inputValue });
