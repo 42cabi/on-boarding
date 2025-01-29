@@ -1,13 +1,15 @@
 import styled from "styled-components";
 import { Filter } from "../../../constant";
 
+interface FilterButtonProps {
+  currentCategory: Filter;
+  handleChangedCategory: (category: Filter) => void;
+}
+
 const CategoryButtons = ({
   currentCategory,
   handleChangedCategory,
-}: {
-  currentCategory: Filter;
-  handleChangedCategory: (category: Filter) => void;
-}) => {
+}: FilterButtonProps) => {
   return (
     <ButtonWrapper>
       <ButtonStyled
