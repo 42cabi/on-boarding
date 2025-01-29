@@ -2,6 +2,8 @@ import { useState } from "react";
 import styled from "styled-components";
 import Message from "../ListInterfaces";
 import MessageBox from "./MessageBox";
+import MessageBoxEditable from "./MessageBoxEditable";
+import { ReactComponent as CloseIcon } from "../../../assets/images/close-icon.svg";
 
 interface MessageListProps {
   items: Message[];
@@ -19,18 +21,23 @@ const MessageList = ({ items, isLoading }: MessageListProps) => {
   return (
     <>
       <MessageBoxStyled>
-        {items.map((item) => (
-          <MessageBox
-            key={`message_box_${item.id}`}
-            messageId={item.id}
-            senderName={item.senderName}
-            receiverName={item.receiverName}
-            context={item.context}
-            imageUrl={item.imageUrl}
-            setShowModal={setShowModal}
-            setModalImgUrl={setModalImgUrl}
-          />
-        ))}
+        {items.map((item) =>
+          item.mine ? (
+            <MessageBoxEditable
+              key={`message_box_${item.id}`}
+              item={item}
+              setShowModal={setShowModal}
+              setModalImgUrl={setModalImgUrl}
+            />
+          ) : (
+            <MessageBox
+              key={`message_box_${item.id}`}
+              item={item}
+              setShowModal={setShowModal}
+              setModalImgUrl={setModalImgUrl}
+            />
+          )
+        )}
       </MessageBoxStyled>
 
       {showModal && (
@@ -40,6 +47,9 @@ const MessageList = ({ items, isLoading }: MessageListProps) => {
             alt="확대된 이미지"
             onClick={(e) => e.stopPropagation()}
           />
+          <CloseButton onClick={() => setShowModal(false)}>
+            <CloseIcon />
+          </CloseButton>
         </ModalOverlay>
       )}
     </>
@@ -74,6 +84,21 @@ const ModalImage = styled.img`
   max-height: 90%;
   border-radius: 8px;
   object-fit: contain;
+`;
+
+const CloseButton = styled.button`
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 `;
 
 export default MessageList;
