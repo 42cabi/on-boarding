@@ -5,6 +5,8 @@ import ListPage from "./pages/ListPage";
 import { ReactElement } from "react";
 import PrivateRoute from "./components/PrivateRoute";
 import PublicRoute from "./components/PublicRoute";
+import { getMessages } from "./api/messages";
+import { Filter, LIST_SIZE } from "./constant";
 
 enum AccessType {
   PUBLIC,
@@ -15,6 +17,7 @@ export interface RouteInfo {
   path: string;
   accessType: AccessType;
   element: ReactElement;
+  loader?: () => Promise<any>;
 }
 
 const routesInfo: RouteInfo[] = [
@@ -22,6 +25,19 @@ const routesInfo: RouteInfo[] = [
     path: "/",
     accessType: AccessType.PRIVATE,
     element: <ListPage />,
+    loader: async () => {
+      try {
+        const res = await getMessages({
+          page: 0,
+          size: LIST_SIZE,
+          category: Filter.TO_EVERYONE,
+        });
+        return res;
+      } catch (error) {
+        console.error("Failed to fetch messages:", error);
+        return null;
+      }
+    },
   },
   {
     path: "/login",
