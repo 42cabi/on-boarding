@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class KongController {
 
-	private KongService kongService;
+	private final KongService kongService;
 
 	@GetMapping("/reaction")
 	public String reaction() {
