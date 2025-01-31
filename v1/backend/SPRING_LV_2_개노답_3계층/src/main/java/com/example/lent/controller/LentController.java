@@ -12,6 +12,6 @@ public class LentController {
 	private final LentService lentService;
 
 	public LentResponse lent(LentRequest request) {
-		return null;
+		return lentService.lent(request);
 	}
 }
