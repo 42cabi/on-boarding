@@ -20,13 +20,6 @@ public class LentServiceImpl implements LentService {
 	private final CabinetRepository cabinetRepository;
 	private final UserRepository userRepository;
 
-	/*
-	public class LentRequest {
-		private Long cabinetId;
-		private Long userId;
-		private LocalDateTime createdAt;
-	}
-	*/
 	@Override
 	public LentResponse lent(LentRequest request) {
 		if (isBannedUser(request.getUserId())) {
