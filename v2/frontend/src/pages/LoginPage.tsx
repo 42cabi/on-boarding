@@ -12,9 +12,16 @@ const LoginPage = () => {
   const idRegex = /^[A-Za-z0-9]{1,10}$/;
   const pwRegex = /^(?!.*(.)\1{3})[A-Za-z0-9]+$/;
 
-  useEffect(() => {});
-
   const handleLogin = async () => {
+    if (!idRegex.test(id)) {
+      alert("형식에 맞지 않는 아이디입니다.");
+      return;
+    }
+    if (!pwRegex.test(pw)) {
+      alert("형식에 맞지 않는 비밀번호입니다.");
+      return;
+    }
+
     try {
       const data = { name: id, password: pw };
       const response = await login(data);
