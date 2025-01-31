@@ -1,14 +1,12 @@
 package com.example.lent.service;
 
 import com.example.lent.domain.Cabinet;
-import com.example.lent.domain.CabinetStatus;
 import com.example.lent.domain.LentHistory;
 import com.example.lent.dto.LentRequest;
 import com.example.lent.dto.LentResponse;
 import com.example.lent.repository.LentHistoryRepository;
 import com.example.lent.testutil.CabinetRepository;
 import com.example.lent.testutil.UserRepository;
-import java.time.LocalDateTime;
 import lombok.RequiredArgsConstructor;
 
 /*서비스는 뭘까요?*/
