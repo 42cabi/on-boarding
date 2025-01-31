@@ -24,7 +24,7 @@ public class LentHistoryRepositoryImpl implements LentHistoryRepository {
 
 	@Override
 	public List<LentHistory> findAll() {
-		return null;
+		return List.copyOf(TABLE);
 	}
 
 }
