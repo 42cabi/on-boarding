@@ -23,4 +23,8 @@ public class LentHistory {
 		this.createdAt = createdAt;
 		this.expiredAt = expiredAt;
 	}
+
+	public void id(Long lentHistoryId) {
+		this.lentHistoryId = lentHistoryId;
+	}
 }

@@ -18,4 +18,16 @@ public class Cabinet {
 	public void id(Long id) {
 		this.cabinetId = id;
 	}
+
+	public boolean isAvailable() {
+		return this.cabinetStatus == CabinetStatus.AVAILABLE;
+	}
+
+	public void lent() {
+		this.cabinetStatus = CabinetStatus.FULL;
+	}
+
+	public void returned() {
+		this.cabinetStatus = CabinetStatus.AVAILABLE;
+	}
 }

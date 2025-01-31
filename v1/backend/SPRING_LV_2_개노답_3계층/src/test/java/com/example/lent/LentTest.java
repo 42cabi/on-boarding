@@ -1,11 +1,16 @@
 package com.example.lent;
 
+import com.example.lent.controller.LentController;
 import com.example.lent.domain.Cabinet;
 import com.example.lent.domain.CabinetStatus;
 import com.example.lent.domain.LentHistory;
 import com.example.lent.domain.User;
 import com.example.lent.dto.LentRequest;
 import com.example.lent.dto.LentResponse;
+import com.example.lent.repository.LentHistoryRepository;
+import com.example.lent.repository.LentHistoryRepositoryImpl;
+import com.example.lent.service.LentService;
+import com.example.lent.service.LentServiceImpl;
 import com.example.lent.testutil.CabinetRepository;
 import com.example.lent.testutil.UserRepository;
 import org.junit.jupiter.api.BeforeEach;

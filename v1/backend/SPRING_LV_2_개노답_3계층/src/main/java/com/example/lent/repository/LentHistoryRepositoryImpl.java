@@ -1,4 +1,4 @@
-package com.example.lent;
+package com.example.lent.repository;
 
 import com.example.lent.domain.LentHistory;
 
@@ -13,11 +13,18 @@ public class LentHistoryRepositoryImpl implements LentHistoryRepository {
 
 	@Override
 	public LentHistory save(LentHistory lentHistory) {
-		return null;
+		if (lentHistory.getLentHistoryId() != null) {
+			TABLE.removeIf(e -> e.getLentHistoryId().equals(lentHistory.getLentHistoryId()));
+		} else {
+			lentHistory.id(ID_SEQUENCE++);
+		}
+		TABLE.add(lentHistory);
+		return lentHistory;
 	}
 
 	@Override
 	public List<LentHistory> findAll() {
-		return null;
+		return List.copyOf(TABLE);
 	}
+
 }
