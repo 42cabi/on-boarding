@@ -4,7 +4,6 @@ import SearchInputField from "../components/SearchInputField";
 import { Link, useNavigate } from "react-router";
 import ImageUploader from "../components/ImageUploader";
 import { sendMessage } from "../api/messages";
-import { logout } from "../api/users";
 
 const SendPage = () => {
   const [searchInputText, setSearchInputText] = useState<string>("");
@@ -52,21 +51,8 @@ const SendPage = () => {
     }
   };
 
-  const HandleLogout = async () => {
-    try {
-      await logout();
-      alert("로그아웃.");
-      navigate("/login");
-    } catch (error) {
-      alert(error);
-    }
-  };
-
   return (
     <WrapperStyled>
-      <LogoutWrapperStyled>
-        <button onClick={HandleLogout}>로그아웃</button>
-      </LogoutWrapperStyled>
       <LinkWrapperStyled>
         <Link to="/">덕담 보러 가기</Link>
       </LinkWrapperStyled>
@@ -121,22 +107,6 @@ const WrapperStyled = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 60px 0;
-`;
-
-const LogoutWrapperStyled = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: flex-start;
-
-  button {
-    width: 100px;
-    height: 30px;
-    color: var(--ref-gray-500);
-    font-size: 0.875rem;
-    border: 1px solid var(--ref-white);
-    border-radius: 4px;
-    cursor: pointer;
-  }
 `;
 
 const LinkWrapperStyled = styled.div`
