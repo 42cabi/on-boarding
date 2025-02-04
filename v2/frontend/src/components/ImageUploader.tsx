@@ -68,9 +68,9 @@ const FileInputStyled = styled.input`
   &::file-selector-button {
     width: 70px;
     height: 25px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--ref-gray-400);
     border-radius: 4px;
-    background: white;
+    background: var(--ref-white);
     cursor: pointer;
   }
 `;
@@ -79,7 +79,7 @@ const DeleteButtonStyled = styled.button`
   width: 25px;
   height: 100%;
   padding-bottom: 3px;
-  color: red;
+  color: var(--ref-red-100);
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;

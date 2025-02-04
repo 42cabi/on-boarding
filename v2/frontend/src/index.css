@@ -16,8 +16,9 @@
   --ref-black: #181818;
 
   /* red */
-  --ref-red-100: #ff4e4e;
-  --ref-red-200: #e54646;
+  --ref-red-100: #ff0000;
+  --ref-red-200: #ff4e4e;
+  --ref-red-300: #e54646;
 
   /* orange */
   --ref-orange-100: #ff8b5b;

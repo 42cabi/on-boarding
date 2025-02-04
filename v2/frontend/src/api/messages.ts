@@ -1,7 +1,11 @@
 import { service } from "./axios.custom";
 
 export const sendMessage = async (data: object) => {
-  return service.post(`/messages`, data);
+  return service.post(`/messages`, data, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
 };
 
 export const getMessages = async (params: object) => {

@@ -2,7 +2,7 @@ import { ReactElement, useEffect, useState } from "react";
 import { checkAuth } from "../api/users";
 import { Navigate, useLocation } from "react-router";
 
-const PrivateRoute = ({
+const PublicRoute = ({
   children,
 }: {
   children: ReactElement;
@@ -31,11 +31,11 @@ const PrivateRoute = ({
     return <div>Loading...</div>;
   }
 
-  if (!isAuthenticated) {
-    return <Navigate to="/login" state={{ from: location.pathname }} replace />;
+  if (isAuthenticated) {
+    return <Navigate to="/" state={{ from: location.pathname }} replace />;
   }
 
   return children;
 };
 
-export default PrivateRoute;
+export default PublicRoute;

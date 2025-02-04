@@ -1,9 +1,6 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { searchGroup, searchName } from "../api/users";
-import { al } from "react-router/dist/development/fog-of-war-DLtn2OLr";
-
 
 const SearchInputField = ({
   setSearchInputText,
@@ -11,48 +8,40 @@ const SearchInputField = ({
   setSearchInputText: (searchTerm: string) => void;
 }) => {
   const [isFocused, setIsFocused] = useState(false);
-  const [searchResult, setSearchResult] = useState<string[]>([]);
+  const [searchList, setSearchList] = useState<string[]>([]);
   const [inputValue, setInputValue] = useState("");
 
   useEffect(() => {
     const debounceTimer = setTimeout(async () => {
-      // API call
-
-      if (inputValue == "") return;
-      if (inputValue[0] === "@") {
-        try {
-          const res = await searchGroup({ input: inputValue });
-          console.log("res : ", res.data);
-          setSearchResult(res.data);
-        } catch (error: any) {
-          alert(error.response.data.message);
-        }
+      if (inputValue == "") {
+        setSearchList([]);
+        return;
       }
-
-      if (inputValue.length) {
-        try {
+      try {
+        if (inputValue[0] === "@") {
+          const searchTerm = inputValue.slice(1).trim();
+          const res = await searchGroup({ input: searchTerm });
+          setSearchList(res.data.groupNames);
+        } else {
           const res = await searchName({ input: inputValue });
-          setSearchResult(res.data);
-        } catch (error: any) {
-          // alert(error.response.data.message);
+          console.log(res.data.names);
+          setSearchList(res.data.names);
         }
+      } catch (error: any) {
+        alert(error.response.data.message);
+        setSearchList([]);
       }
-
-    }, 1000); // 1초
+    }, 500);
 
     return () => {
       clearTimeout(debounceTimer);
     };
   }, [inputValue]);
 
-  const handleSearch = (e: { target: { value: string } }) => {
-    if (e.target.value === "") {
-      setSearchResult([]);
-      setInputValue("");
-      setSearchInputText("");
-    }
-    setInputValue(e.target.value);
-    setSearchInputText(e.target.value);
+  const handleSearch = async (e: { target: { value: string } }) => {
+    const value = e.target.value;
+    setInputValue(value);
+    setSearchInputText(value);
   };
 
   const setSearchName = (value: string) => {
@@ -70,14 +59,14 @@ const SearchInputField = ({
           placeholder="intra id / @everyone"
           onChange={handleSearch}
           onFocus={() => setIsFocused(true)}
-          onBlur={() => setIsFocused(false)}
+          onBlur={() => setTimeout(() => setIsFocused(false), 200)}
           $isFocus={isFocused}
         />
         {isFocused && (
           <SearchResultStyled>
-            {searchResult.length > 0 && (
+            {searchList.length > 0 && (
               <SearchUlStyled>
-                {searchResult.map((result) => (
+                {searchList.map((result) => (
                   <SearchLiStyled
                     key={result}
                     onMouseDown={() => setSearchName(result)}
@@ -102,12 +91,14 @@ const SearchWrapperStyled = styled.div`
 const SearchInputFieldStyled = styled.input<{ $isFocus: boolean }>`
   width: 100%;
   height: 40px;
-  background-color: #ffffff;
+  background-color: var(--ref-white);
   border-radius: 8px;
   text-align: left;
   padding: 10px;
   border-radius: 8px;
-  border: 2px solid ${({ $isFocus }) => ($isFocus ? "#9747ff" : "#ffffff")};
+  border: 2px solid
+    ${({ $isFocus }) =>
+      $isFocus ? "var(--ref-purple-500)" : "var(--ref-white)"};
   text-align: left;
 `;
 
@@ -116,7 +107,7 @@ const SearchResultStyled = styled.div`
   position: absolute;
   z-index: 1000;
   border-radius: 8px;
-  background-color: #ffffff;
+  background-color: var(--ref-white);
 `;
 
 const SearchUlStyled = styled.ul`
@@ -134,8 +125,8 @@ const SearchLiStyled = styled.li`
   border-radius: 8px;
   cursor: pointer;
   &:hover {
-    background-color: #9747ff;
-    color: #ffffff;
+    background-color: var(--ref-purple-500);
+    color: var(--ref-white);
   }
 `;
 

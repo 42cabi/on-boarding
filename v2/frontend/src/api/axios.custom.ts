@@ -9,8 +9,8 @@ const axiosInstance = axios.create({
 });
 
 export const service = {
-  post: async (url: string, data: object) => {
-    return axiosInstance.post(url, data);
+  post: async (url: string, data: object, config?: object) => {
+    return axiosInstance.post(url, data, config);
   },
 
   get: async (url: string, config?: { params?: object }) => {

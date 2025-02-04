@@ -3,39 +3,44 @@ import { ReactComponent as NewYearImg } from "../assets/images/newYear.svg";
 import styled from "styled-components";
 import UserInputField from "../components/UserInputField";
 import { register } from "../api/users";
+import { useNavigate } from "react-router";
 
 const RegisterPage = () => {
   const [id, setId] = useState("");
   const [pw, setPw] = useState("");
+  const navigate = useNavigate();
+  const idRegex = /^[A-Za-z0-9]{1,10}$/;
+  const pwRegex = /^(?!.*(.)\1{3})[A-Za-z0-9]+$/;
 
   const handleRegister = async () => {
-    const idRegex = /^[A-Za-z0-9]{1,10}$/;
-    const pwRegex = /^[A-Za-z0-9]+$/;
-    const fourInARowRegex = /(.)\1{3}/;
-
-    const isValid =
-      idRegex.test(id) && pwRegex.test(pw) && !fourInARowRegex.test(pw);
-
-    if (!isValid) {
-      alert("로그인 실패");
+    if (!idRegex.test(id)) {
+      alert("형식에 맞지 않는 아이디입니다.");
+      return;
+    }
+    if (!pwRegex.test(pw)) {
+      alert("형식에 맞지 않는 비밀번호입니다.");
       return;
     }
 
     try {
       const data = { name: id, password: pw };
       const response = await register(data);
-    } catch (error) {
-      // TODO: 에러 처리
+      if (response.status === 200) {
+        navigate("/login");
+      }
+    } catch (error: any) {
+      alert(error.response.data.message);
     }
   };
   return (
     <RegisterPageStyled id="RegisterPage">
       <NewYearImg />
-      <RegisterTitleStyled>CABI-Onboarding</RegisterTitleStyled>
+      <RegisterTitleStyled>회원가입</RegisterTitleStyled>
       <form>
         <UserInputField
           type="text"
           value={id}
+          pattern={idRegex.source}
           autocomplete="username"
           onChange={(e) => setId(e.target.value)}
           placeholder="id"
@@ -43,6 +48,7 @@ const RegisterPage = () => {
         <UserInputField
           type="password"
           value={pw}
+          pattern={pwRegex.source}
           autocomplete="current-password"
           onChange={(e) => setPw(e.target.value)}
           placeholder="pw"
@@ -64,7 +70,7 @@ const RegisterPageStyled = styled.div`
   align-items: center;
   width: 100%;
   height: 100vh;
-  background-color: #f9f9f9;
+  background-color: var(--ref-gray-100);
 `;
 
 const RegisterTitleStyled = styled.div`
@@ -77,7 +83,7 @@ const RegisterTitleStyled = styled.div`
 
 const RegisterTextStyled = styled.div`
   font-size: 1rem;
-  color: #858486;
+  color: var(--ref-gray-500);
   line-height: 2rem;
   margin-top: 1rem;
 `;
@@ -86,8 +92,8 @@ const RegisterButtonStyled = styled.button`
   width: 350px;
   height: 54px;
   padding: 0.8rem 1rem;
-  background-color: #9747ff;
-  color: #ffffff;
+  background-color: var(--ref-purple-500);
+  color: var(--ref-white);
   font-size: 1rem;
   border: none;
   border-radius: 4px;

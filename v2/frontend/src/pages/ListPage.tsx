@@ -1,53 +1,43 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { Filter, LIST_SIZE } from "../constant";
-import { getMessages } from "../api/messages";
+import ListTopNav from "../components/ListPage/ListTopNav";
+import ListHeader from "../components/ListPage/ListHeader";
+import ListSection from "../components/ListPage/ListSection";
+import styled from "styled-components";
 
 const ListPage = () => {
-  const [items, setItems] = useState<object[]>([]);
-  const [page, setPage] = useState(0);
-  const [isLoading, setIsLoading] = useState(false);
-  const [category, setCategory] = useState(Filter.TO_EVERYONE);
-
-  const fetchItems = async () => {
-    try {
-      setIsLoading(true);
-      const res = await getMessages({ page, size: LIST_SIZE, category });
-      setItems((items) => [...items, ...res.data.messages]);
-      setPage((page) => page + 1);
-      setIsLoading(false);
-    } catch (error) {}
-  };
-
-  useEffect(() => {
-    fetchItems();
-  }, []);
-
   return (
-    <>
-      <Link to="/send">덕담 보내러 가기</Link>
-      <h1>덕담 보기</h1>
-      <div>
-        <button onClick={() => setCategory(Filter.TO_EVERYONE)}>
-          To.everyone
-        </button>
-        <button onClick={() => setCategory(Filter.TO_ME)}>To.me</button>
-        <button onClick={() => setCategory(Filter.FROM_ME)}>From.me</button>
-      </div>
-      <div>
-        <div>리스트</div>
-        {items.map((item: any, index) => (
-          <div key={item.messageId}>
-            <div>{item.senderName}</div>
-            <div>{item.receiverName}</div>
-            <div>{item.context}</div>
-            <div>{item.imageUrl}</div>
-          </div>
-        ))}
-      </div>
-      <div onClick={fetchItems}>{isLoading ? `Loading...` : `더보기`}</div>
-    </>
+    <WrapperStyled>
+      <NavStyled>
+        <ListTopNav />
+      </NavStyled>
+
+      <header>
+        <ListHeader />
+      </header>
+
+      <section>
+        <ListSection />
+      </section>
+    </WrapperStyled>
   );
 };
+
+const WrapperStyled = styled.div`
+  font-family: "Noto Sans KR", sans-serif;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 60px 0;
+  overflow: scroll;
+
+  & > * {
+    width: 80%;
+    max-width: 1000px;
+  }
+`;
+
+const NavStyled = styled.nav`
+  width: 80%;
+`;
 
 export default ListPage;
