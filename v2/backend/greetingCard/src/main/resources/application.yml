@@ -12,7 +12,23 @@ spring:
       max-file-size: 30MB
       max-request-size: 30MB
   config:
-    import: optional:file:.env[.properties]
+    import: application.properties
+
+#spring:
+#  datasource:
+#    driver-class-name: org.h2.Driver
+#    url: jdbc:h2:tcp://localhost/~/onboarding
+#    username: root
+#    password: 1234
+#
+#  jpa:
+#    hibernate:
+#      ddl-auto: update
+#    properties:
+#      hibernate:
+#        show_sql: true #콘솔에 로그가 나옴
+#        format_sql: true #이쁘게 해줌
+
 
 cloud:
   aws:
@@ -31,3 +47,7 @@ logging:
   level:
     root: INFO
     org.springframework: INFO
+
+server:
+  servlet:
+    context-path: /api

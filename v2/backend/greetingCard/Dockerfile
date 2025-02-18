@@ -1,5 +1,5 @@
 # Stage 1: Build the application using Gradle Wrapper
-FROM openjdk:21-jdk-slim AS build
+FROM openjdk:17-jdk-slim AS build
 
 # Install dependencies for building
 RUN apt-get update && apt-get install -y wget unzip && rm -rf /var/lib/apt/lists/*

@@ -6,9 +6,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class MessageResponsePaginationDto {
+public class GroupSearchDto {
 
-	private List<MessageResponseDto> messages;
-	private int totalLength;
-	private int currentPage;
+	List<String> GroupNames;
 }

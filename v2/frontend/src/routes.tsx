@@ -1,0 +1,71 @@
+import SendPage from "./pages/SendPage";
+import LoginPage from "./pages/LoginPage";
+import RegisterPage from "./pages/RegisterPage";
+import ListPage from "./pages/ListPage";
+import { ReactElement } from "react";
+import PrivateRoute from "./components/PrivateRoute";
+import PublicRoute from "./components/PublicRoute";
+import { getMessages } from "./api/messages";
+import { Filter, LIST_SIZE } from "./constant";
+
+enum AccessType {
+  PUBLIC,
+  PRIVATE,
+}
+
+export interface RouteInfo {
+  path: string;
+  accessType: AccessType;
+  element: ReactElement;
+  loader?: () => Promise<any>;
+}
+
+const routesInfo: RouteInfo[] = [
+  {
+    path: "/",
+    accessType: AccessType.PRIVATE,
+    element: <ListPage />,
+    loader: async () => {
+      try {
+        const res = await getMessages({
+          page: 0,
+          size: LIST_SIZE,
+          category: Filter.TO_EVERYONE,
+        });
+        return res;
+      } catch (error) {
+        console.error("Failed to fetch messages:", error);
+        return null;
+      }
+    },
+  },
+  {
+    path: "/login",
+    accessType: AccessType.PUBLIC,
+    element: <LoginPage />,
+  },
+  {
+    path: "/register",
+    accessType: AccessType.PUBLIC,
+    element: <RegisterPage />,
+  },
+  {
+    path: "/send",
+    accessType: AccessType.PRIVATE,
+    element: <SendPage />,
+  },
+];
+
+const injectProtectedRoute = (routesInfo: RouteInfo[]) => {
+  return routesInfo.map((route: RouteInfo) => {
+    if (route.accessType === AccessType.PRIVATE) {
+      route.element = <PrivateRoute>{route.element}</PrivateRoute>;
+    } else if (route.accessType === AccessType.PUBLIC) {
+      route.element = <PublicRoute>{route.element}</PublicRoute>;
+    }
+
+    return route;
+  });
+};
+
+export const routes = injectProtectedRoute(routesInfo);
