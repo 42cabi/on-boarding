@@ -15,7 +15,7 @@ const SendPage = () => {
   const navigate = useNavigate();
   const maxLength = 42;
 
-  const handleInputChanged = (e: ChangeEvent<HTMLTextAreaElement>) => {
+  const handleChanged = (e: ChangeEvent<HTMLTextAreaElement>) => {
     // 글자 폭에 따른 자동 길이 조절
     const currentValue = messageTextAreaRef.current;
     if (!currentValue) return;
@@ -72,7 +72,7 @@ const SendPage = () => {
             <SendTextFieldStyled
               placeholder="메시지 내용을 입력하세요"
               value={text}
-              onChange={handleInputChanged}
+              onChange={handleChanged}
               ref={messageTextAreaRef}
               $isFocus={isFocused}
               onFocus={() => setIsFocused(true)}

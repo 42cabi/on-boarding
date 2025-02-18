@@ -20,7 +20,7 @@ const ImageUploader = ({
 
     if (!inputFile.name.match(/\.(jpg|jpeg|png)$/)) {
       target.value = "";
-      alert("이미지 파일만 업로드 가능합니다.");
+      alert("jpg, jpeg, png 형식의 파일만 업로드 가능합니다.");
       return;
     }
 
